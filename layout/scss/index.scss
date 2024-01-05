@@ -1,10 +1,22 @@
 :root {
   --background: #1e1e1e;
   --gray: #3d3d3d;
+  --light-gray: #454545;
+  --dark-gray: #323232; 
   --white: #d5d5d5;
   --black: #121212;
 
   --not-watched: #8f8f8f;
+  --watched: #67d1ff;
+  --watching: #6aff67;
+  --plan-to-watch: #fcff67;
+  --stalled: #ffa767;
+  --dropped: #ff6767;
+
+  --header-1: 2rem;
+  --header-2: 1.8rem;
+  --text: 1.2rem;
+  --small-text: 1rem;
 }
 
 @font-face {
@@ -23,6 +35,38 @@ body {
   color: var(--white);
 }
 
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.not-watched {
+  background-color: var(--not-watched);
+}
+
+.watched {
+  background-color: var(--watched);
+}
+
+.watching {
+  background-color: var(--watching);
+}
+
+.plan-to-watch {
+  background-color: var(--plan-to-watch);
+}
+
+.stalled {
+  background-color: var(--stalled);
+}
+
+.dropped {
+  background-color: var(--dropped);
+}
+
 .container {
   width: 75%;
   height: 100%;
@@ -32,11 +76,50 @@ body {
 .wrapper {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .image {
   border-radius: 3px;
   height: fit-content;
+}
+
+.card-line {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card {
+  font-size: var(--small-text);
+  width: min-content;
+  background-color: var(--dark-gray);
+  border-radius: 5px;
+
+  img {
+    border-radius: 5px;
+    width: 180px;
+  }
+
+  &__info {
+    width: auto;
+    padding: 0 10px;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    margin: 3px 0;
+  }
+
+  hr {
+    margin: 3px 0;
+  }
+
+  h4 {
+    text-align: center;
+    margin: 5px 0;
+    font-weight: 600;
+  }
 }
 
 .header {
@@ -58,14 +141,14 @@ body {
 
   &--title {
     h2 {
-      font-size: 2rem;
+      font-size: var(--header-1);
       font-weight: 700;
     }
   }
 
   &--link {
     h2 {
-      font-size: 2rem;
+      font-size: var(--header-1);
       font-weight: 400;
     }
   }
@@ -95,6 +178,10 @@ body {
   margin: 100px 0;
   padding: 0 3em;
 
+  &--image {
+    width: 190px;
+  }
+
   &--line {
     margin-bottom: 50px;
   }
@@ -110,7 +197,7 @@ body {
     display: flex;
     flex-direction: column;
     row-gap: 2em;
-    font-size: 1.2rem;
+    font-size: var(--text);
     width: 60%;
   }
 
@@ -123,13 +210,12 @@ body {
 
   &--tag-title {
     font-weight: 400;
-    font-size: 1.8rem;
+    font-size: var(--header-2);
   }
 
   &--select {
     display: flex;
     align-items: center;
-    column-gap: 3px;
   }
 
   &--my-list {
@@ -137,19 +223,12 @@ body {
     column-gap: 1em;
 
     &--dropdown {
-      font-size: 1rem;
+      font-size: var(--small-text);
       background-color: var(--black);
       outline: none;
       border: none;
       border-radius: 2px;
       color: var(--content);
-    }
-
-    .dot {
-      width: 15px;
-      height: 15px;
-      background-color: var(--not-watched);
-      border-radius: 50%;
     }
   }
 }
@@ -169,7 +248,7 @@ body {
 
   &--text {
     color: var(--white);
-    font-size: 1.8rem;
+    font-size: var(--header-2);
     text-decoration: none;
     font-weight: 700;
   }
@@ -177,5 +256,82 @@ body {
   &--icons {
     display: flex;
     column-gap: 20px;
+  }
+}
+
+.profile-page {
+  color: var(--white);
+
+  .thumbnail {
+    position: relative;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  &__info {
+    position: relative;
+    top: -20px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+    }
+
+    h3 {
+      font-size: var(--header-2);
+    }
+
+    p {
+      font-size: var(--text);
+    }
+
+    img {
+      width: 150px;
+      aspect-ratio: 1/1;
+      border: var(--background) 10px solid;
+    }
+  }
+
+  &__anime-list {
+    margin: 50px auto;
+    width: 70%;
+    background-color: var(--light-gray);
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      font-size: var(--header-2);
+      margin: 0.5em auto;
+    }
+
+    div {
+      padding: 0.5em 50px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__suggestions {
+    margin: 50px 0;
+
+    h3 {
+      font-size: var(--header-1);
+      text-align: center;
+      margin-bottom: 20px;
+    }
   }
 }
