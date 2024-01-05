@@ -82,6 +82,12 @@ body {
   height: fit-content;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 80px;
+}
+
 .card-line {
   display: flex;
   justify-content: space-evenly;
@@ -296,4 +302,66 @@ body {
   font-size: var(--header-1);
   text-align: center;
   margin-bottom: 20px;
+}
+.profile-page__list {
+  margin: 50px 0;
+}
+.profile-page__sorting {
+  font-size: var(--text);
+}
+.profile-page__sorting h3 {
+  font-size: var(--header-1);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.profile-page__sorting__lists {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.profile-page__sorting .sort-list-item {
+  background-color: var(--light-gray);
+  padding: 0.5em 1.4em;
+}
+.profile-page__sorting .selected {
+  background-color: var(--black);
+}
+.profile-page__sorting .sort {
+  display: flex;
+  justify-content: flex-end;
+  -moz-column-gap: 7px;
+       column-gap: 7px;
+}
+.profile-page__sorting .sort__category {
+  text-decoration: underline;
+}
+
+.content-navigation {
+  font-size: var(--text);
+  width: 100%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+}
+.content-navigation__items-per-page {
+  font-size: var(--small-text);
+  background-color: var(--black);
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  color: var(--content);
+}
+.content-navigation__page-number {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+}
+.content-navigation .active {
+  color: var(--white);
+}
+.content-navigation .not-active {
+  color: var(--light-gray);
 }/*# sourceMappingURL=index.css.map */

@@ -2,7 +2,7 @@
   --background: #1e1e1e;
   --gray: #3d3d3d;
   --light-gray: #454545;
-  --dark-gray: #323232; 
+  --dark-gray: #323232;
   --white: #d5d5d5;
   --black: #121212;
 
@@ -82,6 +82,12 @@ body {
 .image {
   border-radius: 3px;
   height: fit-content;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 80px;
 }
 
 .card-line {
@@ -333,5 +339,76 @@ body {
       text-align: center;
       margin-bottom: 20px;
     }
+  }
+
+  &__list {
+    margin: 50px 0;
+  }
+
+  &__sorting {
+    font-size: var(--text);
+    h3 {
+      font-size: var(--header-1);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    &__lists {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .sort-list-item {
+      background-color: var(--light-gray);
+      padding: 0.5em 1.4em;
+    }
+
+    .selected {
+      background-color: var(--black);
+    }
+
+    .sort {
+      display: flex;
+      justify-content: flex-end;
+      column-gap: 7px;
+
+      &__category {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.content-navigation {
+  font-size: var(--text);
+  width: 100%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+
+  &__items-per-page {
+    font-size: var(--small-text);
+    background-color: var(--black);
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    color: var(--content);
+  }
+
+  &__page-number {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+  }
+
+  .active {
+    color: var(--white);
+  }
+
+  .not-active {
+    color: var(--light-gray);
   }
 }
