@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./scss/index.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="wrapper">
+          <div class="header--title">
+            <h2>Anime Catalog</h2>
+          </div>
+          <div class="header--link">
+            <h2>Browse All</h2>
+          </div>
+          <div class="left">
+            <div class="header--search">
+              <input type="text" />
+            </div>
+            <div class="header--profile"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="anime-page">
+      <div class="container">
+        <h1 class="anime-page--title">Full Metal Alchemist: Brotherhood</h1>
+        <hr class="anime-page--line" />
+        <div class="anime-page--content">
+          <img
+            class="anime-page--image image"
+            src="./assets/fullmetal-alchemist-brotherhood-1-190x285.jpg"
+            alt="fullmetal-alchemist-brotherhood"
+          />
+          <div class="anime-page--info">
+            <p class="anime-page--synopsis">
+              This is just some dummy text to fill this text box so don’t mind
+              it. Just assume that here should be a synopsis of this anime. Yah
+              I know I still need to add more text to fill this stupid text box.
+            </p>
+            <div class="anime-page--tags">
+              <h4 class="anime-page--tag-title">Tags:</h4>
+              <div class="tag">#action</div>
+              <div class="tag">#fantasy</div>
+              <div class="tag">#comedy</div>
+              <div class="tag">#romance</div>
+              <div class="tag">#adventure</div>
+              <div class="tag">#action</div>
+            </div>
+            <div class="anime-page--my-list">
+              <h4 class="anime-page--my-list--title">MY ANIME:</h4>
+              <div class="anime-page--select">
+                <div class="dot"></div>
+                <select
+                  name="list-select"
+                  id="list-select"
+                  class="anime-page--my-list--dropdown"
+                >
+                  <option value="not-watched">not watched</option>
+                  <option value="watched">watched</option>
+                  <option value="watching">watching</option>
+                  <option value="plan-to-watch">plan to watch</option>
+                  <option value="stalled">stalled</option>
+                  <option value="dropped">dropped</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="wrapper">
+          <div class="footer--content">
+            <a href="#" class="footer--text">Anime Catalog</a>
+            <div class="footer--icons">
+              <a href="#">
+                <img src="./assets/linkedin-svgrepo-com.svg" alt="linkedin" />
+              </a>
+              <a href="#">
+                <img src="./assets/telegram-svgrepo-com.svg" alt="telegram" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
