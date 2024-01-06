@@ -122,6 +122,14 @@ body {
   font-weight: 600;
 }
 
+.plus-button {
+  background-color: var(--background);
+  width: var(--text);
+  aspect-ratio: 1/1;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+}
+
 .header {
   height: 60px;
   background-color: var(--gray);
@@ -188,7 +196,7 @@ body {
 }
 .anime-page--tags {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: 0.5em 1em;
 }
@@ -308,6 +316,9 @@ body {
 }
 .profile-page__sorting {
   font-size: var(--text);
+  width: 70%;
+  margin: 20px auto;
+  margin-top: 50px;
 }
 .profile-page__sorting h3 {
   font-size: var(--header-1);
@@ -364,4 +375,33 @@ body {
 }
 .content-navigation .not-active {
   color: var(--light-gray);
+}
+
+.search-bar {
+  width: 100%;
+  height: 36px;
+  margin: 20px auto;
+}
+.search-bar input {
+  color: var(--white);
+  font-size: var(--text);
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+  border: 2px solid var(--white);
+  background-image: url(../assets/search-icon.svg);
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-attachment: scroll;
+  background-position: left 10px top 50%;
+  background-color: var(--black);
+  padding: 0 40px;
+}
+.search-bar input::-moz-placeholder {
+  color: var(--white);
+  font-size: var(--text);
+}
+.search-bar input::placeholder {
+  color: var(--white);
+  font-size: var(--text);
 }/*# sourceMappingURL=index.css.map */

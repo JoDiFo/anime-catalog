@@ -128,6 +128,14 @@ body {
   }
 }
 
+.plus-button {
+  background-color: var(--background);
+  width: var(--text);
+  aspect-ratio: 1/1;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+}
+
 .header {
   height: 60px;
   background-color: var(--gray);
@@ -209,7 +217,7 @@ body {
 
   &--tags {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     flex-wrap: wrap;
     gap: 0.5em 1em;
   }
@@ -347,6 +355,10 @@ body {
 
   &__sorting {
     font-size: var(--text);
+    width: 70%;
+    margin: 20px auto;
+    margin-top: 50px;
+
     h3 {
       font-size: var(--header-1);
       text-align: center;
@@ -410,5 +422,32 @@ body {
 
   .not-active {
     color: var(--light-gray);
+  }
+}
+
+.search-bar {
+  width: 100%;
+  height: 36px;
+  margin: 20px auto;
+  
+  input {
+    color: var(--white);
+    font-size: var(--text);
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    border: 2px solid var(--white);
+    background-image: url(../assets/search-icon.svg);
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-attachment: scroll;
+    background-position: left 10px top 50%;
+    background-color: var(--black);
+    padding: 0 40px;
+
+    &::placeholder {
+      color: var(--white);
+      font-size: var(--text);
+    }
   }
 }
