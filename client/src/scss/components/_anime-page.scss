@@ -2,22 +2,22 @@
     margin: 100px 0;
     padding: 0 3em;
   
-    &--image {
+    &__image {
       width: 190px;
     }
   
-    &--line {
+    &__line {
       margin-bottom: 50px;
     }
   
-    &--content {
+    &__content {
       display: flex;
       justify-content: left;
       padding: 0 5em;
       column-gap: 4em;
     }
   
-    &--info {
+    &__info {
       display: flex;
       flex-direction: column;
       row-gap: 2em;
@@ -25,28 +25,28 @@
       width: 60%;
     }
   
-    &--tags {
+    &__tags {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       gap: 0.5em 1em;
     }
   
-    &--tag-title {
+    &__tag-title {
       font-weight: 400;
       font-size: var(--header-2);
     }
   
-    &--select {
+    &__select {
       display: flex;
       align-items: center;
     }
   
-    &--my-list {
+    &__my-list {
       display: flex;
       column-gap: 1em;
   
-      &--dropdown {
+      &__dropdown {
         font-size: var(--small-text);
         background-color: var(--black);
         outline: none;
