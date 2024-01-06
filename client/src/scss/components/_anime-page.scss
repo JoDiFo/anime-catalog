@@ -1,0 +1,58 @@
+.anime-page {
+    margin: 100px 0;
+    padding: 0 3em;
+  
+    &--image {
+      width: 190px;
+    }
+  
+    &--line {
+      margin-bottom: 50px;
+    }
+  
+    &--content {
+      display: flex;
+      justify-content: left;
+      padding: 0 5em;
+      column-gap: 4em;
+    }
+  
+    &--info {
+      display: flex;
+      flex-direction: column;
+      row-gap: 2em;
+      font-size: var(--text);
+      width: 60%;
+    }
+  
+    &--tags {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5em 1em;
+    }
+  
+    &--tag-title {
+      font-weight: 400;
+      font-size: var(--header-2);
+    }
+  
+    &--select {
+      display: flex;
+      align-items: center;
+    }
+  
+    &--my-list {
+      display: flex;
+      column-gap: 1em;
+  
+      &--dropdown {
+        font-size: var(--small-text);
+        background-color: var(--black);
+        outline: none;
+        border: none;
+        border-radius: 2px;
+        color: var(--content);
+      }
+    }
+  }

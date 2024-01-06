@@ -1,0 +1,109 @@
+.profile-page {
+    color: var(--white);
+  
+    &__info {
+      position: relative;
+      top: -20px;
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+  
+      div {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+      }
+  
+      h3 {
+        font-size: var(--header-2);
+      }
+  
+      p {
+        font-size: var(--text);
+      }
+  
+      img {
+        width: 150px;
+        aspect-ratio: 1/1;
+        border: var(--background) 10px solid;
+      }
+    }
+  
+    &__anime-list {
+      margin: 50px auto;
+      width: 70%;
+      background-color: var(--light-gray);
+      display: flex;
+      flex-direction: column;
+  
+      h3 {
+        font-size: var(--header-2);
+        margin: 0.5em auto;
+      }
+  
+      div {
+        padding: 0.5em 50px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+      }
+  
+      p {
+        display: flex;
+        align-items: center;
+      }
+    }
+  
+    &__section {
+      margin: 70px 0;
+  
+      h3 {
+        font-size: var(--header-1);
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    }
+  
+    &__list {
+      margin: 50px 0;
+    }
+  
+    &__sorting {
+      font-size: var(--text);
+      width: 70%;
+      margin: 20px auto;
+      margin-top: 50px;
+  
+      h3 {
+        font-size: var(--header-1);
+        text-align: center;
+        margin-bottom: 20px;
+      }
+  
+      &__lists {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+  
+      .sort-list-item {
+        background-color: var(--light-gray);
+        padding: 0.5em 1.4em;
+      }
+  
+      .selected {
+        background-color: var(--black);
+      }
+  
+      .sort {
+        display: flex;
+        justify-content: flex-end;
+        column-gap: 7px;
+  
+        &__category {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
