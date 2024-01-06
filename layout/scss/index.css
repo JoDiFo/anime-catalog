@@ -1,86 +1,66 @@
-:root {
-  --background: #1e1e1e;
-  --gray: #3d3d3d;
-  --light-gray: #454545;
-  --dark-gray: #323232;
-  --white: #d5d5d5;
-  --black: #121212;
-  --not-watched: #8f8f8f;
-  --watched: #67d1ff;
-  --watching: #6aff67;
-  --plan-to-watch: #fcff67;
-  --stalled: #ffa767;
-  --dropped: #ff6767;
-  --big-header: 3rem;
-  --header-1: 2rem;
-  --header-2: 1.8rem;
-  --text: 1.2rem;
-  --small-text: 1rem;
+.header {
+  height: 60px;
+  background-color: var(--gray);
 }
-
-@font-face {
-  font-family: "Inter";
-  src: url("../assets/fonts/Inter-Regular.ttf");
+.header .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "Inter";
+.header .left {
+  width: 280px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-body {
-  background: var(--background);
+.header--title h2 {
+  font-size: var(--header-1);
+  font-weight: 700;
+}
+.header--link h2 {
+  font-size: var(--header-1);
+  font-weight: 400;
+}
+.header--search input {
+  width: 200px;
+  height: 35px;
+  background-color: var(--black);
   color: var(--white);
+  border: none;
+  outline: none;
+  border-radius: 8px;
 }
-
-.dot {
-  width: 15px;
-  height: 15px;
+.header--profile {
+  width: 40px;
+  height: 40px;
+  background-image: url("../../assets/profile-image.jpeg");
+  background-size: contain;
   border-radius: 50%;
-  display: inline-block;
-  margin-right: 5px;
 }
 
-.not-watched {
-  background-color: var(--not-watched);
+.footer {
+  background-color: var(--gray);
+  height: 125px;
 }
-
-.watched {
-  background-color: var(--watched);
-}
-
-.watching {
-  background-color: var(--watching);
-}
-
-.plan-to-watch {
-  background-color: var(--plan-to-watch);
-}
-
-.stalled {
-  background-color: var(--stalled);
-}
-
-.dropped {
-  background-color: var(--dropped);
-}
-
-.container {
-  width: 75%;
-  height: 100%;
-  margin: auto;
-}
-
-.wrapper {
+.footer--content {
   width: 100%;
   height: 100%;
-  position: relative;
+  padding: 0 50px;
+  display: flex;
+  -moz-column-gap: 200px;
+       column-gap: 200px;
+  align-items: center;
 }
-
-.image {
-  border-radius: 3px;
-  height: -moz-fit-content;
-  height: fit-content;
+.footer--text {
+  color: var(--white);
+  font-size: var(--header-2);
+  text-decoration: none;
+  font-weight: 700;
+}
+.footer--icons {
+  display: flex;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
 }
 
 .card-container {
@@ -121,54 +101,6 @@ body {
   text-align: center;
   margin: 5px 0;
   font-weight: 600;
-}
-
-.plus-button {
-  background-color: var(--background);
-  width: var(--text);
-  aspect-ratio: 1/1;
-  border: 1px solid var(--white);
-  border-radius: 50%;
-}
-
-.header {
-  height: 60px;
-  background-color: var(--gray);
-}
-.header .wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.header .left {
-  width: 280px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.header--title h2 {
-  font-size: var(--header-1);
-  font-weight: 700;
-}
-.header--link h2 {
-  font-size: var(--header-1);
-  font-weight: 400;
-}
-.header--search input {
-  width: 200px;
-  height: 35px;
-  background-color: var(--black);
-  color: var(--white);
-  border: none;
-  outline: none;
-  border-radius: 8px;
-}
-.header--profile {
-  width: 40px;
-  height: 40px;
-  background-image: url("../assets/profile-image.jpeg");
-  background-size: contain;
-  border-radius: 50%;
 }
 
 .anime-page {
@@ -221,52 +153,6 @@ body {
   border: none;
   border-radius: 2px;
   color: var(--content);
-}
-
-.footer {
-  background-color: var(--gray);
-  height: 125px;
-}
-.footer--content {
-  width: 100%;
-  height: 100%;
-  padding: 0 50px;
-  display: flex;
-  -moz-column-gap: 200px;
-       column-gap: 200px;
-  align-items: center;
-}
-.footer--text {
-  color: var(--white);
-  font-size: var(--header-2);
-  text-decoration: none;
-  font-weight: 700;
-}
-.footer--icons {
-  display: flex;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
-}
-
-.thumbnail {
-  position: relative;
-}
-.thumbnail img {
-  width: 100%;
-  display: block;
-}
-.thumbnail h3 {
-  font-size: var(--big-header);
-  position: absolute;
-  top: 40px;
-  left: 175px;
-}
-.thumbnail p {
-  font-size: var(--header-2);
-  position: absolute;
-  top: 100px;
-  left: 225px;
-  font-style: italic;
 }
 
 .profile-page {
@@ -360,6 +246,120 @@ body {
 }
 .profile-page__sorting .sort__category {
   text-decoration: underline;
+}
+
+:root {
+  --background: #1e1e1e;
+  --gray: #3d3d3d;
+  --light-gray: #454545;
+  --dark-gray: #323232;
+  --white: #d5d5d5;
+  --black: #121212;
+  --not-watched: #8f8f8f;
+  --watched: #67d1ff;
+  --watching: #6aff67;
+  --plan-to-watch: #fcff67;
+  --stalled: #ffa767;
+  --dropped: #ff6767;
+  --big-header: 3rem;
+  --header-1: 2rem;
+  --header-2: 1.8rem;
+  --text: 1.2rem;
+  --small-text: 1rem;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter-Regular.ttf");
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter";
+}
+
+body {
+  background: var(--background);
+  color: var(--white);
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.not-watched {
+  background-color: var(--not-watched);
+}
+
+.watched {
+  background-color: var(--watched);
+}
+
+.watching {
+  background-color: var(--watching);
+}
+
+.plan-to-watch {
+  background-color: var(--plan-to-watch);
+}
+
+.stalled {
+  background-color: var(--stalled);
+}
+
+.dropped {
+  background-color: var(--dropped);
+}
+
+.container {
+  width: 75%;
+  height: 100%;
+  margin: auto;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.image {
+  border-radius: 3px;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.plus-button {
+  background-color: var(--background);
+  width: var(--text);
+  aspect-ratio: 1/1;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+}
+
+.thumbnail {
+  position: relative;
+}
+.thumbnail img {
+  width: 100%;
+  display: block;
+}
+.thumbnail h3 {
+  font-size: var(--big-header);
+  position: absolute;
+  top: 40px;
+  left: 175px;
+}
+.thumbnail p {
+  font-size: var(--header-2);
+  position: absolute;
+  top: 100px;
+  left: 225px;
+  font-style: italic;
 }
 
 .content-navigation {

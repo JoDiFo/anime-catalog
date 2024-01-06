@@ -1,0 +1,51 @@
+.header {
+  height: 60px;
+  background-color: var(--gray);
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .left {
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &--title {
+    h2 {
+      font-size: var(--header-1);
+      font-weight: 700;
+    }
+  }
+
+  &--link {
+    h2 {
+      font-size: var(--header-1);
+      font-weight: 400;
+    }
+  }
+
+  &--search {
+    input {
+      width: 200px;
+      height: 35px;
+      background-color: var(--black);
+      color: var(--white);
+      border: none;
+      outline: none;
+      border-radius: 8px;
+    }
+  }
+
+  &--profile {
+    width: 40px;
+    height: 40px;
+    background-image: url("../../assets/profile-image.jpeg");
+    background-size: contain;
+    border-radius: 50%;
+  }
+}
