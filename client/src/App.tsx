@@ -1,34 +1,12 @@
 import thumbnailImage from "./assets/thumbnail-image.png";
-import profileImage from "./assets/profile-image.jpeg";
 import animeThumbnail from "./assets/fullmetal-alchemist-brotherhood-1-190x285.jpg";
-import linkedinImage from "./assets/linkedin-svgrepo-com.svg";
-import telegramImage from "./assets/telegram-svgrepo-com.svg";
+
+import { Header, Footer } from "./components";
 
 function App() {
   return (
     <>
-      <header className="header">
-        <div className="container">
-          <div className="wrapper">
-            <div className="header__title">
-              <h2>Anime Catalog</h2>
-            </div>
-            <div className="header__link">
-              <h2>Browse All</h2>
-            </div>
-            <div className="left">
-              <div className="header__search">
-                <input type="text" />
-              </div>
-              <img
-                className="header__profile"
-                src={profileImage}
-                alt="profile image"
-              />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
       <main className="profile-page">
         <div className="thumbnail">
           <img src={thumbnailImage} alt="thumbnail" />
@@ -182,25 +160,7 @@ function App() {
           </div>
         </div>
       </main>
-      <footer className="footer">
-        <div className="container">
-          <div className="wrapper">
-            <div className="footer--content">
-              <a href="#" className="footer--text">
-                Anime Catalog
-              </a>
-              <div className="footer--icons">
-                <a href="#">
-                  <img src={linkedinImage} alt="linkedin" />
-                </a>
-                <a href="#">
-                  <img src={telegramImage} alt="telegram" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
