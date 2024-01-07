@@ -28,41 +28,31 @@ function MyAnime() {
             </div>
           </div>
           <div className="profile-page__list card-container">
-            <div className="card-line">
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-            </div>
-            <div className="card-line">
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-            </div>
-            <div className="card-line">
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-            </div>
-            <div className="card-line">
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-            </div>
-            <div className="card-line">
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-            </div>
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
+            <AnimeCard />
           </div>
           <div className="content-navigation">
             <select

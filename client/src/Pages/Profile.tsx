@@ -38,7 +38,7 @@ function Profile() {
           </div>
           <div className="profile-page__section">
             <h3>YOU MIGHT ALSO LIKE</h3>
-            <div className="card-line">
+            <div className="card-container">
               <AnimeCard />
               <AnimeCard />
               <AnimeCard />
