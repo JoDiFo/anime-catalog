@@ -2,6 +2,16 @@
 @import "./libs/normalize";
 @import "./variables";
 
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--white);
+  border-radius: 2px;
+}
+
 .dot {
   width: 15px;
   height: 15px;
