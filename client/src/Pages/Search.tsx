@@ -1,7 +1,8 @@
-import animeThumbnail from "../assets/fullmetal-alchemist-brotherhood-1-190x285.jpg";
 import leftArrow from "../assets/arrow-left-not-active.svg";
 import rightArrow from "../assets/arrow-right-active.svg";
 import plusIcon from "../assets/plus-icon.svg";
+
+import { AnimeCard } from "../components";
 
 function Search() {
   return (
@@ -30,344 +31,39 @@ function Search() {
           </div>
           <div className="profile-page__list card-container">
             <div className="card-line">
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  className="image"
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
             </div>
             <div className="card-line">
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  className="image"
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
             </div>
             <div className="card-line">
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  className="image"
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
             </div>
             <div className="card-line">
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  className="image"
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
             </div>
             <div className="card-line">
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  className="image"
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src={animeThumbnail}
-                  alt="fullmetal alchemist brotherhood"
-                />
-                <div className="card__info">
-                  <div className="status">
-                    <span className="dot plan-to-watch"></span>plan to watch
-                  </div>
-                  <hr />
-                  <h4>Fullmetal Alchemist: Brotherhood</h4>
-                </div>
-              </div>
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
+              <AnimeCard />
             </div>
           </div>
           <div className="content-navigation">
