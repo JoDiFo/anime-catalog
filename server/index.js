@@ -4,6 +4,8 @@ const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema");
 const fs = require("fs");
 
+const formatFile = require("./formatFile");
+
 const PORT = 8000;
 const DATA = JSON.parse(
   fs.readFileSync("anime-offline-database.json", {
@@ -32,6 +34,11 @@ app.use(
     rootValue: root,
   })
 );
+
+app.get("/format", (req, res) => {
+  formatFile();
+  res.send("OK");
+});
 
 app.listen(PORT, () =>
   console.log(`Listening on port http://localhost:${PORT}`)
