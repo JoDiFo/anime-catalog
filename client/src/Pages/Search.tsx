@@ -2,7 +2,7 @@ import leftArrow from "../assets/arrow-left-not-active.svg";
 import rightArrow from "../assets/arrow-right-active.svg";
 import plusIcon from "../assets/plus-icon.svg";
 
-import { AnimeCard } from "../components";
+import { CardContainer } from "../components";
 
 function Search() {
   return (
@@ -29,33 +29,7 @@ function Search() {
               <div className="sort__category">popularity</div>
             </div>
           </div>
-          <div className="profile-page__list card-container">
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-          </div>
+          <CardContainer />
           <div className="content-navigation">
             <select
               name="number-of-titles"

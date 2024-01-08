@@ -10,6 +10,9 @@
   width: min-content;
   background-color: var(--dark-gray);
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   img {
     border-radius: 5px;
@@ -23,7 +26,8 @@
 
   &__info {
     width: auto;
-    padding: 0 10px;
+    min-height: 100px;
+    padding: 5px 10px;
   }
 
   .status {
