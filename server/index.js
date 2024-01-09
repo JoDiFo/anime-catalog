@@ -4,22 +4,20 @@ const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema");
 const fs = require("fs");
 
-const formatFile = require("./formatFile");
-
 const PORT = 8000;
 const DATA = JSON.parse(
-  fs.readFileSync("anime-offline-database.json", {
+  fs.readFileSync("anime-db.json", {
     path: __dirname,
   })
 );
 
 const root = {
   getAllAnime: () => {
-    return DATA.data;
+    return DATA;
   },
 
   getAnime: ({ id }) => {
-    return DATA.data[0];
+    return DATA[0];
   },
 };
 
