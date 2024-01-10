@@ -5,7 +5,7 @@ export const GET_ALL_ANIME = gql`
     getAllAnime {
       id
       title
-      type
+      picture
     }
   }
 `;

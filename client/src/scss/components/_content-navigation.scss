@@ -1,0 +1,39 @@
+.content-navigation {
+  font-size: var(--text);
+  width: 100%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+
+  &__items-per-page {
+    font-size: var(--small-text);
+    background-color: var(--black);
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    color: var(--content);
+  }
+
+  &__page-number {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+  }
+
+  .page {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .active {
+    text-decoration: underline;
+    color: var(--white);
+  }
+
+  .not-active {
+    color: var(--light-gray);
+  }
+}

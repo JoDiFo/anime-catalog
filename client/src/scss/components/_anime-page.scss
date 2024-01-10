@@ -1,58 +1,58 @@
 .anime-page {
-    margin: 100px 0;
-    padding: 0 3em;
-  
-    &__image {
-      width: 190px;
-    }
-  
-    &__line {
-      margin-bottom: 50px;
-    }
-  
-    &__content {
-      display: flex;
-      justify-content: left;
-      padding: 0 5em;
-      column-gap: 4em;
-    }
-  
-    &__info {
-      display: flex;
-      flex-direction: column;
-      row-gap: 2em;
-      font-size: var(--text);
-      width: 60%;
-    }
-  
-    &__tags {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5em 1em;
-    }
-  
-    &__tag-title {
-      font-weight: 400;
-      font-size: var(--header-2);
-    }
-  
-    &__select {
-      display: flex;
-      align-items: center;
-    }
-  
-    &__my-list {
-      display: flex;
-      column-gap: 1em;
-  
-      &__dropdown {
-        font-size: var(--small-text);
-        background-color: var(--black);
-        outline: none;
-        border: none;
-        border-radius: 2px;
-        color: var(--content);
-      }
+  margin: 100px 0;
+  padding: 0 3em;
+
+  &__image {
+    width: 190px;
+  }
+
+  &__line {
+    margin-bottom: 50px;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: left;
+    padding: 0 5em;
+    column-gap: 4em;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+    font-size: var(--text);
+    width: 60%;
+  }
+
+  &__tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5em 1em;
+  }
+
+  &__tag-title {
+    font-weight: 400;
+    font-size: var(--header-2);
+  }
+
+  &__select {
+    display: flex;
+    align-items: center;
+  }
+
+  &__my-list {
+    display: flex;
+    column-gap: 1em;
+
+    &__dropdown {
+      font-size: var(--small-text);
+      background-color: var(--black);
+      outline: none;
+      border: none;
+      border-radius: 2px;
+      color: var(--content);
     }
   }
+}

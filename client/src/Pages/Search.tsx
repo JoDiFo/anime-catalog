@@ -1,5 +1,3 @@
-// import useFetch from "../Hooks/useFetch";
-// import useFetch2 from '../Hooks/useFetchV2';
 import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_ANIME } from "../query/anime";
@@ -9,12 +7,7 @@ import plusIcon from "../assets/plus-icon.svg";
 import { Content } from "../components";
 
 function Search() {
-  // const URL = "http://localhost:5173/anime-sample.json";
-  // const [items, loading, error] = useFetch(URL);
-  // const [data, error] = useFetch2<any>(URL)
-  // console.log("render", {loading, items});
-
-  const { data, loading, error } = useQuery(GET_ALL_ANIME);
+  const { data, loading } = useQuery(GET_ALL_ANIME);
   const [items, setItems] = useState([]);
   console.log(items);
 
@@ -23,10 +16,6 @@ function Search() {
       setItems(data.getAllAnime);
     }
   }, [data]);
-
-  // if (error) {
-  //   alert(error);
-  // }
 
   return (
     <main className="profile-page">
@@ -52,7 +41,7 @@ function Search() {
               <div className="sort__category">popularity</div>
             </div>
           </div>
-          {loading ? <div>Loading...</div> : <Content items={items} />}
+          {loading ? <div className="loading-text">Loading...</div> : <Content items={items} />}
         </div>
       </div>
     </main>

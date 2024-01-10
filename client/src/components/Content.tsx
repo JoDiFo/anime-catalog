@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ReactPaginate from "react-paginate";
 
 import { CardContainer } from "../components";
@@ -7,15 +7,9 @@ function Content({ items }: any) {
 //   const [currentItems, setCurrentItems] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
 //   const [pageCount, setPageCount] = useState(1);
-  const itemsPerPage = 1;
-
-  //   useEffect(() => {
-  //     calculateValues();
-  //   }, []);
+  const itemsPerPage = 35;
 
   const endOffset = itemOffset + itemsPerPage;
-  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  console.log("calculateValues: ", items);
   const newCurrentItems = items.slice(itemOffset, endOffset);
 //   setCurrentItems(newCurrentItems);
   const newPageCount = Math.ceil(items.length / itemsPerPage);
@@ -43,23 +37,18 @@ function Content({ items }: any) {
           <option value="75">75</option>
           <option value="100">100</option>
         </select>
-        {/* <div className="content-navigation__page-number">
-          <img src={leftArrow} alt="left arrow" />
-          <span className="active">1</span>
-          <span className="not-active">2</span>
-          <img src={rightArrow} alt="right arrow" />
-        </div> */}
         <ReactPaginate
           breakLabel="..."
-          nextLabel="next >"
+          nextLabel=">"
           onPageChange={handlePageClick}
           pageRangeDisplayed={4}
           pageCount={newPageCount}
-          previousLabel="< previous"
+          previousLabel="<"
           renderOnZeroPageCount={null}
-          containerClassName="pagination"
+          containerClassName="content-navigation__page-number"
           pageClassName="page"
           activeClassName="active"
+          disabledClassName="not-active"
         />
       </div>
     </>
