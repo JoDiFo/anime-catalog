@@ -1,10 +1,33 @@
-import leftArrow from "../assets/arrow-left-not-active.svg";
-import rightArrow from "../assets/arrow-right-active.svg";
+// import useFetch from "../Hooks/useFetch";
+// import useFetch2 from '../Hooks/useFetchV2';
+import { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_ANIME } from "../query/anime";
+
 import plusIcon from "../assets/plus-icon.svg";
 
-import { CardContainer } from "../components";
+import { Content } from "../components";
 
 function Search() {
+  // const URL = "http://localhost:5173/anime-sample.json";
+  // const [items, loading, error] = useFetch(URL);
+  // const [data, error] = useFetch2<any>(URL)
+  // console.log("render", {loading, items});
+
+  const { data, loading, error } = useQuery(GET_ALL_ANIME);
+  const [items, setItems] = useState([]);
+  console.log(items);
+
+  useEffect(() => {
+    if (!loading) {
+      setItems(data.getAllAnime);
+    }
+  }, [data]);
+
+  // if (error) {
+  //   alert(error);
+  // }
+
   return (
     <main className="profile-page">
       <div className="container">
@@ -29,25 +52,7 @@ function Search() {
               <div className="sort__category">popularity</div>
             </div>
           </div>
-          <CardContainer />
-          <div className="content-navigation">
-            <select
-              name="number-of-titles"
-              id="number-of-titles"
-              className="content-navigation__items-per-page"
-            >
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="75">75</option>
-              <option value="100">100</option>
-            </select>
-            <div className="content-navigation__page-number">
-              <img src={leftArrow} alt="left arrow" />
-              <span className="active">1</span>
-              <span className="not-active">2</span>
-              <img src={rightArrow} alt="right arrow" />
-            </div>
-          </div>
+          {loading ? <div>Loading...</div> : <Content items={items} />}
         </div>
       </div>
     </main>

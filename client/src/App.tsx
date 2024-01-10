@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import {useHello} from './Hooks/useHello';
+// import { useHello } from "./Hooks/useHello";
 
 import { Home, Anime, MyAnime, Profile, Search } from "./Pages";
 import { Header, Footer } from "./components";
 
 function App() {
-  const value = useHello();
-  console.log(value);
+  // const value = useHello();
+  // console.log(value);
 
   return (
     <>
