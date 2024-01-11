@@ -9,7 +9,6 @@ import { Content } from "../components";
 function Search() {
   const { data, loading } = useQuery(GET_ALL_ANIME);
   const [items, setItems] = useState([]);
-  console.log(items);
 
   useEffect(() => {
     if (!loading) {

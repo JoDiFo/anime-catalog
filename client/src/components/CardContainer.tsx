@@ -5,7 +5,6 @@ interface AnimeList {
 }
 
 type Anime = {
-  
   id: string;
   title: string;
   type: string;
@@ -29,6 +28,7 @@ function CardContainer({ items }: AnimeList) {
         items.map((item: any) => (
           <AnimeCard
             key={item.id}
+            id={item.id}
             animeThumbnail={item.picture}
             title={item.title}
           />

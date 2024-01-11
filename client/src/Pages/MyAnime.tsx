@@ -2,6 +2,8 @@ import thumbnailImage from "../assets/thumbnail-image.png";
 import leftArrow from "../assets/arrow-left-not-active.svg";
 import rightArrow from "../assets/arrow-right-active.svg";
 
+import cardImage from "../assets/fullmetal-alchemist-brotherhood-1-190x285.jpg";
+
 import { ProfileInfo, AnimeCard } from "../components";
 
 function MyAnime() {
@@ -27,32 +29,28 @@ function MyAnime() {
               <div className="sort__category">popularity</div>
             </div>
           </div>
+          {/** TODO: change card container to component */}
           <div className="profile-page__list card-container">
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
-            <AnimeCard />
+            <AnimeCard
+              animeThumbnail={cardImage}
+              title="Fullmetal alchemist: Brotherhood"
+            />
+            <AnimeCard
+              animeThumbnail={cardImage}
+              title="Fullmetal alchemist: Brotherhood"
+            />
+            <AnimeCard
+              animeThumbnail={cardImage}
+              title="Fullmetal alchemist: Brotherhood"
+            />
+            <AnimeCard
+              animeThumbnail={cardImage}
+              title="Fullmetal alchemist: Brotherhood"
+            />
+            <AnimeCard
+              animeThumbnail={cardImage}
+              title="Fullmetal alchemist: Brotherhood"
+            />
           </div>
           <div className="content-navigation">
             <select

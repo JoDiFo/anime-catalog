@@ -1,16 +1,42 @@
-import animeThumbnail from "../assets/fullmetal-alchemist-brotherhood-1-190x285.jpg";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_ONE_ANIME } from "../query/anime";
+
+type AnimeInfo = {
+  title: string;
+  picture: string;
+  tags: string[];
+};
 
 function Anime() {
+  const location = useLocation();
+  const { id } = location.state;
+
+  const { data, loading } = useQuery(GET_ONE_ANIME, {
+    variables: {
+      id: id,
+    },
+  });
+
+  const [anime, setAnime] = useState<AnimeInfo>();
+
+  useEffect(() => {
+    if (!loading) {
+      setAnime(data.getAnime);
+    }
+  }, [data]);
+
   return (
     <main className="anime-page">
       <div className="container">
-        <h1 className="anime-page__title">Full Metal Alchemist: Brotherhood</h1>
+        <h1 className="anime-page__title">{anime?.title}</h1>
         <hr className="anime-page__line" />
         <div className="anime-page__content">
           <img
             className="anime-page__image image"
-            src={animeThumbnail}
-            alt="fullmetal-alchemist-brotherhood"
+            src={anime?.picture}
+            alt={anime?.title}
           />
           <div className="anime-page__info">
             <p className="anime-page__synopsis">
@@ -20,12 +46,9 @@ function Anime() {
             </p>
             <div className="anime-page__tags">
               <h4 className="anime-page__tag-title">Tags:</h4>
-              <div className="tag">#action</div>
-              <div className="tag">#fantasy</div>
-              <div className="tag">#comedy</div>
-              <div className="tag">#romance</div>
-              <div className="tag">#adventure</div>
-              <div className="tag">#action</div>
+              {anime?.tags.map((item) => (
+                <div className="tag">#{item}</div>
+              ))}
             </div>
             <div className="anime-page__my-list">
               <h4 className="anime-page__my-list__title">MY ANIME:</h4>

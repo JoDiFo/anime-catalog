@@ -9,3 +9,13 @@ export const GET_ALL_ANIME = gql`
     }
   }
 `;
+
+export const GET_ONE_ANIME = gql`
+  query getAnime($id: ID) {
+    getAnime(id: $id) {
+      title
+      picture
+      tags
+    }
+  }
+`;

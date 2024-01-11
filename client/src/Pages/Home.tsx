@@ -1,4 +1,5 @@
 import thumbnailImage from "../assets/thumbnail-image.png";
+import cardImage from "../assets/fullmetal-alchemist-brotherhood-1-190x285.jpg";
 
 import { AnimeCard } from "../components";
 
@@ -14,22 +15,54 @@ function Home() {
         <div className="wrapper">
           <div className="profile-page__section">
             <h3>POPULAR THIS WEEK</h3>
+            {/** TODO: change card container to component */}
             <div className="card-container">
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
             </div>
           </div>
           <div className="profile-page__section">
             <h3>YOU MIGHT ALSO LIKE</h3>
+            {/** TODO: change card container to component */}
             <div className="card-container">
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
-              <AnimeCard />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
+              <AnimeCard
+                animeThumbnail={cardImage}
+                title="Fullmetal alchemist: Brotherhood"
+              />
             </div>
           </div>
         </div>

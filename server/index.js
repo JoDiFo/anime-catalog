@@ -17,7 +17,7 @@ const root = {
   },
 
   getAnime: ({ id }) => {
-    return DATA[0];
+    return DATA.find(item => item.id == id);
   },
 };
 
