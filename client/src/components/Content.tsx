@@ -12,19 +12,21 @@ function Content({ items }: any) {
   ];
 
   const [itemOffset, setItemOffset] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(selectOptions[0].value);
-//   const itemsPerPage = 35;
-  const endOffset = itemOffset + selectedOption;
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / selectedOption);
+  const [itemsPerPage, setItemsPerPage] = useState(selectOptions[0].value);
 
-  const handlePageClick = (event: any) => {
-    const newOffset = (event.selected * selectedOption) % items.length;
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = items.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(items.length / itemsPerPage);
+
+  const handlePageChange = (event: any) => {
+    const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
   };
 
-  const handleSelectChange = (event: any) => {
-    setSelectedOption(event.target.value);
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setItemsPerPage(Number.parseInt(event.target.value));
+    // Bad solution but for now it's ok
+    handlePageChange({ selected: 0 });
   };
 
   return (
@@ -35,7 +37,7 @@ function Content({ items }: any) {
           name="number-of-titles"
           id="number-of-titles"
           className="content-navigation__items-per-page"
-          onChange={(event) => handleSelectChange(event)}
+          onChange={handleSelectChange}
         >
           {selectOptions.map((item) => (
             <option key={`${item.value}_${item.text}`} value={item.value}>
@@ -46,7 +48,9 @@ function Content({ items }: any) {
         <ReactPaginate
           breakLabel="..."
           nextLabel=">"
-          onPageChange={handlePageClick}
+          onPageChange={handlePageChange}
+          onPageActive={(event) => console.log("onPageActive", event)}
+          onClick={(event) => console.log("onClick", event)}
           pageRangeDisplayed={4}
           pageCount={pageCount}
           previousLabel="<"
