@@ -4,7 +4,7 @@ import { GET_ALL_ANIME } from "../query/anime";
 
 import plusIcon from "../assets/plus-icon.svg";
 
-import { Content } from "../components";
+import { Content, SortBlock } from "../components";
 
 function Search() {
   const { data, loading } = useQuery(GET_ALL_ANIME);
@@ -35,12 +35,13 @@ function Search() {
             <div className="search-bar">
               <input type="text" placeholder="Search for the anime title" />
             </div>
-            <div className="sort">
-              <p>Sort by:</p>
-              <div className="sort__category">popularity</div>
-            </div>
+            <SortBlock />
           </div>
-          {loading ? <div className="loading-text">Loading...</div> : <Content items={items} />}
+          {loading ? (
+            <div className="loading-text">Loading...</div>
+          ) : (
+            <Content items={items} />
+          )}
         </div>
       </div>
     </main>

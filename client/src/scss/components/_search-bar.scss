@@ -19,6 +19,7 @@
     padding: 0 40px;
 
     &::placeholder {
+      opacity: 0.6;
       color: var(--white);
       font-size: var(--text);
     }

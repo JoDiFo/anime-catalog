@@ -100,9 +100,28 @@
       display: flex;
       justify-content: flex-end;
       column-gap: 7px;
+      position: relative;
 
       &__category {
         text-decoration: underline;
+        cursor: pointer;
+      }
+
+      &__options {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 30px;
+        background-color: var(--light-gray);
+        border-radius: 3px;
+
+        span {
+          padding: 0.3rem;
+          &:hover {
+            background-color: var(--black);
+            cursor: pointer;
+          }
+        }
       }
     }
   }

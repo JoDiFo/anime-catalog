@@ -5,6 +5,7 @@ import AnimeCard from "./AnimeCard";
 import AnimeList from "./AnimeList";
 import CardContainer from "./CardContainer";
 import Content from "./Content";
+import SortBlock from "./SortBlock";
 
 export {
   Header,
@@ -14,4 +15,5 @@ export {
   AnimeList,
   CardContainer,
   Content,
+  SortBlock,
 };
