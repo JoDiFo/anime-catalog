@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
+// TODO change types of elements
+
 function SortBlock() {
   const sortOptions = ["number of episodes", "release date"];
   const [visible, setVisible] = useState(false);
@@ -25,8 +27,8 @@ function SortBlock() {
     document.body.addEventListener("click", handleOutsideClick);
 
     return () => {
-        document.body.removeEventListener("click", handleOutsideClick)
-    }
+      document.body.removeEventListener("click", handleOutsideClick);
+    };
   }, []);
 
   return (

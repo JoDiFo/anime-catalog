@@ -4,6 +4,8 @@ const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema");
 const fs = require("fs");
 
+const getTags = require("./utils/getTags")
+
 const PORT = 8000;
 const DATA = JSON.parse(
   fs.readFileSync("anime-db.json", {
@@ -36,6 +38,11 @@ app.use(
 app.get("/format", (req, res) => {
   formatFile();
   res.send("OK");
+});
+
+app.get("/get-tags", (req, res) => {
+  const result = getTags();
+  res.send(result);
 });
 
 app.listen(PORT, () =>
