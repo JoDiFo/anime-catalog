@@ -29,7 +29,7 @@ const root = {
   },
 
   getAnime: ({ id }) => {
-    return animeList.find((item) => item.id == id);
+    return animeList.data.find((item) => item.id == id);
   },
 
   getAllTags: () => {

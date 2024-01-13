@@ -47,7 +47,9 @@ function Anime() {
             <div className="anime-page__tags">
               <h4 className="anime-page__tag-title">Tags:</h4>
               {anime?.tags.map((item) => (
-                <div className="tag">#{item}</div>
+                <div key={`${item}_tag`} className="tag">
+                  #{item}
+                </div>
               ))}
             </div>
             <div className="anime-page__my-list">
