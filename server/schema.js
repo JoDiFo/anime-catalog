@@ -1,4 +1,4 @@
-const {buildSchema} = require('graphql');
+const { buildSchema } = require("graphql");
 
 const schema = buildSchema(`
     type Anime {
@@ -21,7 +21,8 @@ const schema = buildSchema(`
     type Query {
         getAllAnime: [Anime]
         getAnime(id: ID): Anime
+        getAllTags: [String]
     }
-`)
+`);
 
 module.exports = schema;
