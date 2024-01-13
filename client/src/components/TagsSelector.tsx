@@ -27,30 +27,32 @@ function TagsSelector({ tags }: TagsList) {
 
   return (
     <div className="tags-container">
-      <div className="tags-container__selected">
-        <h4 className="tags-container__selected__title">Selected tags:</h4>
-        {selectedTags &&
-          selectedTags.map((item, index) => (
-            <div
-              key={`${item}_#${index}_tag`}
-              className="tag"
-              onClick={() => handleDeselect(index)}
-            >
-              #{item}
-            </div>
-          ))}
-        <img
-          role="button"
-          className="plus-button"
-          src={plusIcon}
-          alt="plus button"
-          onClick={() => setVisible(true)}
-        />
-      </div>
+      {!visible && (
+        <div className="tags-container__selected">
+          <h4 className="tags-container__selected__title">Selected tags:</h4>
+          {selectedTags &&
+            selectedTags.map((item, index) => (
+              <div
+                key={`${item}_#${index}_tag`}
+                className="tag"
+                onClick={() => handleDeselect(index)}
+              >
+                #{item}
+              </div>
+            ))}
+          <img
+            role="button"
+            className="plus-button"
+            src={plusIcon}
+            alt="plus button"
+            onClick={() => setVisible(true)}
+          />
+        </div>
+      )}
       {visible && (
         <div className="tags-container__block" ref={tagsBlockRef}>
           <div className="tags-container__block__navigation">
-            <input type="text" placeholder="Search for tags"/>
+            <input type="text" placeholder="Search for tags" />
             <img
               role="button"
               src={crossIcon}
@@ -78,15 +80,19 @@ function TagsSelector({ tags }: TagsList) {
           <hr />
           <div className="tags-container__block__tags">
             {tags &&
-              tags.map((item) => (
-                <div
-                  key={`container__block__#${item}`}
-                  className="tag"
-                  onClick={() => handleSelect(item)}
-                >
-                  #{item}
-                </div>
-              ))}
+              tags
+                .filter((item) => {
+                  return !selectedTags.includes(item);
+                })
+                .map((item) => (
+                  <div
+                    key={`container__block__#${item}`}
+                    className="tag"
+                    onClick={() => handleSelect(item)}
+                  >
+                    #{item}
+                  </div>
+                ))}
           </div>
         </div>
       )}

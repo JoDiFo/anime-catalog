@@ -12,6 +12,7 @@ function Content({ items }: any) {
   ];
 
   const [itemOffset, setItemOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(selectOptions[0].value);
 
   const endOffset = itemOffset + itemsPerPage;
@@ -21,12 +22,14 @@ function Content({ items }: any) {
   const handlePageChange = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
+    setCurrentPage(event.selected)
   };
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setItemsPerPage(Number.parseInt(event.target.value));
-    // Bad solution but for now it's ok
-    handlePageChange({ selected: 0 });
+    const newOffset = (0 * itemsPerPage) % items.length;
+    setItemOffset(newOffset);
+    setCurrentPage(0)
   };
 
   return (
@@ -49,8 +52,7 @@ function Content({ items }: any) {
           breakLabel="..."
           nextLabel=">"
           onPageChange={handlePageChange}
-          onPageActive={(event) => console.log("onPageActive", event)}
-          onClick={(event) => console.log("onClick", event)}
+          forcePage={currentPage}
           pageRangeDisplayed={4}
           pageCount={pageCount}
           previousLabel="<"

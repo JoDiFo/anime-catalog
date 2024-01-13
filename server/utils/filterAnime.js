@@ -2,13 +2,15 @@ const { json } = require("express");
 const fs = require("fs");
 
 function filterAnime() {
-  const DATA = JSON.parse(
+  const animeList = JSON.parse(
     fs.readFileSync("anime-db.json", {
       path: __dirname,
     })
   );
 
-  // let result = [];
+  let result = {
+    data: [],
+  };
   const tags = [
     "korean animation",
     "frogs",
@@ -38,19 +40,18 @@ function filterAnime() {
     "scissoring",
     "ero guro",
     "group sex",
+    "shorts",
   ];
 
-  const result = DATA.filter((item) => {
-    return item.tags.length !== 0;
-  });
-
-  
-
-  // tags.map((tag) => {
-  //   result = DATA.filter((item) => {
-  //     return !item.tags.includes(tag);
-  //   });
+  // const result = DATA.filter((item) => {
+  //   return item.tags.length !== 0;
   // });
+
+  tags.map((tag) => {
+    result.data = animeList.data.filter((item) => {
+      return !item.tags.includes(tag);
+    });
+  });
 
   fs.writeFileSync("anime-db.json", JSON.stringify(result, null, 2));
 
