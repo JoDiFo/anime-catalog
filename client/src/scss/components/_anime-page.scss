@@ -2,12 +2,30 @@
   margin: 100px 0;
   padding: 0 3em;
 
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text);
+    margin-bottom: 40px;
+
+    p {
+      text-align: center;
+      font-weight: bold;
+      padding: 0.4rem 0;
+      width: 25%;
+    }
+
+    .border {
+      border-right: solid var(--white) 2px;
+    }
+  }
+
   &__image {
     width: 190px;
   }
 
   &__line {
-    margin-bottom: 50px;
+    margin: 20px 0;
   }
 
   &__content {
@@ -17,7 +35,7 @@
     column-gap: 4em;
   }
 
-  &__info {
+  &__data {
     display: flex;
     flex-direction: column;
     row-gap: 2em;

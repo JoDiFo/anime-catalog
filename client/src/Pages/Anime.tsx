@@ -5,6 +5,12 @@ import { GET_ONE_ANIME } from "../query/anime";
 
 type AnimeInfo = {
   title: string;
+  type: string;
+  episodes: number;
+  status: string;
+  animeSeason: {
+    year: number;
+  };
   picture: string;
   tags: string[];
 };
@@ -32,13 +38,19 @@ function Anime() {
       <div className="container">
         <h1 className="anime-page__title">{anime?.title}</h1>
         <hr className="anime-page__line" />
+        <div className="anime-page__info">
+          <p className="border">{anime?.type}</p>
+          <p className="border">{anime?.episodes}</p>
+          <p className="border">{anime?.status}</p>
+          <p>{anime?.animeSeason.year}</p>
+        </div>
         <div className="anime-page__content">
           <img
             className="anime-page__image image"
             src={anime?.picture}
             alt={anime?.title}
           />
-          <div className="anime-page__info">
+          <div className="anime-page__data">
             <p className="anime-page__synopsis">
               This is just some dummy text to fill this text box so don’t mind
               it. Just assume that here should be a synopsis of this anime. Yah
