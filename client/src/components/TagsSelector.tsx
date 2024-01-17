@@ -3,6 +3,8 @@ import { useState, useRef } from "react";
 import plusIcon from "../assets/plus-icon.svg";
 import crossIcon from "../assets/cross.svg";
 
+import compareStrings from "../Utils/compareStrings";
+
 interface TagsList {
   tags: string[];
 }
@@ -10,6 +12,7 @@ interface TagsList {
 function TagsSelector({ tags }: TagsList) {
   const [visible, setVisible] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [searchString, setSearchString] = useState("");
   const tagsBlockRef = useRef<any>(null);
 
   const handleSelect = (value: string) => {
@@ -25,19 +28,25 @@ function TagsSelector({ tags }: TagsList) {
     setSelectedTags(newSelectedTags);
   };
 
+  const handleClose = () => {
+    setVisible(false);
+    setSearchString("");
+  };
+
   return (
     <div className="tags-container">
-      {!visible && (
+      {
         <div className="tags-container__selected">
           <h4 className="tags-container__selected__title">Selected tags:</h4>
-          {selectedTags &&
+          {!visible &&
+            selectedTags &&
             selectedTags.map((item, index) => (
               <div
                 key={`${item}_#${index}_tag`}
                 className="tag"
                 onClick={() => handleDeselect(index)}
               >
-                #{item}
+                {item}
               </div>
             ))}
           <img
@@ -48,17 +57,21 @@ function TagsSelector({ tags }: TagsList) {
             onClick={() => setVisible(true)}
           />
         </div>
-      )}
+      }
       {visible && (
         <div className="tags-container__block" ref={tagsBlockRef}>
           <div className="tags-container__block__navigation">
-            <input type="text" placeholder="Search for tags" />
+            <input
+              type="text"
+              placeholder="Search for tags"
+              onChange={(event) => setSearchString(event.target.value)}
+            />
             <img
               role="button"
               src={crossIcon}
               alt="close button"
               className="close-button"
-              onClick={() => setVisible(false)}
+              onClick={handleClose}
             />
           </div>
           <hr />
@@ -70,7 +83,7 @@ function TagsSelector({ tags }: TagsList) {
                   className="tag"
                   onClick={() => handleDeselect(index)}
                 >
-                  #{item}
+                  {item}
                 </div>
               ))
             ) : (
@@ -84,13 +97,16 @@ function TagsSelector({ tags }: TagsList) {
                 .filter((item) => {
                   return !selectedTags.includes(item);
                 })
+                .filter((item) => {
+                  return compareStrings(item, searchString);
+                })
                 .map((item) => (
                   <div
                     key={`container__block__#${item}`}
                     className="tag"
                     onClick={() => handleSelect(item)}
                   >
-                    #{item}
+                    {item}
                   </div>
                 ))}
           </div>
