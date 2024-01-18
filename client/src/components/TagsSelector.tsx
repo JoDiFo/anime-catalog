@@ -1,4 +1,7 @@
 import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { setTags } from "../redux/tagsSlice";
+// import type { RootState } from "../redux/store";
 
 import plusIcon from "../assets/plus-icon.svg";
 import crossIcon from "../assets/cross.svg";
@@ -10,6 +13,8 @@ interface TagsList {
 }
 
 function TagsSelector({ tags }: TagsList) {
+  const dispatch = useDispatch();
+
   const [visible, setVisible] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchString, setSearchString] = useState("");
@@ -18,6 +23,7 @@ function TagsSelector({ tags }: TagsList) {
   const handleSelect = (value: string) => {
     const newSelectedTags = [...selectedTags, value];
     setSelectedTags(newSelectedTags);
+    dispatch(setTags(newSelectedTags));
   };
 
   const handleDeselect = (index: number) => {
@@ -26,6 +32,7 @@ function TagsSelector({ tags }: TagsList) {
       ...selectedTags.slice(index + 1, selectedTags.length),
     ];
     setSelectedTags(newSelectedTags);
+    dispatch(setTags(newSelectedTags));
   };
 
   const handleClose = () => {

@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_ANIME } from "../query/anime";
 import { GET_ALL_TAGS } from "../query/tags";
+import { useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
 
 import { Content, SortBlock, TagsSelector } from "../components";
 
-import compareStrings from '../Utils/compareStrings';
+import compareStrings from "../Utils/compareStrings";
+import compareArrays from "../Utils/compareArrays";
 
 type Anime = {
   id: string;
@@ -17,12 +20,12 @@ type Anime = {
   picture: string;
   synonyms: string[];
   tags: string[];
-}
+};
 
 type AnimeSeason = {
   season: string;
   year: number;
-}
+};
 
 function Search() {
   const { data: animeData, loading: isAnimeLoading } = useQuery(GET_ALL_ANIME);
@@ -32,6 +35,9 @@ function Search() {
   const [tags, setTags] = useState([]);
 
   const [searchString, setSearchString] = useState("");
+
+  const selectedTags = useSelector((state: RootState) => state.tags.value);
+  console.log(selectedTags)
 
   useEffect(() => {
     if (!isAnimeLoading) {
@@ -64,7 +70,11 @@ function Search() {
           {isAnimeLoading ? (
             <div className="loading-text">Loading...</div>
           ) : (
-            <Content items={items.filter((item) => compareStrings(item.title, searchString))} />
+            <Content
+              items={items
+                .filter((item) => compareStrings(item.title, searchString))
+                .filter((item) => compareArrays(item.tags, selectedTags))}
+            />
           )}
         </div>
       </div>

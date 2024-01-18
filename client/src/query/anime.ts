@@ -6,6 +6,7 @@ export const GET_ALL_ANIME = gql`
       id
       title
       picture
+      tags
     }
   }
 `;
