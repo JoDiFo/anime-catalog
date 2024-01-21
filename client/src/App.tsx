@@ -1,6 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import { lazily } from "react-lazily";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
+
+import { useQuery } from "@apollo/client";
+import { GET_ALL_ANIME } from "./query/anime";
+import { GET_ALL_TAGS } from "./query/tags";
+
+import { useDispatch } from "react-redux";
+import { setAnime } from "./redux/animeSlice";
+import { setTags } from "./redux/tagsSlice";
 
 const { Home, Anime, MyAnime, Profile, Search } = lazily(
   () => import("./Pages")
@@ -8,6 +16,23 @@ const { Home, Anime, MyAnime, Profile, Search } = lazily(
 import { Header, Footer } from "./components";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const { data: animeData, loading: isAnimeLoading } = useQuery(GET_ALL_ANIME);
+  const { data: tagsData, loading: areTagsLoading } = useQuery(GET_ALL_TAGS);
+
+  useEffect(() => {
+    if (!isAnimeLoading) {
+      dispatch(setAnime(animeData.getAllAnime));
+    }
+  }, [animeData]);
+
+  useEffect(() => {
+    if (!areTagsLoading) {
+      dispatch(setTags(tagsData.getAllTags));
+    }
+  }, [tagsData]);
+
   return (
     <>
       <Header />

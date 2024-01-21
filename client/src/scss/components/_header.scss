@@ -49,3 +49,26 @@
     border-radius: 50%;
   }
 }
+
+.anime-popup {
+  z-index: 2;
+  position: absolute;
+  right: 0px;
+  width: 300px;
+  height: 500px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  background-color: var(--background);
+  padding-right: 5px;
+
+  img {
+    width: 70px;
+  }
+
+  &__item {
+    display: flex;
+    column-gap: 10px;
+  }
+}

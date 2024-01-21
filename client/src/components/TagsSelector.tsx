@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { setTags } from "../redux/tagsSlice";
-// import type { RootState } from "../redux/store";
+import { setSelectedTags } from "../redux/tagsSlice";
 
 import plusIcon from "../assets/plus-icon.svg";
 import crossIcon from "../assets/cross.svg";
@@ -16,23 +15,23 @@ function TagsSelector({ tags }: TagsList) {
   const dispatch = useDispatch();
 
   const [visible, setVisible] = useState(false);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const [searchString, setSearchString] = useState("");
   const tagsBlockRef = useRef<any>(null);
 
   const handleSelect = (value: string) => {
-    const newSelectedTags = [...selectedTags, value];
-    setSelectedTags(newSelectedTags);
-    dispatch(setTags(newSelectedTags));
+    const newSelectedTags = [...selected, value];
+    setSelected(newSelectedTags);
+    dispatch(setSelectedTags(newSelectedTags));
   };
 
   const handleDeselect = (index: number) => {
     const newSelectedTags = [
-      ...selectedTags.slice(0, index),
-      ...selectedTags.slice(index + 1, selectedTags.length),
+      ...selected.slice(0, index),
+      ...selected.slice(index + 1, selected.length),
     ];
-    setSelectedTags(newSelectedTags);
-    dispatch(setTags(newSelectedTags));
+    setSelected(newSelectedTags);
+    dispatch(setSelectedTags(newSelectedTags));
   };
 
   const handleClose = () => {
@@ -46,8 +45,8 @@ function TagsSelector({ tags }: TagsList) {
         <div className="tags-container__selected">
           <h4 className="tags-container__selected__title">Selected tags:</h4>
           {!visible &&
-            selectedTags &&
-            selectedTags.map((item, index) => (
+            selected &&
+            selected.map((item, index) => (
               <div
                 key={`${item}_#${index}_tag`}
                 className="tag"
@@ -83,8 +82,8 @@ function TagsSelector({ tags }: TagsList) {
           </div>
           <hr />
           <div className="tags-container__block__selected">
-            {selectedTags.length !== 0 ? (
-              selectedTags.map((item, index) => (
+            {selected.length !== 0 ? (
+              selected.map((item, index) => (
                 <div
                   key={`${item}_#${index}_tag`}
                   className="tag"
@@ -102,7 +101,7 @@ function TagsSelector({ tags }: TagsList) {
             {tags &&
               tags
                 .filter((item) => {
-                  return !selectedTags.includes(item);
+                  return !selected.includes(item);
                 })
                 .filter((item) => {
                   return compareStrings(item, searchString);

@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_ALL_ANIME } from "../query/anime";
-import { GET_ALL_TAGS } from "../query/tags";
+import { useState } from "react";
+
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 
@@ -10,46 +8,12 @@ import { Content, SortBlock, TagsSelector } from "../components";
 import compareStrings from "../Utils/compareStrings";
 import compareArrays from "../Utils/compareArrays";
 
-type Anime = {
-  id: string;
-  title: string;
-  type: string;
-  episodes: number;
-  status: string;
-  animeSeason: AnimeSeason;
-  picture: string;
-  synonyms: string[];
-  tags: string[];
-};
-
-type AnimeSeason = {
-  season: string;
-  year: number;
-};
-
 function Search() {
-  const { data: animeData, loading: isAnimeLoading } = useQuery(GET_ALL_ANIME);
-  const [items, setItems] = useState<Anime[]>([]);
-
-  const { data: tagsData, loading: areTagsLoading } = useQuery(GET_ALL_TAGS);
-  const [tags, setTags] = useState([]);
-
   const [searchString, setSearchString] = useState("");
 
-  const selectedTags = useSelector((state: RootState) => state.tags.value);
-  console.log(selectedTags)
-
-  useEffect(() => {
-    if (!isAnimeLoading) {
-      setItems(animeData.getAllAnime);
-    }
-  }, [animeData]);
-
-  useEffect(() => {
-    if (!areTagsLoading) {
-      setTags(tagsData.getAllTags);
-    }
-  }, [tagsData]);
+  const anime = useSelector((state: RootState) => state.anime.value);
+  const tags = useSelector((state: RootState) => state.tags.value);
+  const selectedTags = useSelector((state: RootState) => state.tags.selected);
 
   return (
     <main className="profile-page">
@@ -67,14 +31,14 @@ function Search() {
             </div>
             <SortBlock />
           </div>
-          {isAnimeLoading ? (
-            <div className="loading-text">Loading...</div>
-          ) : (
+          {anime ? (
             <Content
-              items={items
+              items={anime
                 .filter((item) => compareStrings(item.title, searchString))
                 .filter((item) => compareArrays(item.tags, selectedTags))}
             />
+          ) : (
+            <div className="loading-text">Loading...</div>
           )}
         </div>
       </div>
