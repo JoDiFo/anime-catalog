@@ -1,17 +1,23 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useDebounce from "../Hooks/useDebounce";
 
 import { useSelector } from "react-redux";
-import type { RootState } from "../redux/store";
-
-import compareStrings from "../Utils/compareStrings";
+import { RootState } from "../redux/store";
 
 import profileImage from "../assets/profile-image.jpeg";
+import { AnimePopup } from "./index";
+import compareStrings from "../Utils/compareStrings";
 
 function Header() {
-  const [searchString, setSearchString] = useState("");
-
   const animeSlice = useSelector((state: RootState) => state.anime.value);
+  
+  const [value, setValue] = useState("")
+  const [displayedItems, setDisplayedItems] = useState<IAnime[]>([]);
+
+  const debouncedValue = useDebounce(value, 500);
+
+
 
   return (
     <header className="header">
@@ -31,7 +37,7 @@ function Header() {
             <div className="header__search">
               <input
                 type="text"
-                onChange={(event) => setSearchString(event.target.value)}
+                onChange={(event) => setValue(event.target.value)}
               />
             </div>
             <Link to="/profile">
@@ -43,20 +49,9 @@ function Header() {
             </Link>
           </div>
         </div>
-        {searchString !== "" && (
-          <div className="anime-popup">
-            {animeSlice &&
-              animeSlice
-                .filter((item) => compareStrings(item.title, searchString))
-                .slice(0, 70)
-                .map((item) => (
-                  <div key={item.id} className="anime-popup__item">
-                    <img src={item.picture} alt={item.title} />
-                    <div>{item.title}</div>
-                  </div>
-                ))}
-          </div>
-        )}
+        {displayedItems.length !== 0 ? (
+          <AnimePopup items={displayedItems} />
+        ) : null}
       </div>
     </header>
   );

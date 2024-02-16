@@ -1,6 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setSelectedTags } from "../redux/tagsSlice";
+import useDebounce from "../Hooks/useDebounce";
 
 import plusIcon from "../assets/plus-icon.svg";
 import crossIcon from "../assets/cross.svg";
@@ -16,8 +17,11 @@ function TagsSelector({ tags }: TagsList) {
 
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
+  const [filteredTags, setFilteredTags] = useState<string[]>([]);
   const [searchString, setSearchString] = useState("");
   const tagsBlockRef = useRef<any>(null);
+
+  const debouncedValue = useDebounce(searchString, 500);
 
   const handleSelect = (value: string) => {
     const newSelectedTags = [...selected, value];
@@ -38,6 +42,27 @@ function TagsSelector({ tags }: TagsList) {
     setVisible(false);
     setSearchString("");
   };
+
+  useEffect(() => {
+    const newItems = tags
+      .filter((item) => {
+        return !selected.includes(item);
+      })
+      .filter((item) => {
+        return compareStrings(item, searchString);
+      });
+    setFilteredTags(newItems);
+  }, [debouncedValue]);
+
+  const selectedTagsBlock = filteredTags.map((item) => (
+    <div
+      key={`container__block__#${item}`}
+      className="tag"
+      onClick={() => handleSelect(item)}
+    >
+      {item}
+    </div>
+  ));
 
   return (
     <div className="tags-container">
@@ -93,25 +118,7 @@ function TagsSelector({ tags }: TagsList) {
             )}
           </div>
           <hr />
-          <div className="tags-container__block__tags">
-            {tags &&
-              tags
-                .filter((item) => {
-                  return !selected.includes(item);
-                })
-                .filter((item) => {
-                  return compareStrings(item, searchString);
-                })
-                .map((item) => (
-                  <div
-                    key={`container__block__#${item}`}
-                    className="tag"
-                    onClick={() => handleSelect(item)}
-                  >
-                    {item}
-                  </div>
-                ))}
-          </div>
+          <div className="tags-container__block__tags">{selectedTagsBlock}</div>
         </div>
       )}
     </div>

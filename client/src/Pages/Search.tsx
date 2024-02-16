@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
@@ -7,13 +7,24 @@ import { Content, SortBlock, TagsSelector } from "../components";
 
 import compareStrings from "../Utils/compareStrings";
 import compareArrays from "../Utils/compareArrays";
+import useDebounce from "../Hooks/useDebounce";
 
 function Search() {
   const [searchString, setSearchString] = useState("");
+  const [displayedItems, setDisplayedItems] = useState<IAnime[]>([]);
+
+  const debouncedValue = useDebounce(searchString, 500);
 
   const anime = useSelector((state: RootState) => state.anime.value);
   const tags = useSelector((state: RootState) => state.tags.value);
   const selectedTags = useSelector((state: RootState) => state.tags.selected);
+
+  useEffect(() => {
+    const newItems = anime
+      .filter((item) => compareStrings(item.title, debouncedValue))
+      .filter((item) => compareArrays(item.tags, selectedTags));
+    setDisplayedItems(newItems);
+  }, [debouncedValue]);
 
   return (
     <main className="profile-page">
@@ -32,11 +43,7 @@ function Search() {
             <SortBlock />
           </div>
           {anime ? (
-            <Content
-              items={anime
-                .filter((item) => compareStrings(item.title, searchString))
-                .filter((item) => compareArrays(item.tags, selectedTags))}
-            />
+            <Content items={displayedItems} />
           ) : (
             <div className="loading-text">Loading...</div>
           )}

@@ -7,6 +7,7 @@ import CardContainer from "./CardContainer";
 import Content from "./Content";
 import SortBlock from "./SortBlock";
 import TagsSelector from "./TagsSelector";
+import AnimePopup from "./AnimePopup";
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   Content,
   SortBlock,
   TagsSelector,
+  AnimePopup,
 };
