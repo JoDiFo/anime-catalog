@@ -45,12 +45,8 @@ function TagsSelector({ tags }: TagsList) {
 
   useEffect(() => {
     const newItems = tags
-      .filter((item) => {
-        return !selected.includes(item);
-      })
-      .filter((item) => {
-        return compareStrings(item, searchString);
-      });
+      .filter((item) => !selected.includes(item))
+      .filter((item) => compareStrings(item, searchString));
     setFilteredTags(newItems);
   }, [debouncedValue]);
 
