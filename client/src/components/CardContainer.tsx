@@ -1,31 +1,10 @@
 import { AnimeCard } from "./index";
 
-interface AnimeList {
-  items: Anime[]
-}
-
-type Anime = {
-  id: string;
-  title: string;
-  type: string;
-  episodes: number;
-  status: string;
-  animeSeason: AnimeSeason;
-  picture: string;
-  synonyms: string[];
-  tags: string[];
-}
-
-type AnimeSeason = {
-  season: string;
-  year: number;
-}
-
-function CardContainer({ items }: AnimeList) {
+function CardContainer({ items }: IAnimeList) {
   return (
     <div className="profile-page__list card-container">
       {items &&
-        items.map((item: any) => (
+        items.map((item: IAnime) => (
           <AnimeCard
             key={item.id}
             id={item.id}

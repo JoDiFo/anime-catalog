@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 
 import { CardContainer } from "../components";
 
-function Content({ items }: any) {
+function Content({ items }: IAnimeList) {
   const selectOptions = [
     { value: 35, text: "35" },
     { value: 70, text: "70" },
@@ -22,19 +22,23 @@ function Content({ items }: any) {
   const handlePageChange = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
-    setCurrentPage(event.selected)
+    setCurrentPage(event.selected);
   };
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setItemsPerPage(Number.parseInt(event.target.value));
     const newOffset = (0 * itemsPerPage) % items.length;
     setItemOffset(newOffset);
-    setCurrentPage(0)
+    setCurrentPage(0);
   };
 
   return (
     <>
-      <CardContainer items={currentItems} />
+      {items.length !== 0 ? (
+        <CardContainer items={currentItems} />
+      ) : (
+        <div className="loading-text">No anime found</div>
+      )}
       <div className="content-navigation">
         <select
           name="number-of-titles"
