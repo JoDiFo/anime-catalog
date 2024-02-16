@@ -44,17 +44,13 @@ function TagsSelector({ tags }: TagsList) {
       {
         <div className="tags-container__selected">
           <h4 className="tags-container__selected__title">Selected tags:</h4>
-          {!visible &&
-            selected &&
-            selected.map((item, index) => (
-              <div
-                key={`${item}_#${index}_tag`}
-                className="tag"
-                onClick={() => handleDeselect(index)}
-              >
-                {item}
-              </div>
-            ))}
+          {!visible && selected
+            ? selected.map((item, index) => (
+                <div key={`${item}_#${index}_tag`} className="tag">
+                  {item}
+                </div>
+              ))
+            : null}
           <img
             role="button"
             className="plus-button"
