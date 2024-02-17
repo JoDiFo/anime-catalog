@@ -11,13 +11,23 @@ import compareStrings from "../Utils/compareStrings";
 
 function Header() {
   const animeSlice = useSelector((state: RootState) => state.anime.value);
-  
-  const [value, setValue] = useState("")
+
+  const [value, setValue] = useState("");
   const [displayedItems, setDisplayedItems] = useState<IAnime[]>([]);
 
   const debouncedValue = useDebounce(value, 500);
 
+  useEffect(() => {
+    if (!value) {
+      setDisplayedItems([]);
+      return;
+    }
 
+    const newItems = animeSlice
+      .filter((item) => compareStrings(item.title, debouncedValue))
+      .slice(0, 50);
+    setDisplayedItems(newItems);
+  }, [debouncedValue]);
 
   return (
     <header className="header">
