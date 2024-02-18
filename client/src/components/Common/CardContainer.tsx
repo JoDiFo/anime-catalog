@@ -1,4 +1,4 @@
-import { AnimeCard } from "./index";
+import { AnimeCard } from "../index";
 
 function CardContainer({ items }: IAnimeList) {
   return (

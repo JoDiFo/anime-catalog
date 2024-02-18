@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
-interface AnimeCard {
+interface IAnimeCard {
   id: string;
   title: string;
   animeThumbnail: string;
 }
 
-function AnimeCard({ id, title, animeThumbnail }: AnimeCard) {
+function AnimeCard({ id, title, animeThumbnail }: IAnimeCard) {
   return (
     <div className="card">
       <Link to="/anime" state={{ id: id }} >

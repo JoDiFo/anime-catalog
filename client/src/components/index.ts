@@ -1,13 +1,13 @@
-import Header from "./Header";
-import Footer from "./Footer";
-import ProfileInfo from "./ProfileInfo";
-import AnimeCard from "./AnimeCard";
-import AnimeList from "./AnimeList";
-import CardContainer from "./CardContainer";
-import Content from "./Content";
-import SortBlock from "./SortBlock";
-import TagsSelector from "./TagsSelector";
-import AnimePopup from "./AnimePopup";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
+import ProfileInfo from "./Profile/ProfileInfo";
+import AnimeCard from "./Common/AnimeCard";
+import AnimeList from "./Profile/AnimeList";
+import CardContainer from "./Common/CardContainer";
+import Content from "./Common/Content";
+import SortBlock from "./Search/SortBlock";
+import TagsSelector from "./Search/TagsSelector";
+import AnimePopup from "./Header/AnimePopup";
 
 export {
   Header,

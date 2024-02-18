@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
 
-import { CardContainer } from "../components";
+import { CardContainer } from "..";
 
 function Content({ items }: IAnimeList) {
   const selectOptions = [

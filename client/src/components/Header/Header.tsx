@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useDebounce from "../Hooks/useDebounce";
+import useDebounce from "../../Hooks/useDebounce";
 
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 
-import profileImage from "../assets/profile-image.jpeg";
-import { AnimePopup } from "./index";
-import compareStrings from "../Utils/compareStrings";
+import profileImage from "../../assets/profile-image.jpeg";
+import { AnimePopup } from "../index";
+import compareStrings from "../../Utils/compareStrings";
 
 function Header() {
   const animeSlice = useSelector((state: RootState) => state.anime.value);

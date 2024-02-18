@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setSelectedTags } from "../redux/tagsSlice";
-import useDebounce from "../Hooks/useDebounce";
+import { setSelectedTags } from "../../redux/tagsSlice";
+import useDebounce from "../../Hooks/useDebounce";
 
-import plusIcon from "../assets/plus-icon.svg";
-import crossIcon from "../assets/cross.svg";
+import plusIcon from "../../assets/plus-icon.svg";
+import crossIcon from "../../assets/cross.svg";
 
-import compareStrings from "../Utils/compareStrings";
+import compareStrings from "../../Utils/compareStrings";
 
 interface TagsList {
   tags: string[];
