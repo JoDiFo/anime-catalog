@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface TagsSlice {
-  value: string[];
+interface ITagsSlice {
+  all: string[];
   selected: string[];
 }
 
-const initialState: TagsSlice = {
-  value: [],
+const initialState: ITagsSlice = {
+  all: [],
   selected: [],
 };
 
@@ -15,12 +15,12 @@ export const tagsSlice = createSlice({
   initialState,
   reducers: {
     setTags: (state, action) => {
-      state.value = action.payload;
+      state.all = action.payload;
     },
 
     setSelectedTags: (state, action) => {
-      state.selected = action.payload
-    }
+      state.selected = action.payload;
+    },
   },
 });
 

@@ -1,11 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface AnimeSlice {
-  value: IAnime[];
-}
-
-const initialState: AnimeSlice = {
-  value: [],
+const initialState: IAnimeList = {
+  items: [],
 };
 
 export const animeSlice = createSlice({
@@ -13,7 +9,7 @@ export const animeSlice = createSlice({
   initialState,
   reducers: {
     setAnime: (state, action) => {
-      state.value = action.payload;
+      state.items = action.payload;
     },
   },
 });

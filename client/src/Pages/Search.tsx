@@ -3,15 +3,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 
-import { Content, SortBlock, TagsSelector } from "../components";
+import { Content, SortBlock, TagsBlock } from "../components";
 
 import compareStrings from "../Utils/compareStrings";
 import compareArrays from "../Utils/compareArrays";
 import useDebounce from "../Hooks/useDebounce";
 
 function Search() {
-  const anime = useSelector((state: RootState) => state.anime.value);
-  const tags = useSelector((state: RootState) => state.tags.value);
+  const anime = useSelector((state: RootState) => state.anime.items);
   const selectedTags = useSelector((state: RootState) => state.tags.selected);
 
   const [searchString, setSearchString] = useState("");
@@ -32,7 +31,7 @@ function Search() {
         <div className="wrapper">
           <div className="profile-page__sorting">
             <h3>BROWSE THROUGH ANIME CATALOG</h3>
-            <TagsSelector tags={tags} />
+            <TagsBlock />
             <div className="search-bar">
               <input
                 type="text"

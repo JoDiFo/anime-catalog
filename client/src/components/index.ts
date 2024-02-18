@@ -6,7 +6,7 @@ import AnimeList from "./Profile/AnimeList";
 import CardContainer from "./Common/CardContainer";
 import Content from "./Common/Content";
 import SortBlock from "./Search/SortBlock";
-import TagsSelector from "./Search/TagsSelector";
+import TagsBlock from "./Search/TagsBlock";
 import AnimePopup from "./Header/AnimePopup";
 
 export {
@@ -18,6 +18,6 @@ export {
   CardContainer,
   Content,
   SortBlock,
-  TagsSelector,
+  TagsBlock,
   AnimePopup,
 };

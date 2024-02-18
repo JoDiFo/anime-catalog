@@ -10,7 +10,7 @@ import { AnimePopup } from "../index";
 import compareStrings from "../../Utils/compareStrings";
 
 function Header() {
-  const animeSlice = useSelector((state: RootState) => state.anime.value);
+  const animeSlice = useSelector((state: RootState) => state.anime.items);
 
   const [value, setValue] = useState("");
   const [displayedItems, setDisplayedItems] = useState<IAnime[]>([]);
