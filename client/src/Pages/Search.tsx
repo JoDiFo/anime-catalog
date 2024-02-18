@@ -10,21 +10,21 @@ import compareArrays from "../Utils/compareArrays";
 import useDebounce from "../Hooks/useDebounce";
 
 function Search() {
-  const [searchString, setSearchString] = useState("");
-  const [displayedItems, setDisplayedItems] = useState<IAnime[]>([]);
-
-  const debouncedValue = useDebounce(searchString, 500);
-
   const anime = useSelector((state: RootState) => state.anime.value);
   const tags = useSelector((state: RootState) => state.tags.value);
   const selectedTags = useSelector((state: RootState) => state.tags.selected);
+
+  const [searchString, setSearchString] = useState("");
+  const [displayedItems, setDisplayedItems] = useState<IAnime[]>(anime);
+
+  const debouncedValue = useDebounce(searchString, 500);
 
   useEffect(() => {
     const newItems = anime
       .filter((item) => compareStrings(item.title, debouncedValue))
       .filter((item) => compareArrays(item.tags, selectedTags));
     setDisplayedItems(newItems);
-  }, [debouncedValue]);
+  }, [debouncedValue, anime, selectedTags]);
 
   return (
     <main className="profile-page">
@@ -42,7 +42,7 @@ function Search() {
             </div>
             <SortBlock />
           </div>
-          {anime ? (
+          {anime.length !== 0 ? (
             <Content items={displayedItems} />
           ) : (
             <div className="loading-text">Loading...</div>

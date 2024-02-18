@@ -4,7 +4,7 @@ export default function compareArrays(arr1: string[], arr2: string[]): boolean {
   }
 
   let result = true;
-  arr2.map((item) => {
+  arr2.forEach((item) => {
     if (!arr1?.includes(item)) {
       result = false;
     }
