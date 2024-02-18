@@ -24,7 +24,7 @@ function Search() {
       .filter((item) => compareStrings(item.title, debouncedValue))
       .filter((item) => compareArrays(item.tags, selectedTags));
     setDisplayedItems(newItems);
-  }, [debouncedValue, anime, selectedTags]);
+  }, [debouncedValue, anime, selectedTags, anime]);
 
   return (
     <main className="profile-page">
