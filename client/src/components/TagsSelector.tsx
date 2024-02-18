@@ -48,9 +48,9 @@ function TagsSelector({ tags }: TagsList) {
       .filter((item) => !selected.includes(item))
       .filter((item) => compareStrings(item, searchString));
     setFilteredTags(newItems);
-  }, [debouncedValue]);
+  }, [debouncedValue, tags]);
 
-  const selectedTagsBlock = filteredTags.map((item) => (
+  const tagsBlock = filteredTags.map((item) => (
     <div
       key={`container__block__#${item}`}
       className="tag"
@@ -114,7 +114,7 @@ function TagsSelector({ tags }: TagsList) {
             )}
           </div>
           <hr />
-          <div className="tags-container__block__tags">{selectedTagsBlock}</div>
+          <div className="tags-container__block__tags">{tagsBlock}</div>
         </div>
       )}
     </div>
