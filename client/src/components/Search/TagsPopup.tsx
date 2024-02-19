@@ -17,7 +17,7 @@ function TagsPopup({ toggleVisible }: IProps) {
   const dispatch = useDispatch();
   const tagsContext = useSelector((state: RootState) => state.tags);
 
-  const [unselectedTags, setUnselectedTags] = useState<string[]>([]);
+  const [unselectedTags, setUnselectedTags] = useState<ITag[]>([]);
   const [searchString, setSearchString] = useState("");
 
   const debouncedValue = useDebounce(searchString, 500);
@@ -30,7 +30,7 @@ function TagsPopup({ toggleVisible }: IProps) {
     dispatch(setSelectedTags(newSelectedTags));
   };
 
-  const handleSelect = (value: string) => {
+  const handleSelect = (value: ITag) => {
     const newSelectedTags = [...tagsContext.selected, value];
     dispatch(setSelectedTags(newSelectedTags));
   };
@@ -43,7 +43,7 @@ function TagsPopup({ toggleVisible }: IProps) {
   useEffect(() => {
     const newItems = tagsContext.all
       .filter((item) => !tagsContext.selected.includes(item))
-      .filter((item) => compareStrings(item, searchString));
+      .filter((item) => compareStrings(item.value, searchString));
     setUnselectedTags(newItems);
   }, [debouncedValue, tagsContext]);
 
@@ -68,11 +68,11 @@ function TagsPopup({ toggleVisible }: IProps) {
         {tagsContext.selected.length !== 0 ? (
           tagsContext.selected.map((item, index) => (
             <div
-              key={`${item}_#${index}_tag`}
+              key={item.id}
               className="tag"
               onClick={() => handleDeselect(index)}
             >
-              {item}
+              {item.value}
             </div>
           ))
         ) : (
@@ -82,12 +82,8 @@ function TagsPopup({ toggleVisible }: IProps) {
       <hr />
       <div className="tags-container__block__tags">
         {unselectedTags.map((item) => (
-          <div
-            key={`container__block__#${item}`}
-            className="tag"
-            onClick={() => handleSelect(item)}
-          >
-            {item}
+          <div key={item.id} className="tag" onClick={() => handleSelect(item)}>
+            {item.value}
           </div>
         ))}
       </div>

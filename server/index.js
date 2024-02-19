@@ -6,6 +6,7 @@ const fs = require("fs");
 
 const formatFile = require("./utils/formatFile");
 const getTags = require("./utils/getTags");
+const formatTags = require("./utils/formatTags");
 const filterAnime = require("./utils/filterAnime");
 const removeTags = require("./utils/removeTags");
 
@@ -55,7 +56,8 @@ app.get("/api/format", (req, res) => {
 });
 
 app.get("/api/tags", (req, res) => {
-  const result = getTags();
+  // const result = getTags();
+  const result = formatTags();
   res.send(result);
 });
 

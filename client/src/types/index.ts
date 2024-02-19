@@ -18,3 +18,8 @@ interface IAnimeSeason {
 interface IAnimeList {
   items: IAnime[];
 }
+
+interface ITag {
+  id: number;
+  value: string;
+}

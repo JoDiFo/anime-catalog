@@ -18,10 +18,15 @@ const schema = buildSchema(`
         year: Int
     }
 
+    type Tag {
+        id: ID
+        value: String
+    }
+
     type Query {
         getAllAnime: [Anime]
         getAnime(id: ID): Anime
-        getAllTags: [String]
+        getAllTags: [Tag]
     }
 `);
 

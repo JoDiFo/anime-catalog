@@ -21,7 +21,12 @@ function Search() {
   useEffect(() => {
     const newItems = anime
       .filter((item) => compareStrings(item.title, debouncedValue))
-      .filter((item) => compareArrays(item.tags, selectedTags));
+      .filter((item) =>
+        compareArrays(
+          item.tags,
+          selectedTags.map((item) => item.value)
+        )
+      );
     setDisplayedItems(newItems);
   }, [debouncedValue, anime, selectedTags]);
 

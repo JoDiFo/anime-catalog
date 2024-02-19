@@ -5,10 +5,10 @@ import { CardContainer } from "..";
 
 function Content({ items }: IAnimeList) {
   const selectOptions = [
-    { value: 35, text: "35" },
-    { value: 70, text: "70" },
-    { value: 120, text: "120" },
-    { value: 200, text: "200" },
+    { id: 1, value: 35, text: "35" },
+    { id: 2, value: 70, text: "70" },
+    { id: 3, value: 120, text: "120" },
+    { id: 4, value: 200, text: "200" },
   ];
 
   const [itemOffset, setItemOffset] = useState(0);
@@ -47,7 +47,7 @@ function Content({ items }: IAnimeList) {
           onChange={handleSelectChange}
         >
           {selectOptions.map((item) => (
-            <option key={`${item.value}_${item.text}`} value={item.value}>
+            <option key={item.id} value={item.value}>
               {item.text}
             </option>
           ))}

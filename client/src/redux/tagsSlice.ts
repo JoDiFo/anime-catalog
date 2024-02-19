@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ITagsSlice {
-  all: string[];
-  selected: string[];
+  all: ITag[];
+  selected: ITag[];
 }
 
 const initialState: ITagsSlice = {
