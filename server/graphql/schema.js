@@ -2,14 +2,13 @@ import { buildSchema } from "graphql";
 
 export const schema = buildSchema(`
     type Anime {
-        id: ID
+        _id: ID
         title: String
         type: String
         episodes: Int
         status: String
         animeSeason: AnimeSeason
         picture: String
-        synonyms: [String]
         tags: [String]
     }
 
@@ -19,7 +18,7 @@ export const schema = buildSchema(`
     }
 
     type Tag {
-        id: ID
+        _id: ID
         value: String
     }
 
