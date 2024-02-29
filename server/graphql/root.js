@@ -1,28 +1,15 @@
-import path from "path";
-import { readFileSync } from "fs";
-
-const animeList = JSON.parse(
-  readFileSync("anime-db.json", {
-    path: path.dirname("anime-db.json"),
-  })
-);
-
-const tagsList = JSON.parse(
-  readFileSync("tags.json", {
-    path: path.dirname("tags.json"),
-  })
-);
+import { queryAllAnime, queryAllTags, queryOneAnime } from "../db/methods.js";
 
 export const root = {
-  getAllAnime: () => {
-    return animeList.data;
+  getAllAnime: async () => {
+    return await queryAllAnime();
   },
 
-  getAnime: ({ id }) => {
-    return animeList.data.find((item) => item.id == id);
+  getAnime: async ({ id }) => {
+    return await queryOneAnime(id);
   },
 
-  getAllTags: () => {
-    return tagsList.data;
+  getAllTags: async () => {
+    return await queryAllTags();
   },
 };
