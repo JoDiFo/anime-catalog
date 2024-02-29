@@ -1,10 +1,11 @@
-const { json } = require("express");
-const fs = require("fs");
+import { json } from "express";
+import path from 'path'
+import { readFileSync, writeFileSync } from "fs";
 
 function getTags() {
   const DATA = JSON.parse(
-    fs.readFileSync("anime-db.json", {
-      path: __dirname,
+    readFileSync("anime-db.json", {
+      path: path.resolve(__dirname),
     })
   );
 
@@ -15,9 +16,9 @@ function getTags() {
 
   const result = [...tags]
 
-  fs.writeFileSync("tags.json", JSON.stringify(result, null, 2));
+  writeFileSync("tags.json", JSON.stringify(result, null, 2));
 
   return result;
 }
 
-module.exports = getTags;
+export default getTags;

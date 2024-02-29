@@ -1,16 +1,17 @@
-const { json } = require("express");
-const fs = require("fs");
+import { json } from "express";
+import path from 'path'
+import { readFileSync, writeFileSync } from "fs";
 
 function removeTags() {
   const animeList = JSON.parse(
-    fs.readFileSync("anime-db.json", {
-      path: __dirname,
+    readFileSync("anime-db.json", {
+      path: path.resolve(__dirname),
     })
   );
 
   const tagList = JSON.parse(
-    fs.readFileSync("filtered-tags.json", {
-      path: __dirname,
+    readFileSync("filtered-tags.json", {
+      path: path.resolve(__dirname),
     })
   );
 
@@ -26,9 +27,9 @@ function removeTags() {
     item.tags = result[index].slice(0, 10);
   });
 
-  fs.writeFileSync("anime-db.json", JSON.stringify(animeList, null, 2));
+  writeFileSync("anime-db.json", JSON.stringify(animeList, null, 2));
 
   return animeList;
 }
 
-module.exports = removeTags;
+export default removeTags;

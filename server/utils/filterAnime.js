@@ -1,10 +1,11 @@
-const { json } = require("express");
-const fs = require("fs");
+import { json } from "express";
+import path from 'path'
+import { readFileSync, writeFileSync } from "fs";
 
 function filterAnime() {
   const animeList = JSON.parse(
-    fs.readFileSync("anime-db.json", {
-      path: __dirname,
+    readFileSync("anime-db.json", {
+      path: path.resolve(__dirname),
     })
   );
 
@@ -53,9 +54,9 @@ function filterAnime() {
     });
   });
 
-  fs.writeFileSync("anime-db.json", JSON.stringify(result, null, 2));
+  writeFileSync("anime-db.json", JSON.stringify(result, null, 2));
 
   return result;
 }
 
-module.exports = filterAnime;
+export default filterAnime;

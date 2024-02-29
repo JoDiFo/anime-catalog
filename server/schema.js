@@ -1,6 +1,6 @@
-const { buildSchema } = require("graphql");
+import { buildSchema } from "graphql";
 
-const schema = buildSchema(`
+export const schema = buildSchema(`
     type Anime {
         id: ID
         title: String
@@ -29,5 +29,3 @@ const schema = buildSchema(`
         getAllTags: [Tag]
     }
 `);
-
-module.exports = schema;

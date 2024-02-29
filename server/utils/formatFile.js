@@ -1,15 +1,16 @@
-const { json } = require("express");
-const fs = require("fs");
+import { json } from "express";
+import path from 'path'
+import { readFileSync, writeFileSync } from "fs";
 
 function formatFile() {
   const DATA = JSON.parse(
-    fs.readFileSync("anime-db.json", {
-      path: __dirname,
+    readFileSync("anime-db.json", {
+      path: path.resolve(__dirname),
     })
   );
 
-  const result = DATA.map((item) => {
-    const { synonyms, ...res } = item;
+  const result = DATA.data.map((item) => {
+    const { id, ...res } = item;
     return res;
   });
   // const result = DATA.map((item) => {
@@ -18,9 +19,9 @@ function formatFile() {
   //   return { id, ...res };
   // });
 
-  fs.writeFileSync("anime-db.json", JSON.stringify(result, null, 2));
+  writeFileSync("test.json", JSON.stringify(result, null, 2));
 
   console.log("Ok");
 }
 
-module.exports = formatFile;
+export default formatFile;
