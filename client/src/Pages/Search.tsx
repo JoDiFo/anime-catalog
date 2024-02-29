@@ -9,6 +9,8 @@ import compareStrings from "../Utils/compareStrings";
 import compareArrays from "../Utils/compareArrays";
 import useDebounce from "../Hooks/useDebounce";
 
+import { IAnime } from "../types";
+
 function Search() {
   const anime = useSelector((state: RootState) => state.anime.items);
   const selectedTags = useSelector((state: RootState) => state.tags.selected);
@@ -20,8 +22,8 @@ function Search() {
 
   useEffect(() => {
     const newItems = anime
-      .filter((item) => compareStrings(item.title, debouncedValue))
-      .filter((item) =>
+      .filter((item: IAnime) => compareStrings(item.title, debouncedValue))
+      .filter((item: IAnime) =>
         compareArrays(
           item.tags,
           selectedTags.map((item) => item.value)

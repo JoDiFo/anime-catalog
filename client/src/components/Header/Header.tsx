@@ -8,6 +8,7 @@ import { RootState } from "../../redux/store";
 import profileImage from "../../assets/profile-image.jpeg";
 import { AnimePopup } from "../index";
 import compareStrings from "../../Utils/compareStrings";
+import { IAnime } from "../../types";
 
 function Header() {
   const animeSlice = useSelector((state: RootState) => state.anime.items);
@@ -24,7 +25,7 @@ function Header() {
     }
 
     const newItems = animeSlice
-      .filter((item) => compareStrings(item.title, debouncedValue))
+      .filter((item: IAnime) => compareStrings(item.title, debouncedValue))
       .slice(0, 50);
     setDisplayedItems(newItems);
   }, [debouncedValue]);

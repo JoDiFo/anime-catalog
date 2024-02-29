@@ -8,6 +8,7 @@ import compareStrings from "../../Utils/compareStrings";
 import useDebounce from "../../Hooks/useDebounce";
 
 import crossIcon from "../../assets/cross.svg";
+import { ITag } from "../../types";
 
 interface IProps {
   toggleVisible: (flag: boolean) => void;
@@ -82,7 +83,11 @@ function TagsPopup({ toggleVisible }: IProps) {
       <hr />
       <div className="tags-container__block__tags">
         {unselectedTags.map((item) => (
-          <div key={item.id} className="tag" onClick={() => handleSelect(item)}>
+          <div
+            key={item._id}
+            className="tag"
+            onClick={() => handleSelect(item)}
+          >
             {item.value}
           </div>
         ))}

@@ -1,17 +1,19 @@
+import { IAnime, IAnimeList } from "../../types";
 import { AnimeCard } from "../index";
 
 function CardContainer({ items }: IAnimeList) {
   return (
     <div className="profile-page__list card-container">
-      {items &&
-        items.map((item: IAnime) => (
-          <AnimeCard
-            key={item.id}
-            id={item.id}
-            animeThumbnail={item.picture}
-            title={item.title}
-          />
-        ))}
+      {items.length !== 0
+        ? items.map((item: IAnime) => (
+            <AnimeCard
+              key={item._id}
+              id={item._id}
+              animeThumbnail={item.picture}
+              title={item.title}
+            />
+          ))
+        : null}
     </div>
   );
 }

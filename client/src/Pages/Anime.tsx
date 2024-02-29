@@ -2,18 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_ONE_ANIME } from "../query/anime";
-
-type AnimeInfo = {
-  title: string;
-  type: string;
-  episodes: number;
-  status: string;
-  animeSeason: {
-    year: number;
-  };
-  picture: string;
-  tags: string[];
-};
+import { IAnime } from "../types";
 
 function Anime() {
   const location = useLocation();
@@ -25,7 +14,7 @@ function Anime() {
     },
   });
 
-  const [anime, setAnime] = useState<AnimeInfo>();
+  const [anime, setAnime] = useState<IAnime>();
 
   useEffect(() => {
     if (!loading) {

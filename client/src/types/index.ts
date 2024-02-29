@@ -1,5 +1,5 @@
-interface IAnime {
-  id: string;
+export interface IAnime {
+  _id: string;
   title: string;
   type: string;
   episodes: number;
@@ -10,16 +10,23 @@ interface IAnime {
   tags: string[];
 }
 
-interface IAnimeSeason {
+export interface IAnimeSeason {
   season: string;
   year: number;
 }
 
-interface IAnimeList {
+export interface IAnimeList {
   items: IAnime[];
 }
 
-interface ITag {
-  id: number;
+export interface ITag {
+  _id: number;
   value: string;
 }
+
+export type IWatchCategory =
+  | "watching"
+  | "watched"
+  | "plan to watch"
+  | "wont watch"
+  | "stalled";

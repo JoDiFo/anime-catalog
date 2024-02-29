@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 export const GET_ALL_ANIME = gql`
   query {
     getAllAnime {
-      id
+      _id
       title
       picture
       tags
@@ -12,8 +12,8 @@ export const GET_ALL_ANIME = gql`
 `;
 
 export const GET_ONE_ANIME = gql`
-  query getAnime($id: ID) {
-    getAnime(id: $id) {
+  query getOneAnime($id: ID) {
+    getOneAnime(id: $id) {
       title
       type
       episodes

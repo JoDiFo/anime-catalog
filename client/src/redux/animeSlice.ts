@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IAnimeList } from "../types";
 
 const initialState: IAnimeList = {
   items: [],
