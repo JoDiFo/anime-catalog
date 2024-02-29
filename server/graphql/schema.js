@@ -22,9 +22,38 @@ export const schema = buildSchema(`
         value: String
     }
 
+    type User {
+        _id: ID
+        username: String
+        email: String
+        password: String
+        watched: [String]
+        watching: [String]
+        planToWatch: [String]
+        stalled: [String]
+        dropped: [String]
+    }
+
+    input UserInput {
+        username: String
+        email: String
+        password: String
+        watched: [String]
+        watching: [String]
+        planToWatch: [String]
+        stalled: [String]
+        dropped: [String]
+    }
+
     type Query {
         getAllAnime: [Anime]
-        getAnime(id: ID): Anime
+        getOneAnime(id: ID): Anime
         getAllTags: [Tag]
+        getUser(id: ID): User
+    }
+
+    type Mutation {
+        createUser(input: UserInput): User
+        updateUser(id: ID, input: UserInput): User
     }
 `);

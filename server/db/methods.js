@@ -20,21 +20,39 @@ async function queryAllTags() {
 }
 
 async function queryLogin(user) {
-  let collection = await db.collection("animeCollection");
+  let collection = await db.collection("usersCollection");
   let result = await collection.find({}).toArray();
   return result;
 }
 
-async function queryRegister(newUser) {
-  let collection = await db.collection("animeCollection");
-  let result = await collection.find({}).toArray();
-  return result;
+async function queryFindUser(userId) {
+  let collection = await db.collection("usersCollection");
+  let user = await collection.findOne({_id: new ObjectId(userId)});
+  return user;
+}
+
+async function queryRegister(user) {
+  let collection = await db.collection("usersCollection");
+  let insertResult = await collection.insertOne(user);
+  let newUser = await collection.findOne({ _id: insertResult.insertedId });
+  return newUser;
+}
+
+async function queryUpdateUser(userId, userData) {
+  let collection = await db.collection("usersCollection");
+  let result = await collection.updateOne(
+    { _id: new ObjectId(userId) },
+    { $set: userData }
+  );
+  let updatedUser = await collection.findOne({ _id: new ObjectId(userId) });
+  return updatedUser;
 }
 
 export {
   queryAllAnime,
   queryOneAnime,
   queryAllTags,
-  queryLogin,
+  queryFindUser,
   queryRegister,
+  queryUpdateUser,
 };
