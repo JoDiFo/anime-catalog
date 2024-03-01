@@ -19,15 +19,15 @@ async function queryAllTags() {
   return result;
 }
 
-async function queryLogin(user) {
+async function queryLogin(email, password) {
   let collection = await db.collection("usersCollection");
-  let result = await collection.find({}).toArray();
+  let result = await collection.findOne({ email, password });
   return result;
 }
 
 async function queryFindUser(userId) {
   let collection = await db.collection("usersCollection");
-  let user = await collection.findOne({_id: new ObjectId(userId)});
+  let user = await collection.findOne({ _id: new ObjectId(userId) });
   return user;
 }
 
@@ -52,6 +52,7 @@ export {
   queryAllAnime,
   queryOneAnime,
   queryAllTags,
+  queryLogin,
   queryFindUser,
   queryRegister,
   queryUpdateUser,

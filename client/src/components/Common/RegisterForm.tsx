@@ -3,15 +3,33 @@ import Form from "../UI/Form";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 
+import { REGISTER_USER } from "../../query/user";
+import { useMutation } from "@apollo/client";
+
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const [newUser] = useMutation(REGISTER_USER);
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
-    console.log(username, email, password);
+    newUser({
+      variables: {
+        input: {
+          username,
+          email,
+          password,
+        },
+      },
+    }).then(({ data }) => {
+      console.log(data);
+      setUsername("");
+      setEmail("");
+      setPassword("");
+    });
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +71,7 @@ function RegisterForm() {
         placeholder="password"
         name="password"
       />
-      <Button onClick={handleLogin}>Submit</Button>
+      <Button onClick={handleSubmit}>Submit</Button>
     </Form>
   );
 }

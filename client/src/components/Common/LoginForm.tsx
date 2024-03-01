@@ -1,15 +1,33 @@
 import Form from "../UI/Form";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { LOGIN_USER } from "../../query/user";
+import { useQuery } from "@apollo/client";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [user, setUser] = useState({});
+
+  const { data, loading, refetch } = useQuery(LOGIN_USER, {
+    variables: {
+      email,
+      password,
+    },
+  });
+
+  useEffect(() => {
+    if (!loading) {
+      setUser(data);
+    }
+  }, [loading]);
+
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-
+    refetch();
     console.log(email, password);
   };
 

@@ -50,6 +50,7 @@ export const schema = buildSchema(`
         getOneAnime(id: ID): Anime
         getAllTags: [Tag]
         getUser(id: ID): User
+        loginUser(email: String, password: String): User
     }
 
     type Mutation {

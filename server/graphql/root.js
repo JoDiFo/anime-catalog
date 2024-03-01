@@ -2,6 +2,7 @@ import {
   queryAllAnime,
   queryAllTags,
   queryFindUser,
+  queryLogin,
   queryOneAnime,
   queryRegister,
   queryUpdateUser,
@@ -30,5 +31,9 @@ export const root = {
 
   updateUser: async ({ id, input }) => {
     return await queryUpdateUser(id, input);
+  },
+
+  loginUser: async ({ email, password }) => {
+    return await queryLogin(email, password);
   },
 };
