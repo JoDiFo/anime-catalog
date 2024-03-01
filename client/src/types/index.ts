@@ -24,6 +24,22 @@ export interface ITag {
   value: string;
 }
 
+export interface IUserData {
+  _id: string;
+  username: string;
+  email: string;
+  password: string;
+  watched: string[];
+  watching: string[];
+  planToWatch: string[];
+  stalled: string[];
+  dropped: string[];
+}
+
+export interface IUserState {
+  isLogged: boolean;
+}
+
 export type IWatchCategory =
   | "watching"
   | "watched"

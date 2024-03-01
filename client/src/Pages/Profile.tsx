@@ -1,7 +1,6 @@
 import thumbnailImage from "../assets/thumbnail-image.png";
-import cardImage from "../assets/fullmetal-alchemist-brotherhood-1-190x285.jpg";
 
-import { ProfileInfo, AnimeCard, AnimeList } from "../components";
+import { ProfileInfo, AnimeList } from "../components";
 
 function Profile() {
   return (
@@ -16,26 +15,8 @@ function Profile() {
           <div className="profile-page__section">
             <h3>YOU MIGHT ALSO LIKE</h3>
             <div className="card-container">
-              <AnimeCard
-                animeThumbnail={cardImage}
-                title="Fullmetal alchemist: Brotherhood"
-              />
-              <AnimeCard
-                animeThumbnail={cardImage}
-                title="Fullmetal alchemist: Brotherhood"
-              />
-              <AnimeCard
-                animeThumbnail={cardImage}
-                title="Fullmetal alchemist: Brotherhood"
-              />
-              <AnimeCard
-                animeThumbnail={cardImage}
-                title="Fullmetal alchemist: Brotherhood"
-              />
-              <AnimeCard
-                animeThumbnail={cardImage}
-                title="Fullmetal alchemist: Brotherhood"
-              />
+              {/*reserved for card container*/}
+              <p>Nothing here yet</p>
             </div>
           </div>
         </div>

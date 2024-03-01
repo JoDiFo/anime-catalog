@@ -7,7 +7,7 @@ import CardContainer from "./Common/CardContainer";
 import Content from "./Common/Content";
 import SortBlock from "./Search/SortBlock";
 import TagsBlock from "./Search/TagsBlock";
-import AnimePopup from "./Header/AnimePopup";
+import ModalWindow from "./UI/ModalWindow/ModalWindow";
 
 export {
   Header,
@@ -19,5 +19,5 @@ export {
   Content,
   SortBlock,
   TagsBlock,
-  AnimePopup,
+  ModalWindow,
 };

@@ -6,12 +6,16 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
 import profileImage from "../../assets/profile-image.jpeg";
-import { AnimePopup } from "../index";
+import AnimePopup from "./AnimePopup";
+import Authorization from "./Authorization";
 import compareStrings from "../../Utils/compareStrings";
 import { IAnime } from "../../types";
 
 function Header() {
   const animeSlice = useSelector((state: RootState) => state.anime.items);
+  const isUserLogged = useSelector(
+    (state: RootState) => state.userReducer.isLogged
+  );
 
   const [value, setValue] = useState("");
   const [displayedItems, setDisplayedItems] = useState<IAnime[]>([]);
@@ -51,13 +55,17 @@ function Header() {
                 onChange={(event) => setValue(event.target.value)}
               />
             </div>
-            <Link to="/profile">
-              <img
-                className="header__profile"
-                src={profileImage}
-                alt="profile image"
-              />
-            </Link>
+            {isUserLogged ? (
+              <Link to="/profile">
+                <img
+                  className="header__profile"
+                  src={profileImage}
+                  alt="profile image"
+                />
+              </Link>
+            ) : (
+              <Authorization />
+            )}
           </div>
         </div>
         {displayedItems.length !== 0 ? (
