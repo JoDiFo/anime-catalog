@@ -7,13 +7,14 @@ import {
   queryRegister,
   queryUpdateUser,
 } from "../db/methods.js";
+import { ID, LoginData, RegisterData } from "../types.js";
 
 export const root = {
   getAllAnime: async () => {
     return await queryAllAnime();
   },
 
-  getOneAnime: async ({ id }) => {
+  getOneAnime: async ({ id }: ID) => {
     return await queryOneAnime(id);
   },
 
@@ -21,19 +22,19 @@ export const root = {
     return await queryAllTags();
   },
 
-  getUser: async ({ id }) => {
+  getUser: async ({ id }: ID) => {
     return await queryFindUser(id);
   },
 
-  createUser: async ({ input }) => {
+  createUser: async ({ input }: RegisterData) => {
     return await queryRegister(input);
   },
 
-  updateUser: async ({ id, input }) => {
+  updateUser: async ({ id, input }: ID & RegisterData) => {
     return await queryUpdateUser(id, input);
   },
 
-  loginUser: async ({ email, password }) => {
+  loginUser: async ({ email, password }: LoginData) => {
     return await queryLogin(email, password);
   },
 };

@@ -9,6 +9,6 @@ try {
   console.log(e);
 }
 
-let db = connection.db("Anime-Catalog-DB");
+const db = connection?.db("Anime-Catalog-DB");
 
 export default db;
