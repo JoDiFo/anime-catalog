@@ -6,7 +6,12 @@ import Input from "../UI/Input";
 import { REGISTER_USER } from "../../query/user";
 import { useMutation } from "@apollo/client";
 
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/userSlice";
+
 function RegisterForm() {
+  const dispatch = useDispatch();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +30,14 @@ function RegisterForm() {
         },
       },
     }).then(({ data }) => {
-      console.log(data);
+      if (data.createUser) {
+        dispatch(
+          login({
+            _id: data.createUser._id,
+            username: data.createUser.username,
+          })
+        );
+      }
       setUsername("");
       setEmail("");
       setPassword("");

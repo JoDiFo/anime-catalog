@@ -4,31 +4,39 @@ import Button from "../UI/Button";
 import { useEffect, useState } from "react";
 
 import { LOGIN_USER } from "../../query/user";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
+
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/userSlice";
 
 function LoginForm() {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [user, setUser] = useState({});
-
-  const { data, loading, refetch } = useQuery(LOGIN_USER, {
-    variables: {
-      email,
-      password,
-    },
-  });
+  const [getUser, { called, data, loading }] = useLazyQuery(LOGIN_USER);
 
   useEffect(() => {
-    if (!loading) {
-      setUser(data);
+    if (called && !loading) {
+      if (data.loginUser) {
+        dispatch(
+          login({ _id: data.loginUser._id, username: data.loginUser.username })
+        );
+      }
     }
-  }, [loading]);
+  }, [called, loading]);
 
-  const handleLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    refetch();
-    console.log(email, password);
+    getUser({
+      variables: {
+        email,
+        password,
+      },
+    });
+    setEmail("");
+    setPassword("");
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +66,7 @@ function LoginForm() {
         placeholder="password"
         name="password"
       />
-      <Button onClick={handleLogin}>Submit</Button>
+      <Button onClick={handleSubmit}>Submit</Button>
     </Form>
   );
 }

@@ -23,13 +23,13 @@ export const userSlice = createSlice({
       state.isLogged = true;
       state._id = action.payload._id;
       state.username = action.payload.username;
-      state.email = action.payload.email;
-      state.password = action.payload.password;
-      state.watched = action.payload.watched;
-      state.watching = action.payload.watching;
-      state.planToWatch = action.payload.planToWatch;
-      state.stalled = action.payload.stalled;
-      state.dropped = action.payload.dropped;
+      // state.email = action.payload.email;
+      // state.password = action.payload.password;
+      // state.watched = action.payload.watched;
+      // state.watching = action.payload.watching;
+      // state.planToWatch = action.payload.planToWatch;
+      // state.stalled = action.payload.stalled;
+      // state.dropped = action.payload.dropped;
     },
 
     logout: (state) => {
