@@ -35,6 +35,7 @@ function RegisterForm() {
           login({
             _id: data.createUser._id,
             username: data.createUser.username,
+            registerDate: data.createUser.registerDate,
           })
         );
       }

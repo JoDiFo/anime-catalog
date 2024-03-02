@@ -5,6 +5,7 @@ export const REGISTER_USER = gql`
     createUser(input: $input) {
       _id
       username
+      registerDate
     }
   }
 `;
@@ -14,6 +15,7 @@ export const LOGIN_USER = gql`
     loginUser(email: $email, password: $password) {
       _id
       username
+      registerDate
     }
   }
 `;

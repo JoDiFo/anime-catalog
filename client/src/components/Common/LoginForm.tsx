@@ -21,7 +21,11 @@ function LoginForm() {
     if (called && !loading) {
       if (data.loginUser) {
         dispatch(
-          login({ _id: data.loginUser._id, username: data.loginUser.username })
+          login({
+            _id: data.loginUser._id,
+            username: data.loginUser.username,
+            registerDate: data.loginUser.registerDate,
+          })
         );
       }
     }

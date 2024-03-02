@@ -25,6 +25,7 @@ export const schema = buildSchema(`
     type User {
         _id: ID
         username: String
+        registerDate: String
         email: String
         password: String
         watched: [String]

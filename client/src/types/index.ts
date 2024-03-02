@@ -27,6 +27,7 @@ export interface ITag {
 export interface IUserData {
   _id: string;
   username: string;
+  registerDate: string;
   email: string;
   password: string;
   watched: string[];

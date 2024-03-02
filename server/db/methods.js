@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
 import db from "./conn.js";
+import getDate from "../utils/getDate.js";
 
 async function queryAllAnime() {
   let collection = await db.collection("animeCollection");
@@ -32,8 +33,10 @@ async function queryFindUser(userId) {
 }
 
 async function queryRegister(user) {
+  const registerDate = getDate();
+  const data = {...user, registerDate}
   let collection = await db.collection("usersCollection");
-  let insertResult = await collection.insertOne(user);
+  let insertResult = await collection.insertOne(data);
   let newUser = await collection.findOne({ _id: insertResult.insertedId });
   return newUser;
 }

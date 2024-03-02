@@ -6,6 +6,7 @@ const initialState: IUserData & IUserState = {
   isLogged: false,
   _id: "",
   username: "",
+  registerDate: "",
   email: "",
   password: "",
   watched: [],
@@ -23,6 +24,7 @@ export const userSlice = createSlice({
       state.isLogged = true;
       state._id = action.payload._id;
       state.username = action.payload.username;
+      state.registerDate = action.payload.registerDate;
       // state.email = action.payload.email;
       // state.password = action.payload.password;
       // state.watched = action.payload.watched;
