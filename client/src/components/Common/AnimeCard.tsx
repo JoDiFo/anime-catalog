@@ -1,20 +1,23 @@
 import { Link } from "react-router-dom";
+import { IAnimeStatus } from "../../types";
 
 interface IAnimeCard {
   id: string;
   title: string;
   animeThumbnail: string;
+  watchStatus: IAnimeStatus;
 }
 
-function AnimeCard({ id, title, animeThumbnail }: IAnimeCard) {
+function AnimeCard({ id, title, animeThumbnail, watchStatus }: IAnimeCard) {
   return (
     <div className="card">
-      <Link to="/anime" state={{ id: id }} >
+      <Link to="/anime" state={{ id: id }}>
         <img src={animeThumbnail} alt={title} />
       </Link>
       <div className="card__info">
         <div className="status">
-          <span className="dot plan-to-watch"></span>plan to watch
+          <span className={`dot ${watchStatus}`}></span>
+          {watchStatus}
         </div>
         <hr />
         <h4>{title}</h4>

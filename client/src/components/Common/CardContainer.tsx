@@ -11,6 +11,7 @@ function CardContainer({ items }: IAnimeList) {
               id={item._id}
               animeThumbnail={item.picture}
               title={item.title}
+              watchStatus={item.watchStatus}
             />
           ))
         : null}

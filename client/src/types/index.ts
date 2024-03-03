@@ -8,6 +8,7 @@ export interface IAnime {
   picture: string;
   synonyms: string[];
   tags: string[];
+  watchStatus: IAnimeStatus;
 }
 
 export interface IAnimeSeason {
@@ -41,9 +42,10 @@ export interface IUserState {
   isLogged: boolean;
 }
 
-export type IWatchCategory =
-  | "watching"
+export type IAnimeStatus =
+  | "not-watched"
   | "watched"
-  | "plan to watch"
-  | "wont watch"
-  | "stalled";
+  | "watching"
+  | "plan-to-watch"
+  | "stalled"
+  | "dropped";
