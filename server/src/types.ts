@@ -22,3 +22,9 @@ export interface IUserData {
   stalled: string[];
   dropped: string[];
 }
+
+export interface IAddAnime {
+  userId: string;
+  animeId: string;
+  input: string;
+}

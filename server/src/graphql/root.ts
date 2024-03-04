@@ -1,13 +1,20 @@
 import {
+  queryAddAnime,
   queryAllAnime,
   queryAllTags,
+  queryAnimeCount,
   queryFindUser,
   queryLogin,
   queryOneAnime,
   queryRegister,
   queryUpdateUser,
 } from "../db/methods.js";
-import { ID, LoginData, RegisterData } from "../types.js";
+
+import { IAddAnime, ID, LoginData, RegisterData } from "../types.js";
+
+interface IGetAnimeCount {
+  userId: string;
+}
 
 export const root = {
   getAllAnime: async () => {
@@ -36,5 +43,13 @@ export const root = {
 
   loginUser: async ({ email, password }: LoginData) => {
     return await queryLogin(email, password);
+  },
+
+  addAnime: async ({ userId, animeId, input }: IAddAnime) => {
+    return await queryAddAnime(userId, animeId, input);
+  },
+
+  getAnimeCount: async ({ userId }: IGetAnimeCount) => {
+    return await queryAnimeCount(userId);
   },
 };

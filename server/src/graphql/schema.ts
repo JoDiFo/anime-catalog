@@ -10,6 +10,7 @@ export const schema = buildSchema(`
         animeSeason: AnimeSeason
         picture: String
         tags: [String]
+        watchStatus: String
     }
 
     type AnimeSeason {
@@ -35,6 +36,14 @@ export const schema = buildSchema(`
         dropped: [String]
     }
 
+    type AnimeCount {
+        watched: Int
+        watching: Int
+        planToWatch: Int
+        stalled: Int
+        dropped: Int
+    }
+
     input UserInput {
         username: String
         email: String
@@ -52,10 +61,12 @@ export const schema = buildSchema(`
         getAllTags: [Tag]
         getUser(id: ID): User
         loginUser(email: String, password: String): User
+        getAnimeCount(userId: ID): AnimeCount
     }
 
     type Mutation {
         createUser(input: UserInput): User
         updateUser(id: ID, input: UserInput): User
+        addAnime(userId: ID, animeId: ID, input: String): User
     }
 `);

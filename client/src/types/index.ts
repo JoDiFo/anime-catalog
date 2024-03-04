@@ -49,3 +49,11 @@ export type IAnimeStatus =
   | "plan-to-watch"
   | "stalled"
   | "dropped";
+
+export interface IAnimeCount {
+  watched: number;
+  watching: number;
+  planToWatch: number;
+  stalled: number;
+  dropped: number;
+}

@@ -80,6 +80,40 @@ async function queryUpdateUser(userId: string, userData: IUserData) {
   }
 }
 
+async function queryAddAnime(
+  userId: string,
+  animeId: string,
+  category: string
+) {
+  try {
+    let usersCollection = await db?.collection("usersCollection");
+    let result = await usersCollection?.updateOne(
+      { _id: new ObjectId(userId) },
+      { $push: { [`${category}`]: animeId } }
+    );
+    let user = await usersCollection?.findOne({ _id: new ObjectId(userId) });
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function queryAnimeCount(userId: string) {
+  try {
+    let usersCollection = await db?.collection("usersCollection");
+    let user = await usersCollection?.findOne({ _id: new ObjectId(userId) });
+    return {
+      watched: user?.watched.length,
+      watching: user?.watching.length,
+      planToWatch: user?.planToWatch.length,
+      stalled: user?.stalled.length,
+      dropped: user?.dropped.length,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export {
   queryAllAnime,
   queryOneAnime,
@@ -88,4 +122,6 @@ export {
   queryFindUser,
   queryRegister,
   queryUpdateUser,
+  queryAddAnime,
+  queryAnimeCount,
 };

@@ -25,13 +25,13 @@ function App() {
     if (!isAnimeLoading) {
       dispatch(setAnime(animeData.getAllAnime));
     }
-  }, [animeData]);
+  }, [isAnimeLoading]);
 
   useEffect(() => {
     if (!areTagsLoading) {
       dispatch(setTags(tagsData.getAllTags));
     }
-  }, [tagsData]);
+  }, [areTagsLoading]);
 
   return (
     <>

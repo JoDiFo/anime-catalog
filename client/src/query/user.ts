@@ -19,3 +19,15 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const GET_ANIME_COUNT = gql`
+  query getAnimeCount($userId: ID) {
+    getAnimeCount(userId: $userId) {
+      watched
+      watching
+      planToWatch
+      stalled
+      dropped
+    }
+  }
+`;
