@@ -18,7 +18,7 @@ export interface IUserData {
   password: string;
   watched: string[];
   watching: string[];
-  planToWatch: string[];
+  "plan-to-watch": string[];
   stalled: string[];
   dropped: string[];
 }

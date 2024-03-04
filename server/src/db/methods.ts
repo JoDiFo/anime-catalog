@@ -57,6 +57,11 @@ async function queryRegister(user: IUserData) {
   try {
     const newUserData = { ...user };
     newUserData.registerDate = getDate();
+    newUserData.watched = [];
+    newUserData.watching = [];
+    newUserData["plan-to-watch"] = [];
+    newUserData.stalled = [];
+    newUserData.dropped = [];
     let collection = await db?.collection("usersCollection");
     let insertResult = await collection?.insertOne(newUserData);
     let newUser = await collection?.findOne({ _id: insertResult?.insertedId });
