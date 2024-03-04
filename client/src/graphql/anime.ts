@@ -1,12 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const GET_ALL_ANIME = gql`
-  query {
-    getAllAnime {
+  query getAllAnime($userId: ID) {
+    getAllAnime(userId: $userId) {
       _id
       title
       picture
       tags
+      watchStatus
     }
   }
 `;

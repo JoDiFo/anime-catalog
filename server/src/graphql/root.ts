@@ -33,8 +33,8 @@ interface IUserId {
 }
 
 export const root = {
-  getAllAnime: async () => {
-    return await queryAllAnime();
+  getAllAnime: async ({ userId }: IUserId) => {
+    return await queryAllAnime(userId);
   },
 
   getOneAnime: async ({ id }: ID) => {

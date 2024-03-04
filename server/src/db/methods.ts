@@ -1,12 +1,25 @@
 import { ObjectId } from "mongodb";
 import db from "./conn.js";
 import getDate from "../utils/getDate.js";
-import { IUserData } from "../types.js";
+import { IAnime, IUser, IUserData } from "../types.js";
 
-async function queryAllAnime() {
+async function queryAllAnime(userId: string) {
   try {
     let collection = await db?.collection("animeCollection");
     let result = await collection?.find({}).toArray();
+
+    if (userId) {
+      let usersCollection = await db?.collection("usersCollection");
+      let user = await usersCollection?.findOne({ _id: new ObjectId(userId) });
+      result?.forEach((item) => {
+        if (user?.watched.includes(item._id.toString())) item.watchStatus = "watched";
+        if (user?.watching.includes(item._id.toString())) item.watchStatus = "watching";
+        if (user?.["plan-to-watch"].includes(item._id.toString()))
+          item.watchStatus = "plan-to-watch";
+        if (user?.stalled.includes(item._id.toString())) item.watchStatus = "stalled";
+        if (user?.dropped.includes(item._id.toString())) item.watchStatus = "dropped";
+      });
+    }
     return result;
   } catch (e) {
     console.log(e);

@@ -56,7 +56,7 @@ export const schema = buildSchema(`
     }
 
     type Query {
-        getAllAnime: [Anime]
+        getAllAnime(userId: ID): [Anime]
         getOneAnime(id: ID): Anime
         getAllTags: [Tag]
         getUser(id: ID): User

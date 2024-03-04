@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_ANIME } from "./graphql/anime";
 import { GET_ALL_TAGS } from "./graphql/tags";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAnime } from "./redux/animeSlice";
 import { setTags } from "./redux/tagsSlice";
 
@@ -14,11 +14,18 @@ const { Home, Anime, MyAnime, Profile, Search } = lazily(
   () => import("./Pages")
 );
 import { Header, Footer } from "./components";
+import { RootState } from "./redux/store";
 
 function App() {
   const dispatch = useDispatch();
 
-  const { data: animeData, loading: isAnimeLoading } = useQuery(GET_ALL_ANIME);
+  const userId = useSelector((state: RootState) => state.userReducer._id);
+
+  const { data: animeData, loading: isAnimeLoading } = useQuery(GET_ALL_ANIME, {
+    variables: {
+      userId,
+    },
+  });
   const { data: tagsData, loading: areTagsLoading } = useQuery(GET_ALL_TAGS);
 
   useEffect(() => {
