@@ -62,6 +62,12 @@ export const schema = buildSchema(`
         getUser(id: ID): User
         loginUser(email: String, password: String): User
         getAnimeCount(userId: ID): AnimeCount
+        getUserAnime(userId: ID): [Anime]
+        getUserWatched(userId: ID): [Anime]
+        getUserWatching(userId: ID): [Anime]
+        getUserPlanning(userId: ID): [Anime]
+        getUserStalled(userId: ID): [Anime]
+        getUserDropped(userId: ID): [Anime]
     }
 
     type Mutation {

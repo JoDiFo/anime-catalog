@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { GET_ONE_ANIME } from "../query/anime";
+import { GET_ONE_ANIME } from "../graphql/anime";
 import { IAnime } from "../types";
 import CategorySelector from "../components/Anime/CategorySelector";
 

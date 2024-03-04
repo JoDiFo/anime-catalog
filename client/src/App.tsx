@@ -3,8 +3,8 @@ import { lazily } from "react-lazily";
 import { Suspense, useEffect } from "react";
 
 import { useQuery } from "@apollo/client";
-import { GET_ALL_ANIME } from "./query/anime";
-import { GET_ALL_TAGS } from "./query/tags";
+import { GET_ALL_ANIME } from "./graphql/anime";
+import { GET_ALL_TAGS } from "./graphql/tags";
 
 import { useDispatch } from "react-redux";
 import { setAnime } from "./redux/animeSlice";

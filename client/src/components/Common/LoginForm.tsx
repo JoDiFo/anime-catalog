@@ -3,7 +3,7 @@ import Input from "../UI/Input";
 import Button from "../UI/Button";
 import { useEffect, useState } from "react";
 
-import { LOGIN_USER } from "../../query/user";
+import { LOGIN_USER } from "../../graphql/user";
 import { useLazyQuery } from "@apollo/client";
 
 import { useDispatch } from "react-redux";

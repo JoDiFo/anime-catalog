@@ -3,7 +3,7 @@ import Form from "../UI/Form";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 
-import { REGISTER_USER } from "../../query/user";
+import { REGISTER_USER } from "../../graphql/user";
 import { useMutation } from "@apollo/client";
 
 import { useDispatch } from "react-redux";

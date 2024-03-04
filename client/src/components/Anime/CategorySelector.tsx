@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Select from "../UI/Select";
 
 import { useMutation } from "@apollo/client";
-import { ADD_ANIME } from "../../query/user";
+import { ADD_ANIME } from "../../graphql/user";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";

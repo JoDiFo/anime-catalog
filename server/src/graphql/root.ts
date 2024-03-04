@@ -8,6 +8,12 @@ import {
   queryOneAnime,
   queryRegister,
   queryUpdateUser,
+  queryUserAnime,
+  queryUserDropped,
+  queryUserPlanning,
+  queryUserStalled,
+  queryUserWatched,
+  queryUserWatching,
 } from "../db/methods.js";
 
 import { ID, LoginData, RegisterData } from "../types.js";
@@ -19,6 +25,10 @@ export interface IAddAnime {
 }
 
 interface IGetAnimeCount {
+  userId: string;
+}
+
+interface IUserId {
   userId: string;
 }
 
@@ -57,5 +67,29 @@ export const root = {
 
   getAnimeCount: async ({ userId }: IGetAnimeCount) => {
     return await queryAnimeCount(userId);
+  },
+
+  getUserAnime: async ({ userId }: IUserId) => {
+    return await queryUserAnime(userId);
+  },
+
+  getUserWatched: async ({ userId }: IUserId) => {
+    return await queryUserWatched(userId);
+  },
+
+  getUserWatching: async ({ userId }: IUserId) => {
+    return await queryUserWatching(userId);
+  },
+
+  getUserPlanning: async ({ userId }: IUserId) => {
+    return await queryUserPlanning(userId);
+  },
+
+  getUserStalled: async ({ userId }: IUserId) => {
+    return await queryUserStalled(userId);
+  },
+
+  getUserDropped: async ({ userId }: IUserId) => {
+    return await queryUserDropped(userId);
   },
 };

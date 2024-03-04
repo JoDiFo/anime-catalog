@@ -1,7 +1,7 @@
 import thumbnailImage from "../assets/thumbnail-image.png";
 
 import { useQuery } from "@apollo/client";
-import { GET_ANIME_COUNT } from "../query/user";
+import { GET_ANIME_COUNT } from "../graphql/user";
 
 import { useEffect, useState } from "react";
 import { IAnimeCount } from "../types";

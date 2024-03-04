@@ -147,6 +147,111 @@ async function queryAnimeCount(userId: string) {
   }
 }
 
+async function queryUserWatched(userId: string) {
+  if (!db) {
+    return;
+  }
+
+  try {
+    let usersCollection = await db.collection("usersCollection");
+    let animeCollection = await db.collection("animeCollection");
+    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+    const result = user?.watched.map((item: string) => {
+      return animeCollection.findOne({ _id: new ObjectId(item) });
+    });
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function queryUserWatching(userId: string) {
+  if (!db) {
+    return;
+  }
+
+  try {
+    let usersCollection = await db.collection("usersCollection");
+    let animeCollection = await db.collection("animeCollection");
+    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+    const result = user?.watching.map((item: string) => {
+      return animeCollection.findOne({ _id: new ObjectId(item) });
+    });
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function queryUserPlanning(userId: string) {
+  if (!db) {
+    return;
+  }
+
+  try {
+    let usersCollection = await db.collection("usersCollection");
+    let animeCollection = await db.collection("animeCollection");
+    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+    const result = user?.["plan-to-watch"].map((item: string) => {
+      return animeCollection.findOne({ _id: new ObjectId(item) });
+    });
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function queryUserStalled(userId: string) {
+  if (!db) {
+    return;
+  }
+
+  try {
+    let usersCollection = await db.collection("usersCollection");
+    let animeCollection = await db.collection("animeCollection");
+    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+    const result = user?.stalled.map((item: string) => {
+      return animeCollection.findOne({ _id: new ObjectId(item) });
+    });
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function queryUserDropped(userId: string) {
+  if (!db) {
+    return;
+  }
+
+  try {
+    let usersCollection = await db.collection("usersCollection");
+    let animeCollection = await db.collection("animeCollection");
+    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+    const result = user?.dropped.map((item: string) => {
+      return animeCollection.findOne({ _id: new ObjectId(item) });
+    });
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function queryUserAnime(userId: string) {
+  return [
+    ...(await queryUserWatched(userId)),
+    ...(await queryUserWatching(userId)),
+    ...(await queryUserPlanning(userId)),
+    ...(await queryUserDropped(userId)),
+    ...(await queryUserStalled(userId)),
+  ];
+}
+
 export {
   queryAllAnime,
   queryOneAnime,
@@ -157,4 +262,10 @@ export {
   queryUpdateUser,
   queryAddAnime,
   queryAnimeCount,
+  queryUserAnime,
+  queryUserWatched,
+  queryUserWatching,
+  queryUserDropped,
+  queryUserStalled,
+  queryUserPlanning,
 };
