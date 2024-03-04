@@ -31,3 +31,11 @@ export const GET_ANIME_COUNT = gql`
     }
   }
 `;
+
+export const ADD_ANIME = gql`
+  mutation addAnime($userId: ID, $animeId: ID, $category: String) {
+    addAnime(userId: $userId, animeId: $animeId, category: $category) {
+      watchStatus
+    }
+  }
+`;

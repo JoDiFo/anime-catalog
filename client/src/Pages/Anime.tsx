@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_ONE_ANIME } from "../query/anime";
 import { IAnime } from "../types";
+import CategorySelector from "../components/Anime/CategorySelector";
 
 function Anime() {
   const location = useLocation();
@@ -10,7 +11,7 @@ function Anime() {
 
   const { data, loading } = useQuery(GET_ONE_ANIME, {
     variables: {
-      id: id,
+      id,
     },
   });
 
@@ -18,9 +19,9 @@ function Anime() {
 
   useEffect(() => {
     if (!loading) {
-      setAnime(data.getAnime);
+      setAnime(data.getOneAnime);
     }
-  }, [data]);
+  }, [data, loading]);
 
   return (
     <main className="anime-page">
@@ -53,24 +54,7 @@ function Anime() {
                 </div>
               ))}
             </div>
-            <div className="anime-page__my-list">
-              <h4 className="anime-page__my-list__title">MY ANIME:</h4>
-              <div className="anime-page__select">
-                <span className="dot not-watched"></span>
-                <select
-                  name="list-select"
-                  id="list-select"
-                  className="anime-page__my-list__dropdown"
-                >
-                  <option value="not-watched">not watched</option>
-                  <option value="watched">watched</option>
-                  <option value="watching">watching</option>
-                  <option value="plan-to-watch">plan to watch</option>
-                  <option value="stalled">stalled</option>
-                  <option value="dropped">dropped</option>
-                </select>
-              </div>
-            </div>
+            <CategorySelector animeId={id} />
           </div>
         </div>
       </div>

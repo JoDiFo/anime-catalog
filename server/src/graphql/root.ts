@@ -10,7 +10,13 @@ import {
   queryUpdateUser,
 } from "../db/methods.js";
 
-import { IAddAnime, ID, LoginData, RegisterData } from "../types.js";
+import { ID, LoginData, RegisterData } from "../types.js";
+
+export interface IAddAnime {
+  userId: string;
+  animeId: string;
+  category: string;
+}
 
 interface IGetAnimeCount {
   userId: string;
@@ -45,8 +51,8 @@ export const root = {
     return await queryLogin(email, password);
   },
 
-  addAnime: async ({ userId, animeId, input }: IAddAnime) => {
-    return await queryAddAnime(userId, animeId, input);
+  addAnime: async ({ userId, animeId, category }: IAddAnime) => {
+    return await queryAddAnime(userId, animeId, category);
   },
 
   getAnimeCount: async ({ userId }: IGetAnimeCount) => {

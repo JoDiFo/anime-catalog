@@ -86,13 +86,46 @@ async function queryAddAnime(
   category: string
 ) {
   try {
+    let animeCollection = await db?.collection("animeCollection");
+    let anime = await animeCollection?.findOne({ _id: new ObjectId(animeId) });
+    if (anime) {
+      anime.watchStatus = category;
+    }
+
     let usersCollection = await db?.collection("usersCollection");
+    let found = await usersCollection
+      ?.find({
+        _id: new ObjectId(userId),
+        [category]: { $in: [animeId] },
+      })
+      .toArray();
+    if (found?.length !== 0) {
+      return anime;
+    }
+
+    const categories = [
+      "dropped",
+      "stalled",
+      "watched",
+      "watching",
+      "plan-to-watch",
+    ];
+    const pullObject: any = {};
+    categories.forEach((item) => {
+      if (item !== category) {
+        pullObject[item] = animeId;
+      }
+    });
+
     let result = await usersCollection?.updateOne(
       { _id: new ObjectId(userId) },
-      { $push: { [`${category}`]: animeId } }
+      {
+        $pull: pullObject,
+        $push: { [category]: animeId },
+      }
     );
-    let user = await usersCollection?.findOne({ _id: new ObjectId(userId) });
-    return user;
+
+    return anime;
   } catch (error) {
     console.log(error);
   }
@@ -105,7 +138,7 @@ async function queryAnimeCount(userId: string) {
     return {
       watched: user?.watched.length,
       watching: user?.watching.length,
-      planToWatch: user?.planToWatch.length,
+      planToWatch: user?.["plan-to-watch"].length,
       stalled: user?.stalled.length,
       dropped: user?.dropped.length,
     };

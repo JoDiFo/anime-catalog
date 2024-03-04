@@ -67,6 +67,6 @@ export const schema = buildSchema(`
     type Mutation {
         createUser(input: UserInput): User
         updateUser(id: ID, input: UserInput): User
-        addAnime(userId: ID, animeId: ID, input: String): User
+        addAnime(userId: ID, animeId: ID, category: String): Anime
     }
 `);
