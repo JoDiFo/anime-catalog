@@ -1,13 +1,11 @@
 import profileImage from "../../assets/profile-image.jpeg";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+interface IProps {
+  username: string;
+  registerDate: string;
+}
 
-function ProfileInfo() {
-  const { username, registerDate } = useSelector(
-    (state: RootState) => state.userReducer
-  );
-
+function ProfileInfo({ username, registerDate }: IProps) {
   return (
     <div className="profile-page__info">
       <img src={profileImage} alt="profile image" />

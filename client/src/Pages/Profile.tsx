@@ -20,7 +20,11 @@ function Profile() {
     dropped: 0,
   });
 
-  const userId = useSelector((state: RootState) => state.userReducer._id);
+  const {
+    _id: userId,
+    username,
+    registerDate,
+  } = useSelector((state: RootState) => state.userReducer);
 
   const { data: animeList, loading: isListLoading } = useQuery(
     GET_ANIME_COUNT,
@@ -33,7 +37,6 @@ function Profile() {
 
   useEffect(() => {
     if (!isListLoading) {
-      console.log(animeList);
       setList(animeList.getAnimeCount);
     }
   }, [isListLoading]);
@@ -45,7 +48,7 @@ function Profile() {
       </div>
       <div className="container">
         <div className="wrapper">
-          <ProfileInfo />
+          <ProfileInfo username={username} registerDate={registerDate} />
           <AnimeList
             watched={list.watched}
             watching={list.watching}
