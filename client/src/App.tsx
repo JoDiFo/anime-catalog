@@ -8,7 +8,7 @@ import { GET_ALL_ANIME } from "./graphql/anime";
 import { useDispatch, useSelector } from "react-redux";
 import { setAnime } from "./redux/animeSlice";
 
-const { Home, Anime, MyAnime, Profile, Search } = lazily(
+const { Home, Anime, MyAnime, Profile, Search, Login } = lazily(
   () => import("./Pages")
 );
 import { Header, Footer } from "./components";
@@ -41,6 +41,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/anime" element={<MyAnime />} />
           <Route path="/anime" element={<Anime />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Suspense>
       <Footer />

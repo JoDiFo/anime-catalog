@@ -13,6 +13,7 @@ import {
   GET_WATCHED,
   GET_WATCHING,
 } from "../graphql/user";
+import { useNavigate } from "react-router-dom";
 
 type IRequest =
   | "all"
@@ -44,6 +45,7 @@ function MyAnime() {
     _id: userId,
     username,
     registerDate,
+    isLogged,
   } = useSelector((state: RootState) => state.userReducer);
 
   const [getAll, { called: calledAll, data: all, loading: loadingAll }] =
@@ -52,6 +54,7 @@ function MyAnime() {
         userId,
       },
     });
+
   const [
     getWatched,
     { called: calledWatched, data: watched, loading: loadingWatched },
@@ -60,6 +63,7 @@ function MyAnime() {
       userId,
     },
   });
+
   const [
     getWatching,
     { called: calledWatching, data: watching, loading: loadingWatching },
@@ -68,6 +72,7 @@ function MyAnime() {
       userId,
     },
   });
+
   const [
     getPlanned,
     { called: calledPlanned, data: planned, loading: loadingPlanned },
@@ -76,6 +81,7 @@ function MyAnime() {
       userId,
     },
   });
+
   const [
     getStalled,
     { called: calledStalled, data: stalled, loading: loadingStalled },
@@ -84,6 +90,7 @@ function MyAnime() {
       userId,
     },
   });
+
   const [
     getDropped,
     { called: calledDropped, data: dropped, loading: loadingDropped },
@@ -92,6 +99,8 @@ function MyAnime() {
       userId,
     },
   });
+
+  const navigate = useNavigate();
 
   const handleSelect = (option: IRequest) => {
     setSelected(option);
@@ -125,40 +134,48 @@ function MyAnime() {
   };
 
   useEffect(() => {
+    if (!isLogged) {
+      navigate("/login");
+    } else {
+      getWatched();
+    }
+  }, [getWatched, isLogged, navigate]);
+
+  useEffect(() => {
     if (calledAll && !loadingAll) {
       setDisplayed(all.getUserAnime);
     }
-  }, [calledAll, loadingAll]);
+  }, [calledAll, loadingAll, all]);
 
   useEffect(() => {
     if (calledWatched && !loadingWatched) {
       setDisplayed(watched.getUserWatched);
     }
-  }, [calledWatched, loadingWatched]);
+  }, [calledWatched, loadingWatched, watched]);
 
   useEffect(() => {
     if (calledWatching && !loadingWatching) {
       setDisplayed(watching.getUserWatching);
     }
-  }, [calledWatching, loadingWatching]);
+  }, [calledWatching, loadingWatching, watching]);
 
   useEffect(() => {
     if (calledPlanned && !loadingPlanned) {
       setDisplayed(planned.getUserPlanning);
     }
-  }, [calledPlanned, loadingPlanned]);
+  }, [calledPlanned, loadingPlanned, planned]);
 
   useEffect(() => {
     if (calledStalled && !loadingStalled) {
       setDisplayed(stalled.getUserStalled);
     }
-  }, [calledStalled, loadingStalled]);
+  }, [calledStalled, loadingStalled, stalled]);
 
   useEffect(() => {
     if (calledDropped && !loadingDropped) {
       setDisplayed(dropped.getUserDropped);
     }
-  }, [calledDropped, loadingDropped]);
+  }, [calledDropped, loadingDropped, dropped]);
 
   return (
     <main className="profile-page">

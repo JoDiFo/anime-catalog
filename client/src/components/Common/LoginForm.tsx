@@ -8,9 +8,15 @@ import { useLazyQuery } from "@apollo/client";
 
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
-function LoginForm() {
+interface IProps {
+  redirectTo: string;
+}
+
+function LoginForm({ redirectTo }: IProps) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +33,7 @@ function LoginForm() {
             registerDate: data.loginUser.registerDate,
           })
         );
+        navigate(redirectTo);
       }
     }
   }, [called, loading]);

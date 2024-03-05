@@ -1,15 +1,14 @@
-import thumbnailImage from "../assets/thumbnail-image.png";
-
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { GET_ANIME_COUNT } from "../graphql/user";
 
 import { useEffect, useState } from "react";
-import { IAnimeCount } from "../types";
-
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-import { ProfileInfo, AnimeList } from "../components";
 import { RootState } from "../redux/store";
+
+import thumbnailImage from "../assets/thumbnail-image.png";
+import { ProfileInfo, AnimeList } from "../components";
+import { IAnimeCount } from "../types";
 
 function Profile() {
   const [list, setList] = useState<IAnimeCount>({
@@ -24,22 +23,31 @@ function Profile() {
     _id: userId,
     username,
     registerDate,
+    isLogged,
   } = useSelector((state: RootState) => state.userReducer);
 
-  const { data: animeList, loading: isListLoading } = useQuery(
-    GET_ANIME_COUNT,
-    {
+  const [getList, { called, data: animeList, loading: isListLoading }] =
+    useLazyQuery(GET_ANIME_COUNT, {
       variables: {
         userId,
       },
-    }
-  );
+    });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isListLoading) {
+    if (!isLogged) {
+      navigate("/login");
+    } else {
+      getList();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (called && !isListLoading) {
       setList(animeList.getAnimeCount);
     }
-  }, [isListLoading]);
+  }, [called, isListLoading]);
 
   return (
     <main className="profile-page">

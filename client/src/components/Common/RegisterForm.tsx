@@ -8,9 +8,15 @@ import { useMutation } from "@apollo/client";
 
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
-function RegisterForm() {
+interface IProps {
+  redirectTo: string;
+}
+
+function RegisterForm({ redirectTo }: IProps) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -38,6 +44,7 @@ function RegisterForm() {
             registerDate: data.createUser.registerDate,
           })
         );
+        navigate(redirectTo);
       }
       setUsername("");
       setEmail("");
