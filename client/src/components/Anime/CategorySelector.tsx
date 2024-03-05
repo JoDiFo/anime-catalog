@@ -6,6 +6,8 @@ import { ADD_ANIME } from "../../graphql/user";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import ModalWindow from "../UI/ModalWindow";
+import LoginForm from "../Common/LoginForm";
 
 interface IProps {
   animeId: string;
@@ -24,6 +26,7 @@ function CategorySelector({ animeId }: IProps) {
   const [queryAdd] = useMutation(ADD_ANIME);
 
   const [selected, setSelected] = useState(categoryOptions[0].value);
+  const [showModal, setShowModal] = useState(false);
 
   const { _id: userId, isLogged } = useSelector(
     (state: RootState) => state.userReducer
@@ -31,10 +34,10 @@ function CategorySelector({ animeId }: IProps) {
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (!isLogged) {
-      alert("Please login first");
-      return;
+      setShowModal(true);
+    } else {
+      setSelected(event.target.value);
     }
-    setSelected(event.target.value);
   };
 
   useEffect(() => {
@@ -49,8 +52,20 @@ function CategorySelector({ animeId }: IProps) {
     }
   }, [selected]);
 
+  useEffect(() => {
+    if (isLogged) {
+      setShowModal(false);
+    }
+  }, [isLogged]);
+
   return (
     <div className="anime-page__my-list">
+      <ModalWindow
+        visible={showModal}
+        setVisible={(flag) => setShowModal(flag)}
+      >
+        <LoginForm redirectTo={"/anime"} state={{ id: animeId }} />
+      </ModalWindow>
       <h4 className="anime-page__my-list__title">MY ANIME:</h4>
       <div className="anime-page__select">
         <span className={`dot ${selected}`}></span>

@@ -12,9 +12,10 @@ import { useNavigate } from "react-router-dom";
 
 interface IProps {
   redirectTo: string;
+  state: any;
 }
 
-function LoginForm({ redirectTo }: IProps) {
+function LoginForm({ redirectTo, state }: IProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,11 +34,10 @@ function LoginForm({ redirectTo }: IProps) {
             registerDate: data.loginUser.registerDate,
           })
         );
-        navigate(redirectTo);
       }
     }
   }, [called, loading]);
-
+  
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     getUser({
@@ -48,6 +48,7 @@ function LoginForm({ redirectTo }: IProps) {
     });
     setEmail("");
     setPassword("");
+    navigate(redirectTo, { state });
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
