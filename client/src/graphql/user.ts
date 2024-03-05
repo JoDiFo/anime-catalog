@@ -6,6 +6,7 @@ export const REGISTER_USER = gql`
       _id
       username
       registerDate
+      token
     }
   }
 `;
@@ -14,6 +15,18 @@ export const LOGIN_USER = gql`
   query loginUser($email: String, $password: String) {
     loginUser(email: $email, password: $password) {
       _id
+      username
+      registerDate
+      token
+    }
+  }
+`;
+
+export const VALIDATE_USER = gql`
+  query validateUser($token: String) {
+    validateUser(token: $token) {
+      isValid
+      _userId
       username
       registerDate
     }
@@ -105,4 +118,3 @@ export const GET_DROPPED = gql`
     }
   }
 `;
-

@@ -9,6 +9,7 @@ import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
+import createExpireTime from "../../Utils/createExpireTime";
 
 interface IProps {
   redirectTo: string;
@@ -44,6 +45,11 @@ function RegisterForm({ redirectTo }: IProps) {
             registerDate: data.createUser.registerDate,
           })
         );
+
+        document.cookie = `token=${
+          data.createUser.token
+        }; expires=${createExpireTime(1)}`;
+
         navigate(redirectTo);
       }
       setUsername("");

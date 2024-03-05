@@ -1,7 +1,8 @@
 import { ObjectId } from "mongodb";
 import db from "./conn.js";
 import getDate from "../utils/getDate.js";
-import { IAnime, IUser, IUserData } from "../types.js";
+import { IAnime, IUser, IUserData, IValidation } from "../types.js";
+import generateToken from "../utils/generateToken.js";
 
 async function queryAllAnime(userId: string) {
   try {
@@ -12,12 +13,16 @@ async function queryAllAnime(userId: string) {
       let usersCollection = await db?.collection("usersCollection");
       let user = await usersCollection?.findOne({ _id: new ObjectId(userId) });
       result?.forEach((item) => {
-        if (user?.watched.includes(item._id.toString())) item.watchStatus = "watched";
-        if (user?.watching.includes(item._id.toString())) item.watchStatus = "watching";
+        if (user?.watched.includes(item._id.toString()))
+          item.watchStatus = "watched";
+        if (user?.watching.includes(item._id.toString()))
+          item.watchStatus = "watching";
         if (user?.["plan-to-watch"].includes(item._id.toString()))
           item.watchStatus = "plan-to-watch";
-        if (user?.stalled.includes(item._id.toString())) item.watchStatus = "stalled";
-        if (user?.dropped.includes(item._id.toString())) item.watchStatus = "dropped";
+        if (user?.stalled.includes(item._id.toString()))
+          item.watchStatus = "stalled";
+        if (user?.dropped.includes(item._id.toString()))
+          item.watchStatus = "dropped";
       });
     }
     return result;
@@ -50,17 +55,41 @@ async function queryLogin(email: string, password: string) {
   try {
     let collection = await db?.collection("usersCollection");
     let result = await collection?.findOne({ email, password });
+    const token = generateToken();
+    let updatedUser = await collection?.updateOne(
+      { _id: new ObjectId(result?._id) },
+      { $set: { token } }
+    );
+    if (result) {
+      result.token = token;
+    }
     return result;
   } catch (e) {
     console.log(e);
   }
 }
 
-async function queryFindUser(userId: string) {
+async function queryValidateUser(token: string) {
   try {
     let collection = await db?.collection("usersCollection");
-    let user = await collection?.findOne({ _id: new ObjectId(userId) });
-    return user;
+    let user = await collection?.findOne({ token });
+    if (user) {
+      const response: IValidation = {
+        isValid: true,
+        _userId: user._id.toString(),
+        username: user.username,
+        registerDate: user.registerDate,
+      };
+      return response;
+    } else {
+      const response: IValidation = {
+        isValid: false,
+        _userId: "",
+        username: "",
+        registerDate: "",
+      };
+      return response;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -75,6 +104,7 @@ async function queryRegister(user: IUserData) {
     newUserData["plan-to-watch"] = [];
     newUserData.stalled = [];
     newUserData.dropped = [];
+    newUserData.token = generateToken();
     let collection = await db?.collection("usersCollection");
     let insertResult = await collection?.insertOne(newUserData);
     let newUser = await collection?.findOne({ _id: insertResult?.insertedId });
@@ -275,7 +305,7 @@ export {
   queryOneAnime,
   queryAllTags,
   queryLogin,
-  queryFindUser,
+  queryValidateUser,
   queryRegister,
   queryUpdateUser,
   queryAddAnime,

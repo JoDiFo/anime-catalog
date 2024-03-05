@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IUserData, IUserState } from "../types";
 
-
 const initialState: IUserData & IUserState = {
   isLogged: false,
   _id: "",
@@ -38,16 +37,17 @@ export const userSlice = createSlice({
       state.isLogged = false;
       state._id = initialState._id;
       state.username = initialState.username;
-      state.email = initialState.email;
-      state.password = initialState.password;
-      state.watched = initialState.watched;
-      state.watching = initialState.watching;
-      state.planToWatch = initialState.planToWatch;
-      state.stalled = initialState.stalled;
-      state.dropped = initialState.dropped;
+      state.registerDate = initialState.registerDate;
+      // state.email = initialState.email;
+      // state.password = initialState.password;
+      // state.watched = initialState.watched;
+      // state.watching = initialState.watching;
+      // state.planToWatch = initialState.planToWatch;
+      // state.stalled = initialState.stalled;
+      // state.dropped = initialState.dropped;
     },
   },
 });
 
-export const { login } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;

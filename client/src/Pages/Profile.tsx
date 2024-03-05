@@ -3,12 +3,14 @@ import { GET_ANIME_COUNT } from "../graphql/user";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
 import thumbnailImage from "../assets/thumbnail-image.png";
 import { ProfileInfo, AnimeList } from "../components";
 import { IAnimeCount } from "../types";
+import Button from "../components/UI/Button";
+import { logout } from "../redux/userSlice";
 
 function Profile() {
   const [list, setList] = useState<IAnimeCount>({
@@ -33,7 +35,14 @@ function Profile() {
       },
     });
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+    document.cookie = "token=a";
+  };
 
   useEffect(() => {
     if (!isLogged) {
@@ -71,6 +80,7 @@ function Profile() {
               <p>Nothing here yet</p>
             </div>
           </div>
+          <Button onClick={handleLogout}>Logout</Button>
         </div>
       </div>
     </main>

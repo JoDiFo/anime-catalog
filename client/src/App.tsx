@@ -13,6 +13,8 @@ const { Home, Anime, MyAnime, Profile, Search, Login } = lazily(
 );
 import { Header, Footer } from "./components";
 import { RootState } from "./redux/store";
+import { VALIDATE_USER } from "./graphql/user";
+import { login } from "./redux/userSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,11 +27,34 @@ function App() {
     },
   });
 
+  const { data: validationData, loading: isValidationLoading } = useQuery(
+    VALIDATE_USER,
+    {
+      variables: {
+        token: document.cookie.split("=")[1],
+      },
+    }
+  );
+
   useEffect(() => {
     if (!isAnimeLoading) {
       dispatch(setAnime(animeData.getAllAnime));
     }
   }, [isAnimeLoading]);
+
+  useEffect(() => {
+    if (!isValidationLoading) {
+      if (validationData.validateUser.isValid) {
+        dispatch(
+          login({
+            _id: validationData.validateUser._userId,
+            username: validationData.validateUser.username,
+            registerDate: validationData.validateUser.registerDate,
+          })
+        );
+      }
+    }
+  }, [isValidationLoading]);
 
   return (
     <>

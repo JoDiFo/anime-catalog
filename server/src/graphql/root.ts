@@ -3,7 +3,7 @@ import {
   queryAllAnime,
   queryAllTags,
   queryAnimeCount,
-  queryFindUser,
+  queryValidateUser,
   queryLogin,
   queryOneAnime,
   queryRegister,
@@ -32,6 +32,10 @@ interface IUserId {
   userId: string;
 }
 
+interface IVerify {
+  token: string;
+}
+
 export const root = {
   getAllAnime: async ({ userId }: IUserId) => {
     return await queryAllAnime(userId);
@@ -45,8 +49,8 @@ export const root = {
     return await queryAllTags();
   },
 
-  getUser: async ({ id }: ID) => {
-    return await queryFindUser(id);
+  validateUser: async ({ token }: IVerify) => {
+    return await queryValidateUser(token);
   },
 
   createUser: async ({ input }: RegisterData) => {

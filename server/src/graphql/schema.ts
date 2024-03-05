@@ -34,6 +34,7 @@ export const schema = buildSchema(`
         planToWatch: [String]
         stalled: [String]
         dropped: [String]
+        token: String
     }
 
     type AnimeCount {
@@ -42,6 +43,13 @@ export const schema = buildSchema(`
         planToWatch: Int
         stalled: Int
         dropped: Int
+    }
+
+    type Validation {
+        isValid: Boolean
+        _userId: ID
+        username: String
+        registerDate: String
     }
 
     input UserInput {
@@ -59,7 +67,7 @@ export const schema = buildSchema(`
         getAllAnime(userId: ID): [Anime]
         getOneAnime(id: ID): Anime
         getAllTags: [Tag]
-        getUser(id: ID): User
+        validateUser(token: String): Validation
         loginUser(email: String, password: String): User
         getAnimeCount(userId: ID): AnimeCount
         getUserAnime(userId: ID): [Anime]

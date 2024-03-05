@@ -9,6 +9,7 @@ import { useLazyQuery } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
+import createExpireTime from "../../Utils/createExpireTime";
 
 interface IProps {
   redirectTo: string;
@@ -34,10 +35,14 @@ function LoginForm({ redirectTo, state }: IProps) {
             registerDate: data.loginUser.registerDate,
           })
         );
+
+        document.cookie = `token=${
+          data.loginUser.token
+        }; expires=${createExpireTime(1)}`;
       }
     }
   }, [called, loading]);
-  
+
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     getUser({

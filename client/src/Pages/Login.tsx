@@ -4,7 +4,7 @@ function Login() {
   return (
     <div className="login-page">
       <div className="login-page__form">
-        <LoginForm redirectTo="/" />
+        <LoginForm redirectTo="/" state={{}} />
       </div>
     </div>
   );

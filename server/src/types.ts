@@ -21,6 +21,7 @@ export interface IUserData {
   "plan-to-watch": string[];
   stalled: string[];
   dropped: string[];
+  token: string;
 }
 
 export interface IUser {
@@ -34,6 +35,7 @@ export interface IUser {
   planToWatch: string[];
   stalled: string[];
   dropped: string[];
+  token: string;
 }
 
 export interface IAnime {
@@ -51,4 +53,11 @@ export interface IAnime {
 interface IAnimeSeason {
   season: string;
   year: number;
+}
+
+export interface IValidation {
+  isValid: boolean;
+  _userId: string;
+  username: string;
+  registerDate: string;
 }
