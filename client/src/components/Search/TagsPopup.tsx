@@ -10,29 +10,35 @@ import useDebounce from "../../Hooks/useDebounce";
 import crossIcon from "../../assets/cross.svg";
 import { ITag } from "../../types";
 
+import { GET_ALL_TAGS } from "../../graphql/tags";
+import { useQuery } from "@apollo/client";
+
 interface IProps {
   toggleVisible: (flag: boolean) => void;
 }
 
 function TagsPopup({ toggleVisible }: IProps) {
   const dispatch = useDispatch();
-  const tagsContext = useSelector((state: RootState) => state.tags);
+  const selectedTags = useSelector((state: RootState) => state.tags.selected);
 
+  const [tags, setTags] = useState<ITag[]>([]);
   const [unselectedTags, setUnselectedTags] = useState<ITag[]>([]);
   const [searchString, setSearchString] = useState("");
+
+  const { data: tagsData, loading: areTagsLoading } = useQuery(GET_ALL_TAGS);
 
   const debouncedValue = useDebounce(searchString, 500);
 
   const handleDeselect = (index: number) => {
     const newSelectedTags = [
-      ...tagsContext.selected.slice(0, index),
-      ...tagsContext.selected.slice(index + 1, tagsContext.selected.length),
+      ...selectedTags.slice(0, index),
+      ...selectedTags.slice(index + 1, selectedTags.length),
     ];
     dispatch(setSelectedTags(newSelectedTags));
   };
 
   const handleSelect = (value: ITag) => {
-    const newSelectedTags = [...tagsContext.selected, value];
+    const newSelectedTags = [...selectedTags, value];
     dispatch(setSelectedTags(newSelectedTags));
   };
 
@@ -42,11 +48,17 @@ function TagsPopup({ toggleVisible }: IProps) {
   };
 
   useEffect(() => {
-    const newItems = tagsContext.all
-      .filter((item) => !tagsContext.selected.includes(item))
+    if (!areTagsLoading) {
+      setTags(tagsData.getAllTags);
+    }
+  }, [areTagsLoading]);
+
+  useEffect(() => {
+    const newItems = tags
+      .filter((item) => !selectedTags.includes(item))
       .filter((item) => compareStrings(item.value, searchString));
     setUnselectedTags(newItems);
-  }, [debouncedValue, tagsContext]);
+  }, [debouncedValue, selectedTags, tags]);
 
   return (
     <div className="tags-container__block">
@@ -66,10 +78,10 @@ function TagsPopup({ toggleVisible }: IProps) {
       </div>
       <hr />
       <div className="tags-container__block__selected">
-        {tagsContext.selected.length !== 0 ? (
-          tagsContext.selected.map((item, index) => (
+        {selectedTags.length !== 0 ? (
+          selectedTags.map((item, index) => (
             <div
-              key={item.id}
+              key={item._id}
               className="tag"
               onClick={() => handleDeselect(index)}
             >

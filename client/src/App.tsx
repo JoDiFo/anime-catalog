@@ -4,11 +4,9 @@ import { Suspense, useEffect } from "react";
 
 import { useQuery } from "@apollo/client";
 import { GET_ALL_ANIME } from "./graphql/anime";
-import { GET_ALL_TAGS } from "./graphql/tags";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setAnime } from "./redux/animeSlice";
-import { setTags } from "./redux/tagsSlice";
 
 const { Home, Anime, MyAnime, Profile, Search } = lazily(
   () => import("./Pages")
@@ -26,19 +24,12 @@ function App() {
       userId,
     },
   });
-  const { data: tagsData, loading: areTagsLoading } = useQuery(GET_ALL_TAGS);
 
   useEffect(() => {
     if (!isAnimeLoading) {
       dispatch(setAnime(animeData.getAllAnime));
     }
   }, [isAnimeLoading]);
-
-  useEffect(() => {
-    if (!areTagsLoading) {
-      dispatch(setTags(tagsData.getAllTags));
-    }
-  }, [areTagsLoading]);
 
   return (
     <>
