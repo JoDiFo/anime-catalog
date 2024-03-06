@@ -13,8 +13,8 @@ export const GET_ALL_ANIME = gql`
 `;
 
 export const GET_ONE_ANIME = gql`
-  query getOneAnime($id: ID) {
-    getOneAnime(id: $id) {
+  query getOneAnime($id: ID, $userId: ID) {
+    getOneAnime(id: $id, userId: $userId) {
       title
       type
       episodes
@@ -24,6 +24,7 @@ export const GET_ONE_ANIME = gql`
       }
       picture
       tags
+      watchStatus
     }
   }
 `;

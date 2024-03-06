@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 
 import { Content, SortBlock, TagsBlock } from "../components";
@@ -12,9 +12,12 @@ import useDebounce from "../Hooks/useDebounce";
 import { IAnime } from "../types";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_ANIME } from "../graphql/anime";
+import { notLoad } from "../redux/animeSlice";
 
 function Search() {
+  const dispatch = useDispatch();
   const selectedTags = useSelector((state: RootState) => state.tags.selected);
+  const needLoad = useSelector((state: RootState) => state.anime.requestReload);
 
   const userId = useSelector((state: RootState) => state.userReducer._id);
 
@@ -40,6 +43,13 @@ function Search() {
       setAnime(animeData.getAllAnime);
     }
   }, [isAnimeLoading]);
+
+  useEffect(() => {
+    if (needLoad) {
+      refetch();
+      dispatch(notLoad());
+    }
+  }, [needLoad]);
 
   useEffect(() => {
     const newItems = anime

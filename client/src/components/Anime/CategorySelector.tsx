@@ -4,16 +4,20 @@ import Select from "../UI/Select";
 import { useMutation } from "@apollo/client";
 import { ADD_ANIME } from "../../graphql/user";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import ModalWindow from "../UI/ModalWindow";
 import LoginForm from "../Common/LoginForm";
+import { load } from "../../redux/animeSlice";
 
 interface IProps {
   animeId: string;
+  defaultValue: string;
+  onChange: () => void;
 }
 
-function CategorySelector({ animeId }: IProps) {
+function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
+  const dispatch = useDispatch();
   const categoryOptions = [
     { value: "not-watched", text: "not watched" },
     { value: "watched", text: "watched" },
@@ -23,9 +27,13 @@ function CategorySelector({ animeId }: IProps) {
     { value: "dropped", text: "dropped" },
   ];
 
+  const initialValue = categoryOptions.find(
+    (item) => item.value === defaultValue
+  )?.value;
+
   const [queryAdd] = useMutation(ADD_ANIME);
 
-  const [selected, setSelected] = useState(categoryOptions[0].value);
+  const [selected, setSelected] = useState(initialValue);
   const [showModal, setShowModal] = useState(false);
 
   const { _id: userId, isLogged } = useSelector(
@@ -48,7 +56,10 @@ function CategorySelector({ animeId }: IProps) {
           animeId,
           category: selected,
         },
-      }).then(({ data }) => console.log(data));
+      }).then(() => {
+        dispatch(load());
+        onChange();
+      });
     }
   }, [selected]);
 

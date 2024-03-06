@@ -36,13 +36,18 @@ interface IVerify {
   token: string;
 }
 
+interface IGetOneAnime {
+  id: string;
+  userId: string;
+}
+
 export const root = {
   getAllAnime: async ({ userId }: IUserId) => {
     return await queryAllAnime(userId);
   },
 
-  getOneAnime: async ({ id }: ID) => {
-    return await queryOneAnime(id);
+  getOneAnime: async ({ id, userId }: IGetOneAnime) => {
+    return await queryOneAnime(id, userId);
   },
 
   getAllTags: async () => {

@@ -1,19 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IAnimeList } from "../types";
 
-const initialState: IAnimeList = {
-  items: [],
+interface IAnimeSlice {
+  requestReload: boolean;
+}
+
+const initialState: IAnimeSlice = {
+  requestReload: false,
 };
 
 export const animeSlice = createSlice({
   name: "animeSlice",
   initialState,
   reducers: {
-    setAnime: (state, action) => {
-      state.items = action.payload;
+    load: (state) => {
+      state.requestReload = true;
+    },
+
+    notLoad: (state) => {
+      state.requestReload = false;
     },
   },
 });
 
-export const { setAnime } = animeSlice.actions;
+export const { load, notLoad } = animeSlice.actions;
 export default animeSlice.reducer;

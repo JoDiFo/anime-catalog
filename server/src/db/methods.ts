@@ -31,10 +31,26 @@ async function queryAllAnime(userId: string) {
   }
 }
 
-async function queryOneAnime(id: string) {
+async function queryOneAnime(id: string, userId: string) {
   try {
     let collection = await db?.collection("animeCollection");
     let result = await collection?.findOne({ _id: new ObjectId(id) });
+
+    if (userId && result) {
+      let usersCollection = await db?.collection("usersCollection");
+      let user = await usersCollection?.findOne({ _id: new ObjectId(userId) });
+      if (user?.watched.includes(result._id.toString()))
+        result.watchStatus = "watched";
+      if (user?.watching.includes(result._id.toString()))
+        result.watchStatus = "watching";
+      if (user?.["plan-to-watch"].includes(result._id.toString()))
+        result.watchStatus = "plan-to-watch";
+      if (user?.stalled.includes(result._id.toString()))
+        result.watchStatus = "stalled";
+      if (user?.dropped.includes(result._id.toString()))
+        result.watchStatus = "dropped";
+    }
+
     return result;
   } catch (e) {
     console.log(e);
