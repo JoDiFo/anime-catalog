@@ -10,15 +10,36 @@ import compareArrays from "../Utils/compareArrays";
 import useDebounce from "../Hooks/useDebounce";
 
 import { IAnime } from "../types";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_ANIME } from "../graphql/anime";
 
 function Search() {
-  const anime = useSelector((state: RootState) => state.anime.items);
   const selectedTags = useSelector((state: RootState) => state.tags.selected);
 
+  const userId = useSelector((state: RootState) => state.userReducer._id);
+
+  const {
+    data: animeData,
+    loading: isAnimeLoading,
+    refetch,
+  } = useQuery(GET_ALL_ANIME, {
+    variables: {
+      userId,
+    },
+    pollInterval: 0,
+  });
+
+  const [anime, setAnime] = useState<IAnime[]>([]);
   const [searchString, setSearchString] = useState("");
   const [displayedItems, setDisplayedItems] = useState<IAnime[]>(anime);
 
   const debouncedValue = useDebounce(searchString, 500);
+
+  useEffect(() => {
+    if (!isAnimeLoading) {
+      setAnime(animeData.getAllAnime);
+    }
+  }, [isAnimeLoading]);
 
   useEffect(() => {
     const newItems = anime

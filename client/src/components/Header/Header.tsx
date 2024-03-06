@@ -10,13 +10,26 @@ import AnimePopup from "./AnimePopup";
 import Authorization from "./Authorization";
 import compareStrings from "../../Utils/compareStrings";
 import { IAnime } from "../../types";
+import { GET_ALL_ANIME } from "../../graphql/anime";
+import { useQuery } from "@apollo/client";
 
 function Header() {
-  const animeSlice = useSelector((state: RootState) => state.anime.items);
-  const isUserLogged = useSelector(
-    (state: RootState) => state.userReducer.isLogged
+  const { _id: userId, isLogged } = useSelector(
+    (state: RootState) => state.userReducer
   );
 
+  const {
+    data: animeData,
+    loading: isAnimeLoading,
+    //refetch,
+  } = useQuery(GET_ALL_ANIME, {
+    variables: {
+      userId,
+    },
+    pollInterval: 0,
+  });
+
+  const [anime, setAnime] = useState<IAnime[]>([]);
   const [value, setValue] = useState("");
   const [displayedItems, setDisplayedItems] = useState<IAnime[]>([]);
 
@@ -28,11 +41,17 @@ function Header() {
       return;
     }
 
-    const newItems = animeSlice
+    const newItems = anime
       .filter((item: IAnime) => compareStrings(item.title, debouncedValue))
       .slice(0, 50);
     setDisplayedItems(newItems);
   }, [debouncedValue]);
+
+  useEffect(() => {
+    if (!isAnimeLoading) {
+      setAnime(animeData.getAllAnime);
+    }
+  }, [isAnimeLoading]);
 
   return (
     <header className="header">
@@ -55,7 +74,7 @@ function Header() {
                 onChange={(event) => setValue(event.target.value)}
               />
             </div>
-            {isUserLogged ? (
+            {isLogged ? (
               <Link to="/profile">
                 <img
                   className="header__profile"
