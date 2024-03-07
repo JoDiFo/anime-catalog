@@ -1,67 +1,79 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import type { RootState } from "../redux/store";
 
 import { Content, SortBlock, TagsBlock } from "../components";
 
-import compareStrings from "../Utils/compareStrings";
-import compareArrays from "../Utils/compareArrays";
 import useDebounce from "../Hooks/useDebounce";
 
 import { IAnime } from "../types";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { GET_ALL_ANIME } from "../graphql/anime";
 import { notLoad } from "../redux/animeSlice";
 
 function Search() {
   const dispatch = useDispatch();
-  const selectedTags = useSelector((state: RootState) => state.tags.selected);
+
+  const selectedTags = useSelector(
+    (state: RootState) => state.tags.selected,
+    shallowEqual
+  );
+
+  const tags = useMemo(
+    () => selectedTags.map((item) => item.value),
+    [selectedTags]
+  );
+
   const needLoad = useSelector((state: RootState) => state.anime.requestReload);
-
   const userId = useSelector((state: RootState) => state.userReducer._id);
-
-  const {
-    data: animeData,
-    loading: isAnimeLoading,
-    refetch,
-  } = useQuery(GET_ALL_ANIME, {
-    variables: {
-      userId,
-    },
-    pollInterval: 0,
-  });
 
   const [anime, setAnime] = useState<IAnime[]>([]);
   const [searchString, setSearchString] = useState("");
-  const [displayedItems, setDisplayedItems] = useState<IAnime[]>(anime);
 
   const debouncedValue = useDebounce(searchString, 500);
 
+  const [
+    getAll,
+    { data: animeData, loading: isAnimeLoading, called, refetch },
+  ] = useLazyQuery(GET_ALL_ANIME, {
+    pollInterval: 0,
+  });
+
   useEffect(() => {
-    if (!isAnimeLoading) {
+    if (called && !isAnimeLoading) {
       setAnime(animeData.getAllAnime);
     }
-  }, [isAnimeLoading]);
+  }, [called, isAnimeLoading, animeData.getAllAnime]);
 
   useEffect(() => {
     if (needLoad) {
-      refetch();
+      refetch({
+        userId,
+        searchString,
+        tags,
+      });
       dispatch(notLoad());
     }
   }, [needLoad]);
 
   useEffect(() => {
-    const newItems = anime
-      .filter((item: IAnime) => compareStrings(item.title, debouncedValue))
-      .filter((item: IAnime) =>
-        compareArrays(
-          item.tags,
-          selectedTags.map((item) => item.value)
-        )
-      );
-    setDisplayedItems(newItems);
-  }, [debouncedValue, anime, selectedTags]);
+    if (!called) {
+      getAll({
+        variables: {
+          userId,
+          searchString,
+          tags,
+        },
+      });
+    } else {
+      refetch({
+        userId,
+        searchString,
+        tags,
+      });
+    }
+  }, [debouncedValue, selectedTags]);
 
   return (
     <main className="profile-page">
@@ -80,7 +92,7 @@ function Search() {
             <SortBlock />
           </div>
           {anime.length !== 0 ? (
-            <Content items={displayedItems} />
+            <Content items={anime} />
           ) : (
             <div className="loading-text">Loading...</div>
           )}

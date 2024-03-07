@@ -16,7 +16,13 @@ import {
   queryUserWatching,
 } from "../db/methods.js";
 
-import { ID, LoginData, RegisterData } from "../types.js";
+import { ID, ITag, LoginData, RegisterData } from "../types.js";
+
+interface IGetAllAnime {
+  userId: string;
+  searchString: string;
+  tags: string[];
+}
 
 export interface IAddAnime {
   userId: string;
@@ -42,8 +48,8 @@ interface IGetOneAnime {
 }
 
 export const root = {
-  getAllAnime: async ({ userId }: IUserId) => {
-    return await queryAllAnime(userId);
+  getAllAnime: async ({ userId, searchString, tags }: IGetAllAnime) => {
+    return await queryAllAnime(userId, searchString, tags);
   },
 
   getOneAnime: async ({ id, userId }: IGetOneAnime) => {

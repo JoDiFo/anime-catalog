@@ -61,3 +61,8 @@ export interface IValidation {
   username: string;
   registerDate: string;
 }
+
+export interface ITag {
+  _id: ID;
+  value: String;
+}

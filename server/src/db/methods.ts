@@ -1,13 +1,25 @@
 import { ObjectId } from "mongodb";
 import db from "./conn.js";
 import getDate from "../utils/getDate.js";
-import { IAnime, IUser, IUserData, IValidation } from "../types.js";
+import { IAnime, ITag, IUser, IUserData, IValidation } from "../types.js";
 import generateToken from "../utils/generateToken.js";
 
-async function queryAllAnime(userId: string) {
+async function queryAllAnime(
+  userId: string,
+  searchString: string,
+  tags: string[]
+) {
   try {
     let collection = await db?.collection("animeCollection");
-    let result = await collection?.find({}).toArray();
+    const findObject: any = {
+      title: { $regex: new RegExp(searchString ? searchString : ".", "i") },
+    };
+
+    if (tags.length > 0) {
+      findObject.tags = { $all: tags };
+    }
+
+    let result = await collection?.find(findObject).toArray();
 
     if (userId) {
       let usersCollection = await db?.collection("usersCollection");
