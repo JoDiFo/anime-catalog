@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 
 import SelectedTags from "./SelectedTags";
 import TagsPopup from "./TagsPopup";
 
-function TagsSelector() {
+function TagsBlock() {
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = (flag: boolean) => {
@@ -18,4 +18,4 @@ function TagsSelector() {
   );
 }
 
-export default TagsSelector;
+export default memo(TagsBlock);

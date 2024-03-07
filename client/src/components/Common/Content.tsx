@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import ReactPaginate from "react-paginate";
 
 import { CardContainer } from "..";
 import { IAnimeList } from "../../types";
+import Select from "../UI/Select";
+
+interface SelectedItem {
+  selected: number;
+}
 
 function Content({ items }: IAnimeList) {
   const selectOptions = [
@@ -20,7 +25,7 @@ function Content({ items }: IAnimeList) {
   const currentItems = items.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(items.length / itemsPerPage);
 
-  const handlePageChange = (event: any) => {
+  const handlePageChange = (event: SelectedItem) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
     setCurrentPage(event.selected);
@@ -41,10 +46,9 @@ function Content({ items }: IAnimeList) {
         <div className="loading-text">No anime found</div>
       )}
       <div className="content-navigation">
-        <select
+        <Select
           name="number-of-titles"
           id="number-of-titles"
-          className="content-navigation__items-per-page"
           onChange={handleSelectChange}
         >
           {selectOptions.map((item) => (
@@ -52,7 +56,7 @@ function Content({ items }: IAnimeList) {
               {item.text}
             </option>
           ))}
-        </select>
+        </Select>
         <ReactPaginate
           breakLabel="..."
           nextLabel=">"
@@ -72,4 +76,4 @@ function Content({ items }: IAnimeList) {
   );
 }
 
-export default Content;
+export default memo(Content);

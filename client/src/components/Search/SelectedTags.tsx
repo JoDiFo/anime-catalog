@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { memo } from "react";
+import { useSelector, shallowEqual } from "react-redux";
 
 import { RootState } from "../../redux/store";
 
@@ -9,7 +10,10 @@ interface IProps {
 }
 
 function SelectedTags({ toggleVisible }: IProps) {
-  const selectedTags = useSelector((state: RootState) => state.tags.selected);
+  const selectedTags = useSelector(
+    (state: RootState) => state.tags.selected,
+    shallowEqual
+  );
 
   return (
     <div className="tags-container__selected">
@@ -32,4 +36,4 @@ function SelectedTags({ toggleVisible }: IProps) {
   );
 }
 
-export default SelectedTags;
+export default memo(SelectedTags);

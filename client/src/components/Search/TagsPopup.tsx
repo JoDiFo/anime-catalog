@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setSelectedTags } from "../../redux/tagsSlice";
 
@@ -19,7 +19,10 @@ interface IProps {
 
 function TagsPopup({ toggleVisible }: IProps) {
   const dispatch = useDispatch();
-  const selectedTags = useSelector((state: RootState) => state.tags.selected);
+  const selectedTags = useSelector(
+    (state: RootState) => state.tags.selected,
+    shallowEqual
+  );
 
   const [tags, setTags] = useState<ITag[]>([]);
   const [unselectedTags, setUnselectedTags] = useState<ITag[]>([]);
@@ -29,18 +32,24 @@ function TagsPopup({ toggleVisible }: IProps) {
 
   const debouncedValue = useDebounce(searchString, 500);
 
-  const handleDeselect = (index: number) => {
-    const newSelectedTags = [
-      ...selectedTags.slice(0, index),
-      ...selectedTags.slice(index + 1, selectedTags.length),
-    ];
-    dispatch(setSelectedTags(newSelectedTags));
-  };
+  const handleDeselect = useCallback(
+    (index: number) => {
+      const newSelectedTags = [
+        ...selectedTags.slice(0, index),
+        ...selectedTags.slice(index + 1, selectedTags.length),
+      ];
+      dispatch(setSelectedTags(newSelectedTags));
+    },
+    [selectedTags]
+  );
 
-  const handleSelect = (value: ITag) => {
-    const newSelectedTags = [...selectedTags, value];
-    dispatch(setSelectedTags(newSelectedTags));
-  };
+  const handleSelect = useCallback(
+    (value: ITag) => {
+      const newSelectedTags = [...selectedTags, value];
+      dispatch(setSelectedTags(newSelectedTags));
+    },
+    [selectedTags]
+  );
 
   const handleClose = () => {
     toggleVisible(false);
@@ -108,4 +117,4 @@ function TagsPopup({ toggleVisible }: IProps) {
   );
 }
 
-export default TagsPopup;
+export default memo(TagsPopup);

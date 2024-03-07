@@ -1,3 +1,4 @@
+import { memo } from "react";
 import profileImage from "../../assets/profile-image.jpeg";
 
 interface IProps {
@@ -17,4 +18,4 @@ function ProfileInfo({ username, registerDate }: IProps) {
   );
 }
 
-export default ProfileInfo;
+export default memo(ProfileInfo);

@@ -44,7 +44,7 @@ function Search() {
     if (called && !isAnimeLoading) {
       setAnime(animeData.getAllAnime);
     }
-  }, [called, isAnimeLoading, animeData.getAllAnime]);
+  }, [called, isAnimeLoading, animeData?.getAllAnime]);
 
   useEffect(() => {
     if (needLoad) {
