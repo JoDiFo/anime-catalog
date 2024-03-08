@@ -84,13 +84,16 @@
       }
     }
   }
+}
 
-  .plus-button {
-    width: 25px;
-    aspect-ratio: 1/1;
-    &:hover {
-      cursor: pointer;
-      filter: invert(100%);
-    }
+.plus-button {
+  background-color: var(--background);
+  width: 25px;
+  aspect-ratio: 1/1;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+    filter: invert(100%);
   }
 }

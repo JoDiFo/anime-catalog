@@ -8,7 +8,7 @@ interface IProps {
 
 function ProfileInfo({ username, registerDate }: IProps) {
   return (
-    <div className="profile-page__info">
+    <div className="page__info">
       <img src={profileImage} alt="profile image" />
       <div>
         <h3>{username}</h3>

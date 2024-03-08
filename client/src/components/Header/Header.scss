@@ -72,3 +72,9 @@
     column-gap: 10px;
   }
 }
+
+@media screen and (max-width: 800px) { // variable
+  .header {
+    display: none;
+  }
+}

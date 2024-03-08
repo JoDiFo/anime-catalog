@@ -14,6 +14,7 @@ body {
   font-size: var(--text);
   background: var(--background);
   color: var(--white);
+  overflow-x: hidden;
 }
 
 a {

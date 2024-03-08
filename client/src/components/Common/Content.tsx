@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import { CardContainer } from "..";
 import { IAnimeList } from "../../types";
 import Select from "../UI/Select";
+import "./ContentNavigation.scss";
 
 interface SelectedItem {
   selected: number;

@@ -12,6 +12,8 @@ import { IAnime } from "../../types";
 import { GET_ALL_ANIME } from "../../graphql/anime";
 import { useLazyQuery } from "@apollo/client";
 
+import "./Header.scss";
+
 function Header() {
   const { _id: userId, isLogged } = useSelector(
     (state: RootState) => state.userReducer
@@ -37,7 +39,7 @@ function Header() {
       variables: {
         userId,
         searchString: value,
-        tags: []
+        tags: [],
       },
     });
   }, [debouncedValue]);

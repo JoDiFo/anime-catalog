@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 
 import SelectedTags from "./SelectedTags";
 import TagsPopup from "./TagsPopup";
+import "./TagsBlock.scss";
 
 function TagsBlock() {
   const [visible, setVisible] = useState(false);

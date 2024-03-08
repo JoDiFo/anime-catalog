@@ -12,12 +12,11 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
 
   img {
     border-radius: 5px;
     width: 180px;
-    max-height: 250px;
     height: 250px;
 
     &:hover {
@@ -46,5 +45,30 @@
     text-align: center;
     margin: 5px 0;
     font-weight: 600;
+  }
+}
+
+@media (max-width: 1300px) {
+  .card-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .card-container {
+    row-gap: 70px;
+  }
+
+  .card {
+    font-size: calc(var(--small-text) * 0.8);
+
+    &__info {
+      min-height: 10px;
+    }
+
+    img {
+      width: calc(180px * 0.6);
+      height: calc(250px * 0.6);
+    }
   }
 }

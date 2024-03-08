@@ -6,6 +6,7 @@ import { IAnime } from "../types";
 import CategorySelector from "../components/Anime/CategorySelector";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import "./AnimePage.scss";
 
 function Anime() {
   const location = useLocation();
@@ -28,9 +29,9 @@ function Anime() {
   }, [data, loading]);
 
   const update = () => {
-    refetch()
-  }
-  
+    refetch();
+  };
+
   if (!anime) {
     return <div className="loading-text">Loading...</div>;
   }
@@ -66,7 +67,11 @@ function Anime() {
                 </div>
               ))}
             </div>
-            <CategorySelector animeId={id} defaultValue={anime.watchStatus} onChange={update} />
+            <CategorySelector
+              animeId={id}
+              defaultValue={anime.watchStatus}
+              onChange={update}
+            />
           </div>
         </div>
       </div>

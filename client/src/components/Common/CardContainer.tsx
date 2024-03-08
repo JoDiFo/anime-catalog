@@ -1,9 +1,10 @@
 import { IAnime, IAnimeList } from "../../types";
 import { AnimeCard } from "../index";
+import "./CardContainer.scss"
 
 function CardContainer({ items }: IAnimeList) {
   return (
-    <div className="profile-page__list card-container">
+    <div className="page__list card-container">
       {items.length !== 0
         ? items.map((item: IAnime) => (
             <AnimeCard

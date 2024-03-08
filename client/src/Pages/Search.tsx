@@ -11,6 +11,7 @@ import { IAnime } from "../types";
 import { useLazyQuery } from "@apollo/client";
 import { GET_ALL_ANIME } from "../graphql/anime";
 import { notLoad } from "../redux/animeSlice";
+import SearchBar from "../components/Search/SearchBar";
 
 function Search() {
   const dispatch = useDispatch();
@@ -76,19 +77,13 @@ function Search() {
   }, [debouncedValue, selectedTags]);
 
   return (
-    <main className="profile-page">
+    <main className="page">
       <div className="container">
         <div className="wrapper">
-          <div className="profile-page__sorting">
+          <div className="page__sorting">
             <h3>BROWSE THROUGH ANIME CATALOG</h3>
             <TagsBlock />
-            <div className="search-bar">
-              <input
-                type="text"
-                placeholder="Search for the anime title"
-                onChange={(e) => setSearchString(e.target.value)}
-              />
-            </div>
+            <SearchBar handleChange={(value) => setSearchString(value)} />
             <SortBlock />
           </div>
           {anime.length !== 0 ? (

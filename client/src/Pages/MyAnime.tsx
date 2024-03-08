@@ -178,16 +178,16 @@ function MyAnime() {
   }, [calledDropped, loadingDropped, dropped]);
 
   return (
-    <main className="profile-page">
+    <main className="page">
       <div className="thumbnail">
         <img src={thumbnailImage} alt="thumbnail" />
       </div>
       <div className="container">
         <div className="wrapper">
           <ProfileInfo username={username} registerDate={registerDate} />
-          <div className="profile-page__sorting">
+          <div className="page__sorting">
             <h3>MY ANIME</h3>
-            <div className="profile-page__sorting__lists">
+            <div className="page__sorting__lists">
               {options.map((item) => (
                 <div
                   key={item.value}

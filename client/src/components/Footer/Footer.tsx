@@ -1,5 +1,6 @@
 import linkedinImage from "../../assets/linkedin-svgrepo-com.svg";
 import telegramImage from "../../assets/telegram-svgrepo-com.svg";
+import "./Footer.scss";
 
 function Footer() {
   return (

@@ -9,7 +9,7 @@ function AnimeList({
   dropped,
 }: IAnimeCount) {
   return (
-    <div className="profile-page__anime-list">
+    <div className="page__anime-list">
       <Link to="/profile/anime">
         <h3>Anime list</h3>
       </Link>

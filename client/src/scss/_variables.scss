@@ -19,3 +19,16 @@
   --text: 1.2rem;
   --small-text: 1rem;
 }
+
+$layout-breakpoint-medium: 1300px;
+$layout-breakpoint-small: 800px;
+
+@media screen and (max-width: $layout-breakpoint-small) {
+  :root {
+    --big-header: 2rem;
+    --header-1: 1.5rem;
+    --header-2: 1.3rem;
+    --text: 1rem;
+    --small-text: 0.8rem;
+  }
+}

@@ -1,6 +1,8 @@
 .footer {
   background-color: var(--gray);
   height: 125px;
+  position: static;
+  bottom: 0;
 
   &--content {
     width: 100%;
@@ -21,5 +23,11 @@
   &--icons {
     display: flex;
     column-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 800px) { // variable
+  .footer {
+    display: none;
   }
 }
