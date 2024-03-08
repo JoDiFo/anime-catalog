@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 const { Home, Anime, MyAnime, Profile, Search, Login } = lazily(
   () => import("./Pages")
 );
-import { Header, Footer } from "./components";
+import { Header, Footer, Loading } from "./components";
 import { VALIDATE_USER } from "./graphql/user";
 import { login } from "./redux/userSlice";
 
@@ -20,7 +20,7 @@ function App() {
     VALIDATE_USER,
     {
       variables: {
-        token: document.cookie.split("=")[1] || "",
+        token: document.cookie.split("=")[1] || "a",
       },
     }
   );
@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       <Header />
-      <Suspense fallback={<div className="loading-text">Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />

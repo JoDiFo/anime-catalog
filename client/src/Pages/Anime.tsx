@@ -7,6 +7,7 @@ import CategorySelector from "../components/Anime/CategorySelector";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import "./AnimePage.scss";
+import { Loading } from "../components";
 
 function Anime() {
   const location = useLocation();
@@ -33,7 +34,7 @@ function Anime() {
   };
 
   if (!anime) {
-    return <div className="loading-text">Loading...</div>;
+    return <Loading />;
   }
 
   return (

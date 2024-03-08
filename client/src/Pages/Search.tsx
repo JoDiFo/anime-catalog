@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import type { RootState } from "../redux/store";
 
-import { Content, SortBlock, TagsBlock } from "../components";
+import { Content, Loading, SortBlock, TagsBlock } from "../components";
 
 import useDebounce from "../Hooks/useDebounce";
 
@@ -86,11 +86,7 @@ function Search() {
             <SearchBar handleChange={(value) => setSearchString(value)} />
             <SortBlock />
           </div>
-          {anime.length !== 0 ? (
-            <Content items={anime} />
-          ) : (
-            <div className="loading-text">Loading...</div>
-          )}
+          {anime.length !== 0 ? <Content items={anime} /> : <Loading />}
         </div>
       </div>
     </main>

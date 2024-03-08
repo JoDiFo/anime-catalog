@@ -8,6 +8,7 @@ import Content from "./Common/Content";
 import SortBlock from "./Search/SortBlock";
 import TagsBlock from "./Search/TagsBlock";
 import ModalWindow from "./UI/ModalWindow/ModalWindow";
+import Loading from "./Common/Loading";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   SortBlock,
   TagsBlock,
   ModalWindow,
+  Loading,
 };

@@ -55,7 +55,7 @@
   .container {
     width: 100%;
   }
-  
+
   .thumbnail {
     display: none;
   }
@@ -79,7 +79,7 @@
 
 .thumbnail {
   position: relative;
-  
+
   img {
     width: 100%;
     display: block;
@@ -99,10 +99,4 @@
     left: 225px;
     font-style: italic;
   }
-}
-
-.loading-text {
-  text-align: center;
-  font-size: var(--header-2);
-  color: var(--white);
 }
