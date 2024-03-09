@@ -12,6 +12,10 @@
   border-radius: 2px;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 .dot {
   width: 15px;
   height: 15px;
@@ -99,4 +103,11 @@
     left: 225px;
     font-style: italic;
   }
+}
+
+.not-found-text {
+  text-align: center;
+  font-size: var(--header-2);
+  color: var(--white);
+  margin: 30px auto;
 }

@@ -86,7 +86,7 @@ function Search() {
             <SearchBar handleChange={(value) => setSearchString(value)} />
             <SortBlock />
           </div>
-          {anime.length !== 0 ? <Content items={anime} /> : <Loading />}
+          {!isAnimeLoading ? <Content items={anime} /> : <Loading />}
         </div>
       </div>
     </main>

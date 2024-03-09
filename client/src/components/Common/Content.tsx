@@ -44,7 +44,7 @@ function Content({ items }: IAnimeList) {
       {items.length !== 0 ? (
         <CardContainer items={currentItems} />
       ) : (
-        <div className="loading-text">No anime found</div>
+        <div className="not-found-text">No anime found</div>
       )}
       <div className="content-navigation">
         <Select
