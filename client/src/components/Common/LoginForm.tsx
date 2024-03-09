@@ -22,6 +22,7 @@ function LoginForm({ redirectTo, state }: IProps) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isIncorrect, setIsIncorrect] = useState(false);
 
   const [getUser, { called, data, loading }] = useLazyQuery(LOGIN_USER);
 
@@ -45,6 +46,15 @@ function LoginForm({ redirectTo, state }: IProps) {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+
+    const regEx = /([a-z]{4,})@((mail)|(gmail))\.((com)|(ru))/;
+    if (!email.match(regEx) || password.length < 8) {
+      setIsIncorrect(true);
+      setEmail("");
+      setPassword("");
+      return;
+    }
+
     getUser({
       variables: {
         email,
@@ -67,22 +77,30 @@ function LoginForm({ redirectTo, state }: IProps) {
   return (
     <Form action="submit">
       <h3>Login</h3>
-      <label htmlFor="email">Please enter your email</label>
-      <Input
-        value={email}
-        onChange={handleEmailChange}
-        type="text"
-        placeholder="email"
-        name="email"
-      />
-      <label htmlFor="password">Please enter your password</label>
-      <Input
-        value={password}
-        onChange={handlePasswordChange}
-        type="password"
-        placeholder="password"
-        name="password"
-      />
+      <div>
+        <label htmlFor="email">Please enter your email</label>
+        <Input
+          value={email}
+          onChange={handleEmailChange}
+          type="text"
+          placeholder="email"
+          name="email"
+          onFocus={() => setIsIncorrect(false)}
+        />
+        <span>{isIncorrect ? "Incorrect email" : ""}</span>
+      </div>
+      <div>
+        <label htmlFor="password">Please enter your password</label>
+        <Input
+          value={password}
+          onChange={handlePasswordChange}
+          type="password"
+          placeholder="password"
+          name="password"
+          onFocus={() => setIsIncorrect(false)}
+        />
+        <span>{isIncorrect ? "Incorrect password" : ""}</span>
+      </div>
       <Button onClick={handleSubmit}>Submit</Button>
     </Form>
   );

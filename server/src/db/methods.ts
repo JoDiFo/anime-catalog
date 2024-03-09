@@ -123,17 +123,31 @@ async function queryValidateUser(token: string) {
   }
 }
 
-async function queryRegister(user: IUserData) {
+interface IRegisterData {
+  username: string;
+  email: string;
+  password: string;
+}
+
+async function queryRegister(user: IRegisterData) {
   try {
-    const newUserData = { ...user };
-    newUserData.registerDate = getDate();
-    newUserData.watched = [];
-    newUserData.watching = [];
-    newUserData["plan-to-watch"] = [];
-    newUserData.stalled = [];
-    newUserData.dropped = [];
-    newUserData.token = generateToken();
     let collection = await db?.collection("usersCollection");
+    const found = await collection?.findOne({ email: user.email });
+    if (found) {
+      return null;
+    }
+
+    const newUserData: IUserData = {
+      ...user,
+      registerDate: getDate(),
+      watched: [],
+      watching: [],
+      ["plan-to-watch"]: [],
+      stalled: [],
+      dropped: [],
+      token: generateToken(),
+    };
+
     let insertResult = await collection?.insertOne(newUserData);
     let newUser = await collection?.findOne({ _id: insertResult?.insertedId });
     return newUser;

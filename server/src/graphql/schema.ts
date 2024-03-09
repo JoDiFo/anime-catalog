@@ -56,11 +56,6 @@ export const schema = buildSchema(`
         username: String
         email: String
         password: String
-        watched: [String]
-        watching: [String]
-        planToWatch: [String]
-        stalled: [String]
-        dropped: [String]
     }
 
     type Query {

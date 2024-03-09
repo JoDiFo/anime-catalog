@@ -14,4 +14,14 @@
     font-size: var(--header-2);
     margin: 0.5em;
   }
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  span {
+    font-size: calc(var(--text) * 0.8);
+    color: rgb(255, 97, 97);
+  }
 }
