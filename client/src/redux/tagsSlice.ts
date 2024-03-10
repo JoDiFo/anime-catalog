@@ -16,8 +16,12 @@ export const tagsSlice = createSlice({
     setSelectedTags: (state, action) => {
       state.selected = action.payload;
     },
+
+    clearSelected: (state) => {
+      state.selected = [];
+    },
   },
 });
 
-export const { setSelectedTags } = tagsSlice.actions;
+export const { setSelectedTags, clearSelected } = tagsSlice.actions;
 export default tagsSlice.reducer;

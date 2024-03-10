@@ -5,7 +5,7 @@ import useDebounce from "../../Hooks/useDebounce";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
-import profileImage from "../../assets/profile-image.jpeg";
+import defaultImage from "../../assets/profile-image.jpeg";
 import AnimePopup from "./AnimePopup";
 import Authorization from "./Authorization";
 import { IAnime } from "../../types";
@@ -15,9 +15,11 @@ import { useLazyQuery } from "@apollo/client";
 import "./Header.scss";
 
 function Header() {
-  const { _id: userId, isLogged } = useSelector(
-    (state: RootState) => state.userReducer
-  );
+  const {
+    _id: userId,
+    isLogged,
+    profileImage,
+  } = useSelector((state: RootState) => state.userReducer);
 
   const [getAll, { data: animeData, loading: isAnimeLoading, called }] =
     useLazyQuery(GET_ALL_ANIME, {
@@ -75,7 +77,7 @@ function Header() {
               <Link to="/profile">
                 <img
                   className="header__profile"
-                  src={profileImage}
+                  src={profileImage || defaultImage}
                   alt="profile image"
                 />
               </Link>

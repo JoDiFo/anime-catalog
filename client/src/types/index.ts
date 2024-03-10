@@ -31,6 +31,7 @@ export interface IUserData {
   registerDate: string;
   email: string;
   password: string;
+  profileImage: string;
   watched: string[];
   watching: string[];
   planToWatch: string[];

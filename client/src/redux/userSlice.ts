@@ -8,6 +8,7 @@ const initialState: IUserData & IUserState = {
   registerDate: "",
   email: "",
   password: "",
+  profileImage: "",
   watched: [],
   watching: [],
   planToWatch: [],
@@ -24,6 +25,7 @@ export const userSlice = createSlice({
       state._id = action.payload._id;
       state.username = action.payload.username;
       state.registerDate = action.payload.registerDate;
+      state.profileImage = action.payload.profileImage;
       // state.email = action.payload.email;
       // state.password = action.payload.password;
       // state.watched = action.payload.watched;
@@ -38,6 +40,7 @@ export const userSlice = createSlice({
       state._id = initialState._id;
       state.username = initialState.username;
       state.registerDate = initialState.registerDate;
+      state.profileImage = initialState.profileImage;
       // state.email = initialState.email;
       // state.password = initialState.password;
       // state.watched = initialState.watched;
@@ -46,8 +49,12 @@ export const userSlice = createSlice({
       // state.stalled = initialState.stalled;
       // state.dropped = initialState.dropped;
     },
+
+    setProfileImage: (state, action) => {
+      state.profileImage = action.payload;
+    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, setProfileImage } = userSlice.actions;
 export default userSlice.reducer;
