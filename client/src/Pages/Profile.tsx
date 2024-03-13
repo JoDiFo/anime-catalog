@@ -73,7 +73,7 @@ function Profile() {
             stalled={list.stalled}
             dropped={list.dropped}
           />
-          <div className="profile-page__section">
+          <div className="page__section">
             <h3>YOU MIGHT ALSO LIKE</h3>
             <div className="card-container">
               {/*reserved for card container*/}
