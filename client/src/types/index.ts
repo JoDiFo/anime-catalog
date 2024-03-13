@@ -58,3 +58,16 @@ export interface IAnimeCount {
   stalled: number;
   dropped: number;
 }
+
+export type IRequest =
+  | "all"
+  | "watched"
+  | "watching"
+  | "plan-to-watch"
+  | "stalled"
+  | "dropped";
+
+export interface IOption {
+  value: IRequest;
+  text: string;
+}

@@ -1,6 +1,17 @@
 .page {
   color: var(--white);
 
+  &__sorting {
+    width: 70%;
+    margin: auto;
+
+    h3 {
+      font-size: var(--header-2);
+      text-align: center;
+      margin: 0.5em auto;
+    }
+  }
+
   &__info {
     position: relative;
     top: -20px;
@@ -14,10 +25,6 @@
       flex-direction: column;
       row-gap: 10px;
       position: relative;
-    }
-
-    h3 {
-      font-size: var(--header-2);
     }
 
     p {
@@ -99,58 +106,30 @@
     margin: 50px 0;
   }
 
-  &__sorting {
-    font-size: var(--text);
-    width: 70%;
-    margin: 20px auto;
-    margin-top: 50px;
+  .sort {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 7px;
+    position: relative;
 
-    h3 {
-      font-size: var(--header-1);
-      text-align: center;
-      margin-bottom: 20px;
+    &__category {
+      text-decoration: underline;
+      cursor: pointer;
     }
 
-    &__lists {
+    &__options {
       display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .sort-list-item {
+      flex-direction: column;
+      position: absolute;
+      top: 30px;
       background-color: var(--light-gray);
-      padding: 0.5em 1.4em;
-    }
+      border-radius: 3px;
 
-    .selected {
-      background-color: var(--black);
-    }
-
-    .sort {
-      display: flex;
-      justify-content: flex-end;
-      column-gap: 7px;
-      position: relative;
-
-      &__category {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      &__options {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 30px;
-        background-color: var(--light-gray);
-        border-radius: 3px;
-
-        span {
-          padding: 0.3rem;
-          &:hover {
-            background-color: var(--black);
-            cursor: pointer;
-          }
+      span {
+        padding: 0.3rem;
+        &:hover {
+          background-color: var(--black);
+          cursor: pointer;
         }
       }
     }

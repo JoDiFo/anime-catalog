@@ -14,19 +14,8 @@ import {
   GET_WATCHING,
 } from "../graphql/user";
 import { useNavigate } from "react-router-dom";
-
-type IRequest =
-  | "all"
-  | "watched"
-  | "watching"
-  | "plan-to-watch"
-  | "stalled"
-  | "dropped";
-
-interface IOption {
-  value: IRequest;
-  text: string;
-}
+import ListSelector from "../components/MyAnime/ListSelector";
+import { IOption, IRequest } from "../types";
 
 function MyAnime() {
   const options: IOption[] = [
@@ -185,22 +174,11 @@ function MyAnime() {
       <div className="container">
         <div className="wrapper">
           <ProfileInfo username={username} registerDate={registerDate} />
-          <div className="page__sorting">
-            <h3>MY ANIME</h3>
-            <div className="page__sorting__lists">
-              {options.map((item) => (
-                <div
-                  key={item.value}
-                  className={`sort-list-item ${
-                    item.value === selected ? "selected" : ""
-                  }`}
-                  onClick={() => handleSelect(item.value)}
-                >
-                  {item.text}
-                </div>
-              ))}
-            </div>
-          </div>
+          <ListSelector
+            options={options}
+            selected={selected}
+            onClick={(value) => handleSelect(value)}
+          />
           <Content items={displayed} />
         </div>
       </div>
