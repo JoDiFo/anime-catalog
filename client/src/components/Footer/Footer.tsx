@@ -8,14 +8,14 @@ function Footer() {
       <div className="container">
         <div className="wrapper">
           <div className="footer--content">
-            <a href="#" className="footer--text">
+            <a href="" className="footer--text">
               Anime Catalog
             </a>
             <div className="footer--icons">
-              <a href="#">
+              <a href="">
                 <img src={linkedinImage} alt="linkedin" />
               </a>
-              <a href="#">
+              <a href="">
                 <img src={telegramImage} alt="telegram" />
               </a>
             </div>
