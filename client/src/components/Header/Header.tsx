@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useDebounce from "../../Hooks/useDebounce";
 
@@ -13,6 +13,7 @@ import { GET_ALL_ANIME } from "../../graphql/anime";
 import { useLazyQuery } from "@apollo/client";
 
 import "./Header.scss";
+import SearchBar from "./SearchBar";
 
 function Header() {
   const {
@@ -21,36 +22,47 @@ function Header() {
     profileImage,
   } = useSelector((state: RootState) => state.userReducer);
 
-  const [getAll, { data: animeData, loading: isAnimeLoading, called }] =
-    useLazyQuery(GET_ALL_ANIME, {
-      pollInterval: 0,
-    });
+  const location = useLocation();
+
+  const [
+    getAll,
+    { data: animeData, loading: isAnimeLoading, called, refetch },
+  ] = useLazyQuery(GET_ALL_ANIME, {
+    pollInterval: 0,
+  });
 
   const [anime, setAnime] = useState<IAnime[]>([]);
-  const [value, setValue] = useState("");
+  const [searchString, setSearchString] = useState("");
 
-  const debouncedValue = useDebounce(value, 500);
+  const debouncedValue = useDebounce(searchString, 500);
 
   useEffect(() => {
-    if (!value) {
-      setAnime([]);
-      return;
-    }
-
-    getAll({
-      variables: {
+    if (!called)
+      getAll({
+        variables: {
+          userId,
+          searchString,
+          tags: [],
+        },
+      });
+    else
+      refetch({
         userId,
-        searchString: value,
+        searchString,
         tags: [],
-      },
-    });
+      });
   }, [debouncedValue]);
 
   useEffect(() => {
     if (called && !isAnimeLoading) {
-      setAnime(animeData.getAllAnime);
+      if (searchString) setAnime(animeData.getAllAnime);
+      else setAnime([]);
     }
-  }, [called, isAnimeLoading]);
+  }, [called, isAnimeLoading, animeData?.getAllAnime]);
+
+  useEffect(() => {
+    setSearchString("");
+  }, [location]);
 
   return (
     <header className="header">
@@ -67,12 +79,11 @@ function Header() {
             </div>
           </Link>
           <div className="left">
-            <div className="header__search">
-              <input
-                type="text"
-                onChange={(event) => setValue(event.target.value)}
-              />
-            </div>
+            <SearchBar
+              value={searchString}
+              onChange={(value) => setSearchString(value)}
+            />
+            
             {isLogged ? (
               <Link to="/profile">
                 <img
