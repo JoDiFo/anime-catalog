@@ -1,15 +1,19 @@
 import { memo } from "react";
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 
 import { RootState } from "../../redux/store";
 
 import plusIcon from "../../assets/plus-icon.svg";
+import Button from "../UI/Button";
+import { clearSelected } from "../../redux/tagsSlice";
 
 interface IProps {
   toggleVisible: (flag: boolean) => void;
 }
 
 function SelectedTags({ toggleVisible }: IProps) {
+  const dispatch = useDispatch();
+
   const selectedTags = useSelector(
     (state: RootState) => state.tags.selected,
     shallowEqual
@@ -32,6 +36,7 @@ function SelectedTags({ toggleVisible }: IProps) {
         alt="plus button"
         onClick={() => toggleVisible(true)}
       />
+      <Button onClick={() => dispatch(clearSelected())}>Clear all tags</Button>
     </div>
   );
 }
