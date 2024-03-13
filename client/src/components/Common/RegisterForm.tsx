@@ -29,8 +29,13 @@ function RegisterForm({ redirectTo }: IProps) {
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
-    const regEx = /([a-z]{4,})@((mail)|(gmail))\.((com)|(ru))/;
-    if (!email.match(regEx) || password.length < 8 || username.length < 4) {
+    const regEx = /([a-zA-Z0-9]{4,})@((mail)|(gmail))\.((com)|(ru))/;
+    if (
+      !email.match(regEx) ||
+      password.length < 8 ||
+      username.length < 4 ||
+      username.length > 15
+    ) {
       setIsIncorrect(true);
       setEmail("");
       setPassword("");
@@ -115,11 +120,11 @@ function RegisterForm({ redirectTo }: IProps) {
           value={password}
           onChange={handlePasswordChange}
           type="password"
-          placeholder="password"
+          placeholder="password (at least 8 characters)"
           name="password"
           onFocus={() => setIsIncorrect(false)}
         />
-        <span>{isIncorrect ? "Incorrect email" : ""}</span>
+        <span>{isIncorrect ? "Incorrect password" : ""}</span>
       </div>
       <Button onClick={handleSubmit}>Submit</Button>
     </Form>

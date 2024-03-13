@@ -48,7 +48,7 @@ function LoginForm({ redirectTo, state }: IProps) {
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
-    const regEx = /([a-z]{4,})@((mail)|(gmail))\.((com)|(ru))/;
+    const regEx = /([a-zA-Z0-9]{4,})@((mail)|(gmail))\.((com)|(ru))/;
     if (!email.match(regEx) || password.length < 8) {
       setIsIncorrect(true);
       setEmail("");
