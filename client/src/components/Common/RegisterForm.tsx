@@ -52,6 +52,7 @@ function RegisterForm({ redirectTo }: IProps) {
             _id: data.createUser._id,
             username: data.createUser.username,
             registerDate: data.createUser.registerDate,
+            profileImage: data.createUser.imageUrl,
           })
         );
 

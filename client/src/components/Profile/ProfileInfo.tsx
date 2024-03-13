@@ -1,8 +1,14 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import defaultImage from "../../assets/profile-image.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setProfileImage } from "../../redux/userSlice";
+
+import { storage } from "../../firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+import { useMutation } from "@apollo/client";
+import { UPLOAD_IMAGE } from "../../graphql/user";
 
 interface IProps {
   username: string;
@@ -11,11 +17,28 @@ interface IProps {
 
 function ProfileInfo({ username, registerDate }: IProps) {
   const dispatch = useDispatch();
-  const profileImage = useSelector(
-    (state: RootState) => state.userReducer.profileImage
+  const { _id: userId, profileImage } = useSelector(
+    (state: RootState) => state.userReducer
   );
 
+  const [uploadMutation, { data, loading }] = useMutation(UPLOAD_IMAGE);
+
   const [visible, setVisible] = useState(false);
+
+  const uploadImage = (file: File) => {
+    console.log(file);
+    const imageRef = ref(storage, `images/${file.name}`);
+    uploadBytes(imageRef, file)
+      .then(() => getDownloadURL(imageRef))
+      .then((url) =>
+        uploadMutation({
+          variables: {
+            userId,
+            imageUrl: url,
+          },
+        })
+      );
+  };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
@@ -23,7 +46,16 @@ function ProfileInfo({ username, registerDate }: IProps) {
     }
 
     dispatch(setProfileImage(URL.createObjectURL(e.target.files[0])));
+    uploadImage(e.target.files[0]);
   };
+
+  useEffect(() => {
+    if (!loading && data) {
+      if (!data.uploadImage) {
+        alert("something went wrong!");
+      }
+    }
+  }, [loading, data]);
 
   return (
     <div className="page__info">

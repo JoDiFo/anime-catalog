@@ -60,6 +60,7 @@ export interface IValidation {
   _userId: string;
   username: string;
   registerDate: string;
+  imageUrl: string;
 }
 
 export interface ITag {

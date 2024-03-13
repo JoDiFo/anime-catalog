@@ -35,6 +35,7 @@ export const schema = buildSchema(`
         stalled: [String]
         dropped: [String]
         token: String
+        imageUrl: String
     }
 
     type AnimeCount {
@@ -50,6 +51,7 @@ export const schema = buildSchema(`
         _userId: ID
         username: String
         registerDate: String
+        imageUrl: String
     }
 
     input UserInput {
@@ -77,5 +79,6 @@ export const schema = buildSchema(`
         createUser(input: UserInput): User
         updateUser(id: ID, input: UserInput): User
         addAnime(userId: ID, animeId: ID, category: String): Anime
+        uploadImage(userId: ID, imageUrl: String): Boolean
     }
 `);

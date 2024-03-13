@@ -107,6 +107,7 @@ async function queryValidateUser(token: string) {
         _userId: user._id.toString(),
         username: user.username,
         registerDate: user.registerDate,
+        imageUrl: user.imageUrl,
       };
       return response;
     } else {
@@ -115,6 +116,7 @@ async function queryValidateUser(token: string) {
         _userId: "",
         username: "",
         registerDate: "",
+        imageUrl: "",
       };
       return response;
     }
@@ -342,6 +344,16 @@ async function queryUserAnime(userId: string) {
   ];
 }
 
+async function queryUploadImage(userId: string, imageUrl: string) {
+  const usersCollection = await db?.collection("usersCollection");
+  const result = await usersCollection?.updateOne(
+    { _id: new ObjectId(userId) },
+    { $set: { imageUrl } }
+  );
+
+  return result && result.modifiedCount > 0;
+}
+
 export {
   queryAllAnime,
   queryOneAnime,
@@ -358,4 +370,5 @@ export {
   queryUserDropped,
   queryUserStalled,
   queryUserPlanning,
+  queryUploadImage,
 };

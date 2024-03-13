@@ -7,6 +7,7 @@ export const REGISTER_USER = gql`
       username
       registerDate
       token
+      imageUrl
     }
   }
 `;
@@ -18,6 +19,7 @@ export const LOGIN_USER = gql`
       username
       registerDate
       token
+      imageUrl
     }
   }
 `;
@@ -29,6 +31,7 @@ export const VALIDATE_USER = gql`
       _userId
       username
       registerDate
+      imageUrl
     }
   }
 `;
@@ -116,5 +119,11 @@ export const GET_DROPPED = gql`
       picture
       tags
     }
+  }
+`;
+
+export const UPLOAD_IMAGE = gql`
+  mutation uploadImage($userId: ID, $imageUrl: String) {
+    uploadImage(userId: $userId, imageUrl: $imageUrl)
   }
 `;

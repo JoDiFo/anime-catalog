@@ -33,6 +33,7 @@ function App() {
             _id: validationData.validateUser._userId,
             username: validationData.validateUser.username,
             registerDate: validationData.validateUser.registerDate,
+            profileImage: validationData.validateUser.imageUrl,
           })
         );
       }

@@ -34,6 +34,7 @@ function LoginForm({ redirectTo, state }: IProps) {
             _id: data.loginUser._id,
             username: data.loginUser.username,
             registerDate: data.loginUser.registerDate,
+            profileImage: data.loginUser.imageUrl,
           })
         );
 

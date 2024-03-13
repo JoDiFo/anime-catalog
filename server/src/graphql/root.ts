@@ -14,6 +14,7 @@ import {
   queryUserStalled,
   queryUserWatched,
   queryUserWatching,
+  queryUploadImage,
 } from "../db/methods.js";
 
 import { ID, ITag, LoginData, RegisterData } from "../types.js";
@@ -45,6 +46,11 @@ interface IVerify {
 interface IGetOneAnime {
   id: string;
   userId: string;
+}
+
+interface IUploadImage {
+  userId: string;
+  imageUrl: string;
 }
 
 export const root = {
@@ -106,5 +112,9 @@ export const root = {
 
   getUserDropped: async ({ userId }: IUserId) => {
     return await queryUserDropped(userId);
+  },
+
+  uploadImage: async ({ userId, imageUrl }: IUploadImage) => {
+    return await queryUploadImage(userId, imageUrl);
   },
 };
