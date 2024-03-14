@@ -37,6 +37,7 @@ async function queryAllAnime(
           item.watchStatus = "dropped";
       });
     }
+
     return result;
   } catch (e) {
     console.log(e);
@@ -273,8 +274,11 @@ async function queryUserWatched(userId: string) {
     let usersCollection = await db.collection("usersCollection");
     let animeCollection = await db.collection("animeCollection");
     let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.watched.map((item: string) => {
-      return animeCollection.findOne({ _id: new ObjectId(item) });
+    const result = user?.watched.map(async (item: string) => {
+      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
+      if (anime) anime.watchStatus = "watched";
+
+      return anime;
     });
 
     return result;
@@ -292,8 +296,11 @@ async function queryUserWatching(userId: string) {
     let usersCollection = await db.collection("usersCollection");
     let animeCollection = await db.collection("animeCollection");
     let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.watching.map((item: string) => {
-      return animeCollection.findOne({ _id: new ObjectId(item) });
+    const result = user?.watching.map(async (item: string) => {
+      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
+      if (anime) anime.watchStatus = "watching";
+
+      return anime;
     });
 
     return result;
@@ -311,8 +318,11 @@ async function queryUserPlanning(userId: string) {
     let usersCollection = await db.collection("usersCollection");
     let animeCollection = await db.collection("animeCollection");
     let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.["plan-to-watch"].map((item: string) => {
-      return animeCollection.findOne({ _id: new ObjectId(item) });
+    const result = user?.["plan-to-watch"].map(async (item: string) => {
+      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
+      if (anime) anime.watchStatus = "plan-to-watch";
+
+      return anime;
     });
 
     return result;
@@ -330,8 +340,11 @@ async function queryUserStalled(userId: string) {
     let usersCollection = await db.collection("usersCollection");
     let animeCollection = await db.collection("animeCollection");
     let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.stalled.map((item: string) => {
-      return animeCollection.findOne({ _id: new ObjectId(item) });
+    const result = user?.stalled.map(async (item: string) => {
+      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
+      if (anime) anime.watchStatus = "stalled";
+
+      return anime;
     });
 
     return result;
@@ -349,8 +362,11 @@ async function queryUserDropped(userId: string) {
     let usersCollection = await db.collection("usersCollection");
     let animeCollection = await db.collection("animeCollection");
     let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.dropped.map((item: string) => {
-      return animeCollection.findOne({ _id: new ObjectId(item) });
+    const result = user?.dropped.map(async (item: string) => {
+      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
+      if (anime) anime.watchStatus = "dropped";
+
+      return anime;
     });
 
     return result;
@@ -364,8 +380,8 @@ async function queryUserAnime(userId: string) {
     ...(await queryUserWatched(userId)),
     ...(await queryUserWatching(userId)),
     ...(await queryUserPlanning(userId)),
-    ...(await queryUserDropped(userId)),
     ...(await queryUserStalled(userId)),
+    ...(await queryUserDropped(userId)),
   ];
 }
 

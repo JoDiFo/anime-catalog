@@ -8,7 +8,7 @@ function ListSelector({
   onClick,
 }: {
   options: IOption[];
-  selected: string;
+  selected: string | null;
   onClick: (value: IRequest) => void;
 }) {
   return (

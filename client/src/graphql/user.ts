@@ -68,7 +68,6 @@ export const GET_ALL = gql`
       _id
       title
       picture
-      tags
       watchStatus
     }
   }
@@ -80,7 +79,6 @@ export const GET_WATCHED = gql`
       _id
       title
       picture
-      tags
     }
   }
 `;
@@ -91,7 +89,6 @@ export const GET_WATCHING = gql`
       _id
       title
       picture
-      tags
     }
   }
 `;
@@ -102,7 +99,6 @@ export const GET_PLANNED = gql`
       _id
       title
       picture
-      tags
     }
   }
 `;
@@ -113,7 +109,6 @@ export const GET_STALLED = gql`
       _id
       title
       picture
-      tags
     }
   }
 `;
@@ -124,7 +119,6 @@ export const GET_DROPPED = gql`
       _id
       title
       picture
-      tags
     }
   }
 `;
