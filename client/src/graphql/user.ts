@@ -56,6 +56,12 @@ export const ADD_ANIME = gql`
   }
 `;
 
+export const REMOVE_ANIME = gql`
+  mutation removeAnime($userId: ID, $animeId: ID) {
+    removeAnime(userId: $userId, animeId: $animeId)
+  }
+`;
+
 export const GET_ALL = gql`
   query getUserAnime($userId: ID) {
     getUserAnime(userId: $userId) {
@@ -63,6 +69,7 @@ export const GET_ALL = gql`
       title
       picture
       tags
+      watchStatus
     }
   }
 `;

@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import db from "./conn.js";
 import getDate from "../utils/getDate.js";
-import { IAnime, ITag, IUser, IUserData, IValidation } from "../types.js";
+import { IUserData, IValidation } from "../types.js";
 import generateToken from "../utils/generateToken.js";
 
 async function queryAllAnime(
@@ -223,6 +223,31 @@ async function queryAddAnime(
   }
 }
 
+async function queryRemoveAnime(userId: string, animeId: string) {
+  let usersCollection = await db?.collection("usersCollection");
+
+  const categories = [
+    "dropped",
+    "stalled",
+    "watched",
+    "watching",
+    "plan-to-watch",
+  ];
+  const pullObject: any = {};
+  categories.forEach((item) => {
+    pullObject[item] = animeId;
+  });
+
+  let result = await usersCollection?.updateOne(
+    { _id: new ObjectId(userId) },
+    {
+      $pull: pullObject,
+    }
+  );
+
+  return result?.acknowledged;
+}
+
 async function queryAnimeCount(userId: string) {
   try {
     let usersCollection = await db?.collection("usersCollection");
@@ -371,4 +396,5 @@ export {
   queryUserStalled,
   queryUserPlanning,
   queryUploadImage,
+  queryRemoveAnime,
 };

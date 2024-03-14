@@ -79,6 +79,7 @@ export const schema = buildSchema(`
         createUser(input: UserInput): User
         updateUser(id: ID, input: UserInput): User
         addAnime(userId: ID, animeId: ID, category: String): Anime
+        removeAnime(userId: ID, animeId: ID): Boolean
         uploadImage(userId: ID, imageUrl: String): Boolean
     }
 `);

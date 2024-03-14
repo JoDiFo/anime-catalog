@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Select from "../UI/Select";
 
 import { useMutation } from "@apollo/client";
-import { ADD_ANIME } from "../../graphql/user";
+import { ADD_ANIME, REMOVE_ANIME } from "../../graphql/user";
 
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -32,6 +32,7 @@ function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
   )?.value;
 
   const [queryAdd] = useMutation(ADD_ANIME);
+  const [queryRemove] = useMutation(REMOVE_ANIME)
 
   const [selected, setSelected] = useState(initialValue);
   const [showModal, setShowModal] = useState(false);
@@ -59,6 +60,13 @@ function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
       }).then(() => {
         dispatch(load());
         onChange();
+      });
+    } else {
+      queryRemove({
+        variables: {
+          userId,
+          animeId,
+        },
       });
     }
   }, [selected]);

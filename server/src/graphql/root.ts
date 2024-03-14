@@ -15,9 +15,10 @@ import {
   queryUserWatched,
   queryUserWatching,
   queryUploadImage,
+  queryRemoveAnime,
 } from "../db/methods.js";
 
-import { ID, ITag, LoginData, RegisterData } from "../types.js";
+import { ID, LoginData, RegisterData } from "../types.js";
 
 interface IGetAllAnime {
   userId: string;
@@ -84,6 +85,10 @@ export const root = {
 
   addAnime: async ({ userId, animeId, category }: IAddAnime) => {
     return await queryAddAnime(userId, animeId, category);
+  },
+  
+  removeAnime: async ({ userId, animeId }: IAddAnime) => {
+    return await queryRemoveAnime(userId, animeId);
   },
 
   getAnimeCount: async ({ userId }: IGetAnimeCount) => {
