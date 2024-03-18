@@ -11,12 +11,11 @@ import crossIcon from "../../assets/cross.svg";
 
 import { GET_ALL_TAGS } from "../../graphql/tags";
 import { useQuery } from "@apollo/client";
+import TagsContainer from "./TagsContainer";
 
 interface IProps {
   toggleVisible: (flag: boolean) => void;
 }
-
-// TODO move tag container into its own component (most likely dumb)
 
 function TagsPopup({ toggleVisible }: IProps) {
   const dispatch = useDispatch();
@@ -34,19 +33,18 @@ function TagsPopup({ toggleVisible }: IProps) {
   const debouncedValue = useDebounce(searchString, 500);
 
   const handleDeselect = useCallback(
-    (index: number) => {
-      const newSelectedTags = [
-        ...selectedTags.slice(0, index),
-        ...selectedTags.slice(index + 1, selectedTags.length),
-      ];
+    (tag: ETag) => {
+      const newSelectedTags = selectedTags.filter(
+        (value) => value._id !== tag._id
+      );
       dispatch(setSelectedTags(newSelectedTags));
     },
     [selectedTags]
   );
 
   const handleSelect = useCallback(
-    (value: ETag) => {
-      const newSelectedTags = [...selectedTags, value];
+    (tag: ETag) => {
+      const newSelectedTags = [...selectedTags, tag];
       dispatch(setSelectedTags(newSelectedTags));
     },
     [selectedTags]
@@ -87,33 +85,9 @@ function TagsPopup({ toggleVisible }: IProps) {
         />
       </div>
       <hr />
-      <div className="tags-container__block__selected">
-        {selectedTags.length !== 0 ? (
-          selectedTags.map((item, index) => (
-            <div
-              key={item._id}
-              className="tag"
-              onClick={() => handleDeselect(index)}
-            >
-              {item.value}
-            </div>
-          ))
-        ) : (
-          <div>No selected tags</div>
-        )}
-      </div>
+      <TagsContainer tags={selectedTags} handleClick={handleDeselect} />
       <hr />
-      <div className="tags-container__block__tags">
-        {unselectedTags.map((item) => (
-          <div
-            key={item._id}
-            className="tag"
-            onClick={() => handleSelect(item)}
-          >
-            {item.value}
-          </div>
-        ))}
-      </div>
+      <TagsContainer tags={unselectedTags} handleClick={handleSelect} />
     </div>
   );
 }
