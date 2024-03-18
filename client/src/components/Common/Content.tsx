@@ -38,13 +38,13 @@ function Content({ items }: { items: EAnime[] }) {
     setCurrentPage(0);
   };
 
+  if (!items.length) {
+    return <div className="not-found-text">No anime found</div>;
+  }
+
   return (
     <>
-      {items.length !== 0 ? (
-        <CardContainer items={currentItems} />
-      ) : (
-        <div className="not-found-text">No anime found</div>
-      )}
+      <CardContainer items={currentItems} />
       <div className="content-navigation">
         <Select
           name="number-of-titles"
@@ -62,7 +62,7 @@ function Content({ items }: { items: EAnime[] }) {
           nextLabel=">"
           onPageChange={handlePageChange}
           forcePage={currentPage}
-          pageRangeDisplayed={4}
+          pageRangeDisplayed={2}
           pageCount={pageCount}
           previousLabel="<"
           renderOnZeroPageCount={null}
