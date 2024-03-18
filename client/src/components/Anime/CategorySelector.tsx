@@ -32,17 +32,15 @@ function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
   )?.value;
 
   const [queryAdd] = useMutation(ADD_ANIME);
-  const [queryRemove] = useMutation(REMOVE_ANIME)
+  const [queryRemove] = useMutation(REMOVE_ANIME);
 
   const [selected, setSelected] = useState(initialValue);
   const [showModal, setShowModal] = useState(false);
 
-  const { _id: userId, isLogged } = useSelector(
-    (state: RootState) => state.userReducer
-  );
+  const userId = useSelector((state: RootState) => state.userReducer._id);
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    if (!isLogged) {
+    if (!userId) {
       setShowModal(true);
     } else {
       setSelected(event.target.value);
@@ -72,10 +70,10 @@ function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
   }, [selected]);
 
   useEffect(() => {
-    if (isLogged) {
+    if (userId) {
       setShowModal(false);
     }
-  }, [isLogged]);
+  }, [userId]);
 
   return (
     <div className="anime-page__my-list">

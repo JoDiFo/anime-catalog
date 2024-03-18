@@ -1,11 +1,6 @@
-import { IAnime } from "../../types";
 import { Link } from "react-router-dom";
 
-interface IProps {
-  items: IAnime[];
-}
-
-function AnimePopup({ items }: IProps) {
+function AnimePopup({ items }: { items: EAnime[] }) {
   return (
     <div className="anime-popup">
       {items.slice(0, 20).map((item) => (

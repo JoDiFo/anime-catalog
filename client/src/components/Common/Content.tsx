@@ -2,7 +2,6 @@ import { memo, useState } from "react";
 import ReactPaginate from "react-paginate";
 
 import { CardContainer } from "..";
-import { IAnimeList } from "../../types";
 import Select from "../UI/Select";
 import "./ContentNavigation.scss";
 
@@ -10,7 +9,7 @@ interface SelectedItem {
   selected: number;
 }
 
-function Content({ items }: IAnimeList) {
+function Content({ items }: { items: EAnime[] }) {
   const selectOptions = [
     { id: 1, value: 35, text: "35" },
     { id: 2, value: 70, text: "70" },

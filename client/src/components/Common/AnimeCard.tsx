@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import { IAnimeStatus } from "../../types";
 
 interface IAnimeCard {
   id: string;
   title: string;
   animeThumbnail: string;
-  watchStatus: IAnimeStatus;
+  watchStatus: EAnimeWatchStatus;
 }
 
 function AnimeCard({ id, title, animeThumbnail, watchStatus }: IAnimeCard) {

@@ -7,7 +7,6 @@ import { Content, Loading, TagsBlock } from "../components";
 
 import useDebounce from "../Hooks/useDebounce";
 
-import { IAnime } from "../types";
 import { useLazyQuery } from "@apollo/client";
 import { GET_ALL_ANIME } from "../graphql/anime";
 import { notLoad } from "../redux/animeSlice";
@@ -29,7 +28,7 @@ function Search() {
   const needLoad = useSelector((state: RootState) => state.anime.requestReload);
   const userId = useSelector((state: RootState) => state.userReducer._id);
 
-  const [anime, setAnime] = useState<IAnime[]>([]);
+  const [anime, setAnime] = useState<EAnime[]>([]);
   const [searchString, setSearchString] = useState("");
 
   const debouncedValue = useDebounce(searchString, 500);

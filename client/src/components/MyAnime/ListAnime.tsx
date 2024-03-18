@@ -1,4 +1,3 @@
-import { IRequest } from "../../types";
 import AllAnime from "./AllAnime";
 import DroppedAnime from "./DroppedAnime";
 import PlannedAnime from "./PlannedAnime";
@@ -10,7 +9,7 @@ function ListAnime({
   listName,
   userId,
 }: {
-  listName: IRequest;
+  listName: EAnimeCategoryOption;
   userId: string;
 }) {
   switch (listName) {

@@ -25,7 +25,6 @@ function Profile() {
     _id: userId,
     username,
     registerDate,
-    isLogged,
   } = useSelector((state: RootState) => state.userReducer);
 
   const [getList, { called, data: animeList, loading: isListLoading }] =
@@ -45,7 +44,7 @@ function Profile() {
   };
 
   useEffect(() => {
-    if (!isLogged) {
+    if (!userId) {
       navigate("/login");
     } else {
       getList();

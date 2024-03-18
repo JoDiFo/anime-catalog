@@ -8,7 +8,6 @@ import { RootState } from "../../redux/store";
 import defaultImage from "../../assets/profile-image.jpeg";
 import AnimePopup from "./AnimePopup";
 import Authorization from "./Authorization";
-import { IAnime } from "../../types";
 import { GET_ALL_ANIME } from "../../graphql/anime";
 import { useLazyQuery } from "@apollo/client";
 
@@ -16,11 +15,9 @@ import "./Header.scss";
 import SearchBar from "./SearchBar";
 
 function Header() {
-  const {
-    _id: userId,
-    isLogged,
-    profileImage,
-  } = useSelector((state: RootState) => state.userReducer);
+  const { _id: userId, profileImage } = useSelector(
+    (state: RootState) => state.userReducer
+  );
 
   const location = useLocation();
 
@@ -31,7 +28,7 @@ function Header() {
     pollInterval: 0,
   });
 
-  const [anime, setAnime] = useState<IAnime[]>([]);
+  const [anime, setAnime] = useState<EAnime[]>([]);
   const [searchString, setSearchString] = useState("");
 
   const debouncedValue = useDebounce(searchString, 500);
@@ -83,8 +80,8 @@ function Header() {
               value={searchString}
               onChange={(value) => setSearchString(value)}
             />
-            
-            {isLogged ? (
+
+            {userId ? (
               <Link to="/profile">
                 <img
                   className="header__profile"

@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ITag } from "../types";
 
 interface ITagsSlice {
-  selected: ITag[];
+  selected: ETag[];
 }
 
 const initialState: ITagsSlice = {

@@ -7,11 +7,10 @@ import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import ListSelector from "../components/MyAnime/ListSelector";
-import { IOption, IRequest } from "../types";
 import ListAnime from "../components/MyAnime/ListAnime";
 
 function MyAnime() {
-  const options: IOption[] = [
+  const options: { value: EAnimeCategoryOption; text: string }[] = [
     { value: "all", text: "all" },
     { value: "watched", text: "watched" },
     { value: "watching", text: "watching" },
@@ -20,26 +19,25 @@ function MyAnime() {
     { value: "dropped", text: "dropped" },
   ];
 
-  const [selected, setSelected] = useState<IRequest>("all");
+  const [selected, setSelected] = useState<EAnimeCategoryOption>("all");
 
   const {
     _id: userId,
     username,
     registerDate,
-    isLogged,
   } = useSelector((state: RootState) => state.userReducer);
 
   const navigate = useNavigate();
 
-  const handleSelect = (option: IRequest) => {
+  const handleSelect = (option: EAnimeCategoryOption) => {
     setSelected(option);
   };
 
   useEffect(() => {
-    if (!isLogged) {
+    if (!userId) {
       navigate("/login");
     }
-  }, [isLogged, navigate]);
+  }, [navigate, userId]);
 
   return (
     <main className="page">

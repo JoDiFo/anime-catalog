@@ -9,11 +9,13 @@ import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
-import createExpireTime from "../../Utils/createExpireTime";
+import createExpireTime from "../../utils/createExpireTime";
 
 interface IProps {
   redirectTo: string;
 }
+
+// TODO abstract fields validation into separate functions
 
 function RegisterForm({ redirectTo }: IProps) {
   const dispatch = useDispatch();

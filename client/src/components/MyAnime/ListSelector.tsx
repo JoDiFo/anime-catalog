@@ -1,5 +1,4 @@
 import { memo } from "react";
-import { IOption, IRequest } from "../../types";
 import "./ListSelector.scss";
 
 function ListSelector({
@@ -7,9 +6,9 @@ function ListSelector({
   selected,
   onClick,
 }: {
-  options: IOption[];
+  options: { value: EAnimeCategoryOption; text: string }[];
   selected: string | null;
-  onClick: (value: IRequest) => void;
+  onClick: (value: EAnimeCategoryOption) => void;
 }) {
   return (
     <div className="list-selector">
@@ -18,9 +17,7 @@ function ListSelector({
         {options.map((item) => (
           <div
             key={item.value}
-            className={`list-item ${
-              item.value === selected ? "selected" : ""
-            }`}
+            className={`list-item ${item.value === selected ? "selected" : ""}`}
             onClick={() => onClick(item.value)}
           >
             {item.text}

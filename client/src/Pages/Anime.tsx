@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_ONE_ANIME } from "../graphql/anime";
-import { IAnime } from "../types";
 import CategorySelector from "../components/Anime/CategorySelector";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -21,7 +20,7 @@ function Anime() {
     },
   });
 
-  const [anime, setAnime] = useState<IAnime>();
+  const [anime, setAnime] = useState<EAnime>();
 
   useEffect(() => {
     if (!loading) {
@@ -46,7 +45,7 @@ function Anime() {
           <p className="border">{anime.type}</p>
           <p className="border">{anime.episodes}</p>
           <p className="border">{anime.status}</p>
-          <p>{anime.animeSeason.year}</p>
+          <p>{anime.year}</p>
         </div>
         <div className="anime-page__content">
           <img
@@ -64,7 +63,7 @@ function Anime() {
               <h4 className="anime-page__tag-title">Tags:</h4>
               {anime.tags.map((item) => (
                 <div key={`${item}_tag`} className="tag">
-                  #{item}
+                  {item}
                 </div>
               ))}
             </div>

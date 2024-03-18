@@ -4,11 +4,10 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setSelectedTags } from "../../redux/tagsSlice";
 
-import compareStrings from "../../Utils/compareStrings";
+import compareStrings from "../../utils/compareStrings";
 import useDebounce from "../../Hooks/useDebounce";
 
 import crossIcon from "../../assets/cross.svg";
-import { ITag } from "../../types";
 
 import { GET_ALL_TAGS } from "../../graphql/tags";
 import { useQuery } from "@apollo/client";
@@ -17,6 +16,8 @@ interface IProps {
   toggleVisible: (flag: boolean) => void;
 }
 
+// TODO move tag container into its own component (most likely dumb)
+
 function TagsPopup({ toggleVisible }: IProps) {
   const dispatch = useDispatch();
   const selectedTags = useSelector(
@@ -24,8 +25,8 @@ function TagsPopup({ toggleVisible }: IProps) {
     shallowEqual
   );
 
-  const [tags, setTags] = useState<ITag[]>([]);
-  const [unselectedTags, setUnselectedTags] = useState<ITag[]>([]);
+  const [tags, setTags] = useState<ETag[]>([]);
+  const [unselectedTags, setUnselectedTags] = useState<ETag[]>([]);
   const [searchString, setSearchString] = useState("");
 
   const { data: tagsData, loading: areTagsLoading } = useQuery(GET_ALL_TAGS);
@@ -44,7 +45,7 @@ function TagsPopup({ toggleVisible }: IProps) {
   );
 
   const handleSelect = useCallback(
-    (value: ITag) => {
+    (value: ETag) => {
       const newSelectedTags = [...selectedTags, value];
       dispatch(setSelectedTags(newSelectedTags));
     },

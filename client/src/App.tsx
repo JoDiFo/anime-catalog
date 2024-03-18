@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/client";
 import { useDispatch } from "react-redux";
 
 const { Home, Anime, MyAnime, Profile, Search, Login } = lazily(
-  () => import("./Pages")
+  () => import("./pages")
 );
 import { Header, Footer, Loading } from "./components";
 import { VALIDATE_USER } from "./graphql/user";

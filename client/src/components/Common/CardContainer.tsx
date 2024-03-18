@@ -1,12 +1,11 @@
-import { IAnime, IAnimeList } from "../../types";
 import { AnimeCard } from "../index";
-import "./CardContainer.scss"
+import "./CardContainer.scss";
 
-function CardContainer({ items }: IAnimeList) {
+function CardContainer({ items }: { items: EAnime[] }) {
   return (
     <div className="page__list card-container">
       {items.length !== 0
-        ? items.map((item: IAnime) => (
+        ? items.map((item: EAnime) => (
             <AnimeCard
               key={item._id}
               id={item._id}

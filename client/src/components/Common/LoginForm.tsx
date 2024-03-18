@@ -9,7 +9,7 @@ import { useLazyQuery } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
-import createExpireTime from "../../Utils/createExpireTime";
+import createExpireTime from "../../utils/createExpireTime";
 
 interface IProps {
   redirectTo: string;
