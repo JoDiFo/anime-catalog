@@ -8,6 +8,7 @@ import { client } from "./postgresConn.js";
 import Anime from "../models/Anime.js";
 import {
   GET_ALL_TAGS,
+  GET_ANIME_WATCH_STATUS,
   GET_ONE_ANIME_WITHOUT_USER_ID,
   GET_ONE_ANIME_WITH_USER_ID,
 } from "./queries.js";
@@ -53,24 +54,28 @@ async function queryAllAnime(
   }
 }
 
-// TODO handle exception if anime id is not the one that user added
 async function queryOneAnime(animeId: number, userId: number) {
   try {
-    let queryText;
-    let variables;
+    let watch_status = "not-watched";
 
-    if (!userId) {
-      queryText = GET_ONE_ANIME_WITHOUT_USER_ID;
-      variables = [animeId];
-    } else {
-      queryText = GET_ONE_ANIME_WITH_USER_ID;
-      variables = [animeId, userId];
+    const { rows: animeData } = await client.query(
+      GET_ONE_ANIME_WITHOUT_USER_ID,
+      [animeId]
+    );
+
+    if (userId) {
+      const { rows: watchStatus } = await client.query(GET_ANIME_WATCH_STATUS, [
+        animeId,
+        userId,
+      ]);
+
+      if (watchStatus.length > 0) {
+        watch_status = watchStatus[0].category;
+      }
     }
 
-    const { rows } = await client.query(queryText, variables);
-
-    const tags = rows.map((row) => row.name);
-    const row: DAnimeRow = rows[0];
+    const tags = animeData.map((row: DTag) => row.name);
+    const row: DAnime = animeData[0];
 
     const anime = new Anime(
       row.id,
@@ -81,7 +86,7 @@ async function queryOneAnime(animeId: number, userId: number) {
       row.year,
       row.image_url,
       tags,
-      userId ? row.watch_status : "not-watched"
+      watch_status
     );
 
     return anime;
@@ -94,7 +99,7 @@ async function queryAllTags() {
   try {
     const { rows } = await client.query(GET_ALL_TAGS);
 
-    const tags: ETag[] = rows.map((row: DTagRow) => new Tag(row.id, row.name));
+    const tags: ETag[] = rows.map((row: DTag) => new Tag(row.id, row.name));
     return tags;
   } catch (e) {
     console.log(e);
