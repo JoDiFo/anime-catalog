@@ -18,7 +18,7 @@ import {
   queryRemoveAnime,
 } from "../db/methods.js";
 
-import { ID, LoginData, RegisterData } from "../types.js";
+import { LoginData, RegisterData } from "../types.js";
 
 interface IGetAllAnime {
   userId: string;
@@ -44,11 +44,6 @@ interface IVerify {
   token: string;
 }
 
-interface IGetOneAnime {
-  id: string;
-  userId: string;
-}
-
 interface IUploadImage {
   userId: string;
   imageUrl: string;
@@ -59,8 +54,14 @@ export const root = {
     return await queryAllAnime(userId, searchString, tags);
   },
 
-  getOneAnime: async ({ id, userId }: IGetOneAnime) => {
-    return await queryOneAnime(id, userId);
+  getOneAnime: async ({
+    animeId,
+    userId,
+  }: {
+    animeId: number;
+    userId: number;
+  }) => {
+    return await queryOneAnime(animeId, userId);
   },
 
   getAllTags: async () => {
@@ -75,7 +76,7 @@ export const root = {
     return await queryRegister(input);
   },
 
-  updateUser: async ({ id, input }: ID & RegisterData) => {
+  updateUser: async ({ id, input }: { id: string } & RegisterData) => {
     return await queryUpdateUser(id, input);
   },
 
@@ -86,7 +87,7 @@ export const root = {
   addAnime: async ({ userId, animeId, category }: IAddAnime) => {
     return await queryAddAnime(userId, animeId, category);
   },
-  
+
   removeAnime: async ({ userId, animeId }: IAddAnime) => {
     return await queryRemoveAnime(userId, animeId);
   },

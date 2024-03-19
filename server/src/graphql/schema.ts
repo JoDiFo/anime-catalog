@@ -2,25 +2,20 @@ import { buildSchema } from "graphql";
 
 export const schema = buildSchema(`
     type Anime {
-        _id: ID
+        id: ID
         title: String
         type: String
         episodes: Int
         status: String
-        animeSeason: AnimeSeason
-        picture: String
-        tags: [String]
-        watchStatus: String
-    }
-
-    type AnimeSeason {
-        season: String
         year: Int
+        image_url: String
+        tags: [String]
+        watch_status: String
     }
 
     type Tag {
-        _id: ID
-        value: String
+        id: ID
+        name: String
     }
 
     type User {
@@ -62,7 +57,7 @@ export const schema = buildSchema(`
 
     type Query {
         getAllAnime(userId: ID, searchString: String, tags: [String]): [Anime]
-        getOneAnime(id: ID, userId: ID): Anime
+        getOneAnime(animeId: ID, userId: ID): Anime
         getAllTags: [Tag]
         validateUser(token: String): Validation
         loginUser(email: String, password: String): User

@@ -1,8 +1,17 @@
 import { ObjectId } from "mongodb";
-import db from "./conn.js";
+import db from "./mongodbConn.js";
 import getDate from "../utils/getDate.js";
 import { IUserData, IValidation } from "../types.js";
 import generateToken from "../utils/generateToken.js";
+
+import { client } from "./postgresConn.js";
+import Anime from "../models/Anime.js";
+import {
+  GET_ALL_TAGS,
+  GET_ONE_ANIME_WITHOUT_USER_ID,
+  GET_ONE_ANIME_WITH_USER_ID,
+} from "./queries.js";
+import Tag from "../models/Tag.js";
 
 async function queryAllAnime(
   userId: string,
@@ -15,7 +24,7 @@ async function queryAllAnime(
       title: { $regex: new RegExp(searchString ? searchString : ".", "i") },
     };
 
-    if (tags.length > 0) {
+    if (tags?.length > 0) {
       findObject.tags = { $all: tags };
     }
 
@@ -44,27 +53,38 @@ async function queryAllAnime(
   }
 }
 
-async function queryOneAnime(id: string, userId: string) {
+// TODO handle exception if anime id is not the one that user added
+async function queryOneAnime(animeId: number, userId: number) {
   try {
-    let collection = await db?.collection("animeCollection");
-    let result = await collection?.findOne({ _id: new ObjectId(id) });
+    let queryText;
+    let variables;
 
-    if (userId && result) {
-      let usersCollection = await db?.collection("usersCollection");
-      let user = await usersCollection?.findOne({ _id: new ObjectId(userId) });
-      if (user?.watched.includes(result._id.toString()))
-        result.watchStatus = "watched";
-      if (user?.watching.includes(result._id.toString()))
-        result.watchStatus = "watching";
-      if (user?.["plan-to-watch"].includes(result._id.toString()))
-        result.watchStatus = "plan-to-watch";
-      if (user?.stalled.includes(result._id.toString()))
-        result.watchStatus = "stalled";
-      if (user?.dropped.includes(result._id.toString()))
-        result.watchStatus = "dropped";
+    if (!userId) {
+      queryText = GET_ONE_ANIME_WITHOUT_USER_ID;
+      variables = [animeId];
+    } else {
+      queryText = GET_ONE_ANIME_WITH_USER_ID;
+      variables = [animeId, userId];
     }
 
-    return result;
+    const { rows } = await client.query(queryText, variables);
+
+    const tags = rows.map((row) => row.name);
+    const row: DAnimeRow = rows[0];
+
+    const anime = new Anime(
+      row.id,
+      row.title,
+      row.type,
+      row.episodes,
+      row.status,
+      row.year,
+      row.image_url,
+      tags,
+      userId ? row.watch_status : "not-watched"
+    );
+
+    return anime;
   } catch (e) {
     console.log(e);
   }
@@ -72,9 +92,10 @@ async function queryOneAnime(id: string, userId: string) {
 
 async function queryAllTags() {
   try {
-    let collection = await db?.collection("tagsCollection");
-    let result = await collection?.find({}).toArray();
-    return result;
+    const { rows } = await client.query(GET_ALL_TAGS);
+
+    const tags: ETag[] = rows.map((row: DTagRow) => new Tag(row.id, row.name));
+    return tags;
   } catch (e) {
     console.log(e);
   }

@@ -1,7 +1,3 @@
-export interface ID {
-  id: string;
-}
-
 export interface RegisterData {
   input: IUserData;
 }
@@ -38,32 +34,10 @@ export interface IUser {
   token: string;
 }
 
-export interface IAnime {
-  _id: string;
-  title: string;
-  type: string;
-  episodes: number;
-  status: string;
-  animeSeason: IAnimeSeason;
-  picture: string;
-  tags: string[];
-  watchStatus: string;
-}
-
-interface IAnimeSeason {
-  season: string;
-  year: number;
-}
-
 export interface IValidation {
   isValid: boolean;
   _userId: string;
   username: string;
   registerDate: string;
   imageUrl: string;
-}
-
-export interface ITag {
-  _id: ID;
-  value: String;
 }
