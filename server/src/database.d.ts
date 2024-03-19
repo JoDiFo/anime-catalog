@@ -1,5 +1,5 @@
 interface DAnime {
-  id: string;
+  anime_id: string;
   title: string;
   type: string;
   episodes: number;
@@ -9,7 +9,7 @@ interface DAnime {
 }
 
 interface DUser {
-  id: number;
+  user_id: number;
   username: string;
   email: string;
   password: string;
@@ -19,7 +19,7 @@ interface DUser {
 }
 
 interface DTag {
-  id: number;
+  tag_id: number;
   name: string;
 }
 
