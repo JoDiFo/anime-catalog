@@ -1,20 +1,31 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
     "module": "NodeNext",
+    "target": "ESNext",
+
     "strict": true,
     "sourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "NodeNext",
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*"],
   "ts-node": {
     "esm": true,
     "compilerOptions": {
       "module": "NodeNext"
     }
-  }
+  },
+  "files": [
+    "src/entities.d.ts",
+    "src/database.d.ts",
+  ]
 }
+
+// TODO try to get rid of file extensions names (set module to bundler)
+// Though I am not sure if I should do this in server
+
+// TODO see if I can make included files more generic
