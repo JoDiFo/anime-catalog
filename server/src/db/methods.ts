@@ -1,5 +1,3 @@
-import { ObjectId } from "mongodb";
-import db from "./mongodbConn.js";
 import getDate from "../utils/getDate.js";
 import generateToken from "../utils/generateToken.js";
 
@@ -380,28 +378,36 @@ async function queryUserDropped(userId: string) {
 }
 
 async function queryUserAnime(userId: string) {
-  const { rows } = await client.query(GET_ALL_ANIME_WITHOUT_USER, [userId]);
+  try {
+    const { rows } = await client.query(GET_ALL_ANIME_WITHOUT_USER, [userId]);
 
-  const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
-    return new Anime(
-      row.anime_id,
-      row.title,
-      row.type,
-      row.episodes,
-      row.status,
-      row.year,
-      row.image_url,
-      row.names,
-      row.category
-    );
-  });
+    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+      return new Anime(
+        row.anime_id,
+        row.title,
+        row.type,
+        row.episodes,
+        row.status,
+        row.year,
+        row.image_url,
+        row.names,
+        row.category
+      );
+    });
 
-  return animes;
+    return animes;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 async function queryUploadImage(userId: string, imageUrl: string) {
-  const { rowCount } = await client.query(UPLOAD_IMAGE, [imageUrl, userId]);
-  return rowCount === 1 ? true : false;
+  try {
+    const { rowCount } = await client.query(UPLOAD_IMAGE, [imageUrl, userId]);
+    return rowCount === 1 ? true : false;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export {
