@@ -7,7 +7,6 @@ import {
   queryLogin,
   queryOneAnime,
   queryRegister,
-  queryUpdateUser,
   queryUserAnime,
   queryUserDropped,
   queryUserPlanning,
@@ -17,8 +16,6 @@ import {
   queryUploadImage,
   queryRemoveAnime,
 } from "../db/methods.js";
-
-import { LoginData, RegisterData } from "../types.js";
 
 interface IGetAllAnime {
   userId: string;
@@ -84,11 +81,13 @@ export const root = {
     return await queryRegister(username, email, password);
   },
 
-  updateUser: async ({ id, input }: { id: string } & RegisterData) => {
-    return await queryUpdateUser(id, input);
-  },
-
-  loginUser: async ({ email, password }: LoginData) => {
+  loginUser: async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
     return await queryLogin(email, password);
   },
 

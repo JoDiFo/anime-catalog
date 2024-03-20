@@ -49,12 +49,6 @@ export const schema = buildSchema(`
         image_url: String
     }
 
-    input UserInput {
-        username: String
-        email: String
-        password: String
-    }
-
     type Query {
         getAllAnime(userId: ID, searchString: String, tags: [String]): [Anime]
         getOneAnime(animeId: ID!, userId: ID): Anime
@@ -72,7 +66,6 @@ export const schema = buildSchema(`
 
     type Mutation {
         createUser(username: String!, email: String!, password: String!): UserLoginData
-        updateUser(id: ID!, input: UserInput!): User
         addAnime(userId: ID!, animeId: ID!, category: String!): Anime
         removeAnime(userId: ID!, animeId: ID!): Boolean
         uploadImage(userId: ID!, imageUrl: String!): Boolean

@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb";
 import db from "./mongodbConn.js";
 import getDate from "../utils/getDate.js";
-import { IUserData, IValidation } from "../types.js";
 import generateToken from "../utils/generateToken.js";
 
 import { client } from "./postgresConn.js";
@@ -17,7 +16,7 @@ import {
   VALIDATE_USER_TOKEN,
 } from "./queries.js";
 import { Tag } from "../models/Tag.js";
-import { User, UserLoginData } from "../models/User.js";
+import { UserLoginData } from "../models/User.js";
 
 async function queryAllAnime(
   userId: string,
@@ -194,20 +193,6 @@ async function queryRegister(
       userData.image_url,
       userData.token
     );
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function queryUpdateUser(userId: string, userData: IUserData) {
-  try {
-    let collection = await db?.collection("usersCollection");
-    let result = await collection?.updateOne(
-      { _id: new ObjectId(userId) },
-      { $set: userData }
-    );
-    let updatedUser = await collection?.findOne({ _id: new ObjectId(userId) });
-    return updatedUser;
   } catch (error) {
     console.log(error);
   }
@@ -442,7 +427,6 @@ export {
   queryLogin,
   queryValidateUser,
   queryRegister,
-  queryUpdateUser,
   queryAddAnime,
   queryAnimeCount,
   queryUserAnime,
