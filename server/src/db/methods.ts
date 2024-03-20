@@ -8,6 +8,8 @@ import { Anime, AnimeCount } from "../models/Anime.js";
 import {
   FIND_USER_BY_EMAIL,
   GET_ALL_ANIME,
+  GET_ALL_ANIME_WITHOUT_USER,
+  GET_ALL_ANIME_WITH_CATEGORY_USER,
   GET_ALL_TAGS,
   GET_ANIME_COUNT,
   GET_ANIME_WATCH_STATUS,
@@ -21,6 +23,7 @@ import {
 import { Tag } from "../models/Tag.js";
 import { UserLoginData } from "../models/User.js";
 
+// TODO rewrite this function using query with join using anime_id
 async function queryAllAnime(
   userId: string,
   searchString: string,
@@ -233,7 +236,7 @@ async function queryAnimeCount(userId: string) {
   try {
     const { rows } = await client.query(GET_ANIME_COUNT, [userId]);
     const animeCount: DAnimeCount[] = rows;
-    const result = new AnimeCount(animeCount)
+    const result = new AnimeCount(animeCount);
     return result;
   } catch (error) {
     console.log(error);
@@ -241,123 +244,158 @@ async function queryAnimeCount(userId: string) {
 }
 
 async function queryUserWatched(userId: string) {
-  if (!db) {
-    return;
-  }
-
   try {
-    let usersCollection = await db.collection("usersCollection");
-    let animeCollection = await db.collection("animeCollection");
-    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.watched.map(async (item: string) => {
-      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
-      if (anime) anime.watchStatus = "watched";
+    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
+      userId,
+      "watched",
+    ]);
 
-      return anime;
+    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+      return new Anime(
+        row.anime_id,
+        row.title,
+        row.type,
+        row.episodes,
+        row.status,
+        row.year,
+        row.image_url,
+        row.names,
+        row.category
+      );
     });
 
-    return result;
+    return animes;
   } catch (error) {
     console.log(error);
   }
 }
 
 async function queryUserWatching(userId: string) {
-  if (!db) {
-    return;
-  }
-
   try {
-    let usersCollection = await db.collection("usersCollection");
-    let animeCollection = await db.collection("animeCollection");
-    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.watching.map(async (item: string) => {
-      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
-      if (anime) anime.watchStatus = "watching";
+    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
+      userId,
+      "watching",
+    ]);
 
-      return anime;
+    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+      return new Anime(
+        row.anime_id,
+        row.title,
+        row.type,
+        row.episodes,
+        row.status,
+        row.year,
+        row.image_url,
+        row.names,
+        row.category
+      );
     });
 
-    return result;
+    return animes;
   } catch (error) {
     console.log(error);
   }
 }
 
 async function queryUserPlanning(userId: string) {
-  if (!db) {
-    return;
-  }
-
   try {
-    let usersCollection = await db.collection("usersCollection");
-    let animeCollection = await db.collection("animeCollection");
-    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.["plan-to-watch"].map(async (item: string) => {
-      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
-      if (anime) anime.watchStatus = "plan-to-watch";
+    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
+      userId,
+      "plan_to_watch",
+    ]);
 
-      return anime;
+    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+      return new Anime(
+        row.anime_id,
+        row.title,
+        row.type,
+        row.episodes,
+        row.status,
+        row.year,
+        row.image_url,
+        row.names,
+        row.category
+      );
     });
 
-    return result;
+    return animes;
   } catch (error) {
     console.log(error);
   }
 }
 
 async function queryUserStalled(userId: string) {
-  if (!db) {
-    return;
-  }
-
   try {
-    let usersCollection = await db.collection("usersCollection");
-    let animeCollection = await db.collection("animeCollection");
-    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.stalled.map(async (item: string) => {
-      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
-      if (anime) anime.watchStatus = "stalled";
+    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
+      userId,
+      "stalled",
+    ]);
 
-      return anime;
+    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+      return new Anime(
+        row.anime_id,
+        row.title,
+        row.type,
+        row.episodes,
+        row.status,
+        row.year,
+        row.image_url,
+        row.names,
+        row.category
+      );
     });
 
-    return result;
+    return animes;
   } catch (error) {
     console.log(error);
   }
 }
 
 async function queryUserDropped(userId: string) {
-  if (!db) {
-    return;
-  }
-
   try {
-    let usersCollection = await db.collection("usersCollection");
-    let animeCollection = await db.collection("animeCollection");
-    let user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-    const result = user?.dropped.map(async (item: string) => {
-      const anime = await animeCollection.findOne({ _id: new ObjectId(item) });
-      if (anime) anime.watchStatus = "dropped";
+    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
+      userId,
+      "dropped",
+    ]);
 
-      return anime;
+    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+      return new Anime(
+        row.anime_id,
+        row.title,
+        row.type,
+        row.episodes,
+        row.status,
+        row.year,
+        row.image_url,
+        row.names,
+        row.category
+      );
     });
 
-    return result;
+    return animes;
   } catch (error) {
     console.log(error);
   }
 }
 
 async function queryUserAnime(userId: string) {
-  return [
-    ...(await queryUserWatched(userId)),
-    ...(await queryUserWatching(userId)),
-    ...(await queryUserPlanning(userId)),
-    ...(await queryUserStalled(userId)),
-    ...(await queryUserDropped(userId)),
-  ];
+  const { rows } = await client.query(GET_ALL_ANIME_WITHOUT_USER, [userId]);
+
+  const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+    return new Anime(
+      row.anime_id,
+      row.title,
+      row.type,
+      row.episodes,
+      row.status,
+      row.year,
+      row.image_url,
+      row.names,
+      row.category
+    );
+  });
+
+  return animes;
 }
 
 async function queryUploadImage(userId: string, imageUrl: string) {

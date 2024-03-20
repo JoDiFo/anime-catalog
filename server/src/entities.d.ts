@@ -47,6 +47,7 @@ interface EAnimeCount {
   dropped: number;
 }
 
+// TODO rename plan_to_watch to planned
 type EAnimeCategory =
   | "watched"
   | "watching"

@@ -150,3 +150,70 @@ where
 group by
 	category
 `;
+
+export const GET_ALL_ANIME_WITH_CATEGORY_USER = `
+select
+	animes.anime_id,
+	animes.title,
+	animes."type" ,
+	animes.episodes, 
+	animes."year" ,
+	animes.image_url, 
+	animes.status ,
+	array_agg(tags.name) as names,
+	user_category.category 
+from
+	ANIMES
+join anime_tag
+	using (anime_id)
+join tags
+	using (tag_id)
+join user_category
+	using (anime_id)
+where user_category.user_id = $1
+	and user_category.category = $2
+group by
+	animes.anime_id,
+	animes.title,
+	animes."type" ,
+	animes.episodes, 
+	animes."year" ,
+	animes.image_url, 
+	animes.status,
+	user_category.category 
+order by
+	anime_id
+`
+
+export const GET_ALL_ANIME_WITHOUT_USER = `
+select
+	animes.anime_id,
+	animes.title,
+	animes."type" ,
+	animes.episodes, 
+	animes."year" ,
+	animes.image_url, 
+	animes.status ,
+	array_agg(tags.name) as names,
+	user_category.category 
+from
+	ANIMES
+join anime_tag
+	using (anime_id)
+join tags
+	using (tag_id)
+join user_category
+	using (anime_id)
+where user_category.user_id = $1
+group by
+	animes.anime_id,
+	animes.title,
+	animes."type" ,
+	animes.episodes, 
+	animes."year" ,
+	animes.image_url, 
+	animes.status,
+	user_category.category 
+order by
+	anime_id
+`
