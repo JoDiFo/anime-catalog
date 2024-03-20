@@ -2,6 +2,8 @@ import getDate from "../utils/getDate.js";
 import generateToken from "../utils/generateToken.js";
 
 import { client } from "./postgresConn.js";
+import { UserLoginData } from "../models/User.js";
+import { Tag } from "../models/Tag.js";
 import { Anime, AnimeCount } from "../models/Anime.js";
 import {
   FIND_USER_BY_EMAIL,
@@ -19,8 +21,6 @@ import {
   UPLOAD_IMAGE,
   VALIDATE_USER_TOKEN,
 } from "./queries.js";
-import { Tag } from "../models/Tag.js";
-import { UserLoginData } from "../models/User.js";
 
 // TODO rewrite this function using query with join using anime_id
 async function queryAllAnime(
