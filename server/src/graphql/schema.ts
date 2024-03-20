@@ -41,12 +41,12 @@ export const schema = buildSchema(`
         dropped: Int
     }
 
-    type Validation {
+    type UserLoginData {
         isValid: Boolean
-        _userId: ID
+        id: ID
         username: String
         registerDate: String
-        imageUrl: String
+        image_url: String
     }
 
     input UserInput {
@@ -59,8 +59,8 @@ export const schema = buildSchema(`
         getAllAnime(userId: ID, searchString: String, tags: [String]): [Anime]
         getOneAnime(animeId: ID, userId: ID): Anime
         getAllTags: [Tag]
-        validateUser(token: String): Validation
-        loginUser(email: String, password: String): User
+        validateUser(token: String): UserLoginData
+        loginUser(email: String, password: String): UserLoginData
         getAnimeCount(userId: ID): AnimeCount
         getUserAnime(userId: ID): [Anime]
         getUserWatched(userId: ID): [Anime]

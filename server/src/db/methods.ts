@@ -7,12 +7,15 @@ import generateToken from "../utils/generateToken.js";
 import { client } from "./postgresConn.js";
 import Anime from "../models/Anime.js";
 import {
+  FIND_USER_BY_EMAIL,
   GET_ALL_ANIME,
   GET_ALL_TAGS,
   GET_ANIME_WATCH_STATUS,
   GET_ONE_ANIME_WITHOUT_USER_ID,
+  UPDATE_USER_TOKEN,
 } from "./queries.js";
 import Tag from "../models/Tag.js";
+import { User, UserLoginData } from "../models/User.js";
 
 async function queryAllAnime(
   userId: string,
@@ -117,17 +120,30 @@ async function queryAllTags() {
 
 async function queryLogin(email: string, password: string) {
   try {
-    let collection = await db?.collection("usersCollection");
-    let result = await collection?.findOne({ email, password });
-    const token = generateToken();
-    let updatedUser = await collection?.updateOne(
-      { _id: new ObjectId(result?._id) },
-      { $set: { token } }
-    );
-    if (result) {
-      result.token = token;
+    const { rows } = await client.query(FIND_USER_BY_EMAIL, [email]);
+    const user: DUser = rows[0];
+
+    if (user.password === password) {
+      const token = generateToken();
+      user.token = token;
+      updateUserToken(user.user_id, token);
+      return new UserLoginData(
+        true,
+        user.user_id,
+        user.username,
+        user.register_date,
+        user.image_url,
+        user.token
+      );
     }
-    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function updateUserToken(userId: number, newToken: string) {
+  try {
+    await client.query(UPDATE_USER_TOKEN, [newToken, userId]);
   } catch (e) {
     console.log(e);
   }

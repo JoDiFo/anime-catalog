@@ -80,3 +80,21 @@ group by
 order by
 	anime_id
 `;
+
+export const FIND_USER_BY_EMAIL = `
+select
+	*
+from
+	users
+where
+	users.email = $1
+`;
+
+export const UPDATE_USER_TOKEN = `
+update
+	users
+set
+	"token" = $1
+where
+	users.user_id = $2
+`;

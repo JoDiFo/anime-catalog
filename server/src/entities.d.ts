@@ -14,3 +14,27 @@ interface ETag {
   id: number;
   name: string;
 }
+
+interface EUser {
+  id: number;
+  username: string;
+  registerDate: string;
+  email: string;
+  password: string;
+  watched: string[];
+  watching: string[];
+  planToWatch: string[];
+  stalled: string[];
+  dropped: string[];
+  token: string;
+  image_url: string;
+}
+
+interface EUserLoginData {
+  isValid: boolean;
+  id: number;
+  username: string;
+  registerDate: string;
+  image_url: string;
+  token: string;
+}
