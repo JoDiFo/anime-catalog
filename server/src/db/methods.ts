@@ -12,7 +12,9 @@ import {
   GET_ALL_TAGS,
   GET_ANIME_WATCH_STATUS,
   GET_ONE_ANIME_WITHOUT_USER_ID,
+  REGISTER_USER,
   UPDATE_USER_TOKEN,
+  VALIDATE_USER_TOKEN,
 } from "./queries.js";
 import { Tag } from "../models/Tag.js";
 import { User, UserLoginData } from "../models/User.js";
@@ -118,6 +120,7 @@ async function queryAllTags() {
   }
 }
 
+// TODO add return if not valid
 async function queryLogin(email: string, password: string) {
   try {
     const { rows } = await client.query(FIND_USER_BY_EMAIL, [email]);
@@ -149,62 +152,48 @@ async function updateUserToken(userId: number, newToken: string) {
   }
 }
 
+// TODO handle if not valid
 async function queryValidateUser(token: string) {
   try {
-    let collection = await db?.collection("usersCollection");
-    let user = await collection?.findOne({ token });
-    if (user) {
-      const response: IValidation = {
-        isValid: true,
-        _userId: user._id.toString(),
-        username: user.username,
-        registerDate: user.registerDate,
-        imageUrl: user.imageUrl,
-      };
-      return response;
-    } else {
-      const response: IValidation = {
-        isValid: false,
-        _userId: "",
-        username: "",
-        registerDate: "",
-        imageUrl: "",
-      };
-      return response;
-    }
+    const { rows } = await client.query(VALIDATE_USER_TOKEN, [token]);
+    const userData: EUserLoginData = rows[0];
+    return new UserLoginData(
+      true,
+      userData.id,
+      userData.username,
+      userData.registerDate,
+      userData.image_url,
+      userData.token
+    );
   } catch (error) {
     console.log(error);
   }
 }
 
-interface IRegisterData {
-  username: string;
-  email: string;
-  password: string;
-}
-
-async function queryRegister(user: IRegisterData) {
+// TODO handle if already exists
+async function queryRegister(
+  username: string,
+  email: string,
+  password: string
+) {
   try {
-    let collection = await db?.collection("usersCollection");
-    const found = await collection?.findOne({ email: user.email });
-    if (found) {
-      return null;
-    }
+    const { rows } = await client.query(REGISTER_USER, [
+      username,
+      email,
+      password,
+      getDate(),
+      generateToken(),
+    ]);
 
-    const newUserData: IUserData = {
-      ...user,
-      registerDate: getDate(),
-      watched: [],
-      watching: [],
-      ["plan-to-watch"]: [],
-      stalled: [],
-      dropped: [],
-      token: generateToken(),
-    };
-
-    let insertResult = await collection?.insertOne(newUserData);
-    let newUser = await collection?.findOne({ _id: insertResult?.insertedId });
-    return newUser;
+    const userData: DUser = rows[0];
+    return new UserLoginData(
+      true,
+      userData.user_id,
+      userData.username,
+      userData.register_date,
+      userData.image_url,
+      userData.token
+    );
   } catch (error) {
     console.log(error);
   }

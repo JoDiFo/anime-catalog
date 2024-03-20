@@ -98,3 +98,24 @@ set
 where
 	users.user_id = $2
 `;
+
+export const VALIDATE_USER_TOKEN = `
+select
+	*
+from
+	users
+where
+	users."token" = $1
+`;
+export const REGISTER_USER = `
+insert
+	into
+	users (username,
+	email,
+	"password",
+	register_date,
+	image_url,
+	"token")
+values ($1, $2, $3, $4, '', $5)
+returning *
+`;

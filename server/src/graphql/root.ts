@@ -72,8 +72,16 @@ export const root = {
     return await queryValidateUser(token);
   },
 
-  createUser: async ({ input }: RegisterData) => {
-    return await queryRegister(input);
+  createUser: async ({
+    username,
+    email,
+    password,
+  }: {
+    username: string;
+    email: string;
+    password: string;
+  }) => {
+    return await queryRegister(username, email, password);
   },
 
   updateUser: async ({ id, input }: { id: string } & RegisterData) => {
