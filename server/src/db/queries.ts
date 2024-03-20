@@ -119,3 +119,22 @@ insert
 values ($1, $2, $3, $4, '', $5)
 returning *
 `;
+
+export const INSERT_INTO_CATEGORY = `
+insert
+	into
+	user_category (user_id,
+	anime_id,
+	category)
+values ($1, $2, $3)
+returning *
+`
+
+export const REMOVE_FROM_CATEGORIES = `
+delete
+from
+	user_category
+where
+	user_id = $1
+	and anime_id = $2
+`

@@ -11,7 +11,9 @@ import {
   GET_ALL_TAGS,
   GET_ANIME_WATCH_STATUS,
   GET_ONE_ANIME_WITHOUT_USER_ID,
+  INSERT_INTO_CATEGORY,
   REGISTER_USER,
+  REMOVE_FROM_CATEGORIES,
   UPDATE_USER_TOKEN,
   VALIDATE_USER_TOKEN,
 } from "./queries.js";
@@ -204,74 +206,26 @@ async function queryAddAnime(
   category: string
 ) {
   try {
-    let animeCollection = await db?.collection("animeCollection");
-    let anime = await animeCollection?.findOne({ _id: new ObjectId(animeId) });
-    if (anime) {
-      anime.watchStatus = category;
-    }
+    await client.query(REMOVE_FROM_CATEGORIES, [userId, animeId]);
+    const { rows } = await client.query(INSERT_INTO_CATEGORY, [
+      userId,
+      animeId,
+      category,
+    ]);
 
-    let usersCollection = await db?.collection("usersCollection");
-    let found = await usersCollection
-      ?.find({
-        _id: new ObjectId(userId),
-        [category]: { $in: [animeId] },
-      })
-      .toArray();
-    if (found?.length !== 0) {
-      return anime;
-    }
-
-    const categories = [
-      "dropped",
-      "stalled",
-      "watched",
-      "watching",
-      "plan-to-watch",
-    ];
-    const pullObject: any = {};
-    categories.forEach((item) => {
-      if (item !== category) {
-        pullObject[item] = animeId;
-      }
-    });
-
-    let result = await usersCollection?.updateOne(
-      { _id: new ObjectId(userId) },
-      {
-        $pull: pullObject,
-        $push: { [category]: animeId },
-      }
-    );
-
-    return anime;
+    if (rows.length > 0) return true;
   } catch (error) {
     console.log(error);
   }
 }
 
 async function queryRemoveAnime(userId: string, animeId: string) {
-  let usersCollection = await db?.collection("usersCollection");
-
-  const categories = [
-    "dropped",
-    "stalled",
-    "watched",
-    "watching",
-    "plan-to-watch",
-  ];
-  const pullObject: any = {};
-  categories.forEach((item) => {
-    pullObject[item] = animeId;
-  });
-
-  let result = await usersCollection?.updateOne(
-    { _id: new ObjectId(userId) },
-    {
-      $pull: pullObject,
-    }
-  );
-
-  return result?.acknowledged;
+  try {
+    client.query(REMOVE_FROM_CATEGORIES, [userId, animeId]);
+    return true;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 async function queryAnimeCount(userId: string) {
