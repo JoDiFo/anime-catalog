@@ -18,6 +18,7 @@ import {
   REGISTER_USER,
   REMOVE_FROM_CATEGORIES,
   UPDATE_USER_TOKEN,
+  UPLOAD_IMAGE,
   VALIDATE_USER_TOKEN,
 } from "./queries.js";
 import { Tag } from "../models/Tag.js";
@@ -399,13 +400,8 @@ async function queryUserAnime(userId: string) {
 }
 
 async function queryUploadImage(userId: string, imageUrl: string) {
-  const usersCollection = await db?.collection("usersCollection");
-  const result = await usersCollection?.updateOne(
-    { _id: new ObjectId(userId) },
-    { $set: { imageUrl } }
-  );
-
-  return result && result.modifiedCount > 0;
+  const { rowCount } = await client.query(UPLOAD_IMAGE, [imageUrl, userId]);
+  return rowCount === 1 ? true : false;
 }
 
 export {

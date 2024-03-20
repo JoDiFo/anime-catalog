@@ -183,7 +183,7 @@ group by
 	user_category.category 
 order by
 	anime_id
-`
+`;
 
 export const GET_ALL_ANIME_WITHOUT_USER = `
 select
@@ -216,4 +216,13 @@ group by
 	user_category.category 
 order by
 	anime_id
-`
+`;
+
+export const UPLOAD_IMAGE = `
+update
+	users
+set
+	image_url = $1
+where
+	user_id = $2
+`;
