@@ -2,25 +2,20 @@ import { buildSchema } from "graphql";
 
 export const schema = buildSchema(`
     type Anime {
-        _id: ID
+        id: ID
         title: String
         type: String
         episodes: Int
         status: String
-        animeSeason: AnimeSeason
-        picture: String
-        tags: [String]
-        watchStatus: String
-    }
-
-    type AnimeSeason {
-        season: String
         year: Int
+        image_url: String
+        tags: [String]
+        watch_status: String
     }
 
     type Tag {
-        _id: ID
-        value: String
+        id: ID
+        name: String
     }
 
     type User {
@@ -41,45 +36,38 @@ export const schema = buildSchema(`
     type AnimeCount {
         watched: Int
         watching: Int
-        planToWatch: Int
+        plan_to_watch: Int
         stalled: Int
         dropped: Int
     }
 
-    type Validation {
+    type UserLoginData {
         isValid: Boolean
-        _userId: ID
+        id: ID
         username: String
         registerDate: String
-        imageUrl: String
-    }
-
-    input UserInput {
-        username: String
-        email: String
-        password: String
+        image_url: String
     }
 
     type Query {
         getAllAnime(userId: ID, searchString: String, tags: [String]): [Anime]
-        getOneAnime(id: ID, userId: ID): Anime
+        getOneAnime(animeId: ID!, userId: ID): Anime
         getAllTags: [Tag]
-        validateUser(token: String): Validation
-        loginUser(email: String, password: String): User
-        getAnimeCount(userId: ID): AnimeCount
-        getUserAnime(userId: ID): [Anime]
-        getUserWatched(userId: ID): [Anime]
-        getUserWatching(userId: ID): [Anime]
-        getUserPlanning(userId: ID): [Anime]
-        getUserStalled(userId: ID): [Anime]
-        getUserDropped(userId: ID): [Anime]
+        validateUser(token: String!): UserLoginData
+        loginUser(email: String!, password: String!): UserLoginData
+        getAnimeCount(userId: ID!): AnimeCount
+        getUserAnime(userId: ID!): [Anime]
+        getUserWatched(userId: ID!): [Anime]
+        getUserWatching(userId: ID!): [Anime]
+        getUserPlanning(userId: ID!): [Anime]
+        getUserStalled(userId: ID!): [Anime]
+        getUserDropped(userId: ID!): [Anime]
     }
 
     type Mutation {
-        createUser(input: UserInput): User
-        updateUser(id: ID, input: UserInput): User
-        addAnime(userId: ID, animeId: ID, category: String): Anime
-        removeAnime(userId: ID, animeId: ID): Boolean
-        uploadImage(userId: ID, imageUrl: String): Boolean
+        registerUser(username: String!, email: String!, password: String!): UserLoginData
+        addAnime(userId: ID!, animeId: ID!, category: String!): Boolean
+        removeAnime(userId: ID!, animeId: ID!): Boolean
+        uploadImage(userId: ID!, imageUrl: String!): Boolean
     }
 `);
