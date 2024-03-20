@@ -24,8 +24,8 @@ interface DTag {
 }
 
 interface DTags {
-  tags_ids: number[],
-  names: string[]
+  tags_ids: number[];
+  names: string[];
 }
 
 interface DAnimeTag {
@@ -39,4 +39,9 @@ interface DUserCategory {
   user_id: number;
   anime_id: number;
   category: string;
+}
+
+interface DAnimeCount {
+  count: number;
+  category: EAnimeCategory;
 }

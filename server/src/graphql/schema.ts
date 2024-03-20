@@ -36,7 +36,7 @@ export const schema = buildSchema(`
     type AnimeCount {
         watched: Int
         watching: Int
-        planToWatch: Int
+        plan_to_watch: Int
         stalled: Int
         dropped: Int
     }

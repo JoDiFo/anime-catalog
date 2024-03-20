@@ -31,3 +31,16 @@ export class Anime implements EAnime {
     this.watch_status = watch_status;
   }
 }
+
+export class AnimeCount implements EAnimeCount {
+  watched!: number;
+  watching!: number;
+  plan_to_watch!: number;
+  stalled!: number;
+  dropped!: number;
+  constructor(animeCount: DAnimeCount[]) {
+    animeCount.forEach((anime: DAnimeCount) => {
+      this[anime.category] = anime.count;
+    });
+  }
+}

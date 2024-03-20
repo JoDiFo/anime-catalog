@@ -38,3 +38,18 @@ interface EUserLoginData {
   image_url: string;
   token: string;
 }
+
+interface EAnimeCount {
+  watched: number;
+  watching: number;
+  plan_to_watch: number;
+  stalled: number;
+  dropped: number;
+}
+
+type EAnimeCategory =
+  | "watched"
+  | "watching"
+  | "plan_to_watch"
+  | "stalled"
+  | "dropped";

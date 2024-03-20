@@ -4,11 +4,12 @@ import getDate from "../utils/getDate.js";
 import generateToken from "../utils/generateToken.js";
 
 import { client } from "./postgresConn.js";
-import { Anime } from "../models/Anime.js";
+import { Anime, AnimeCount } from "../models/Anime.js";
 import {
   FIND_USER_BY_EMAIL,
   GET_ALL_ANIME,
   GET_ALL_TAGS,
+  GET_ANIME_COUNT,
   GET_ANIME_WATCH_STATUS,
   GET_ONE_ANIME_WITHOUT_USER_ID,
   INSERT_INTO_CATEGORY,
@@ -230,15 +231,10 @@ async function queryRemoveAnime(userId: string, animeId: string) {
 
 async function queryAnimeCount(userId: string) {
   try {
-    let usersCollection = await db?.collection("usersCollection");
-    let user = await usersCollection?.findOne({ _id: new ObjectId(userId) });
-    return {
-      watched: user?.watched.length,
-      watching: user?.watching.length,
-      planToWatch: user?.["plan-to-watch"].length,
-      stalled: user?.stalled.length,
-      dropped: user?.dropped.length,
-    };
+    const { rows } = await client.query(GET_ANIME_COUNT, [userId]);
+    const animeCount: DAnimeCount[] = rows;
+    const result = new AnimeCount(animeCount)
+    return result;
   } catch (error) {
     console.log(error);
   }

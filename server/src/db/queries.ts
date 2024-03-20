@@ -128,7 +128,7 @@ insert
 	category)
 values ($1, $2, $3)
 returning *
-`
+`;
 
 export const REMOVE_FROM_CATEGORIES = `
 delete
@@ -137,4 +137,16 @@ from
 where
 	user_id = $1
 	and anime_id = $2
-`
+`;
+
+export const GET_ANIME_COUNT = `
+select
+	count(anime_id),
+	category
+from
+	user_category
+where
+	user_id = $1
+group by
+	category
+`;
