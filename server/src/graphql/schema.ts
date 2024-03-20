@@ -57,24 +57,24 @@ export const schema = buildSchema(`
 
     type Query {
         getAllAnime(userId: ID, searchString: String, tags: [String]): [Anime]
-        getOneAnime(animeId: ID, userId: ID): Anime
+        getOneAnime(animeId: ID!, userId: ID): Anime
         getAllTags: [Tag]
-        validateUser(token: String): UserLoginData
-        loginUser(email: String, password: String): UserLoginData
-        getAnimeCount(userId: ID): AnimeCount
-        getUserAnime(userId: ID): [Anime]
-        getUserWatched(userId: ID): [Anime]
-        getUserWatching(userId: ID): [Anime]
-        getUserPlanning(userId: ID): [Anime]
-        getUserStalled(userId: ID): [Anime]
-        getUserDropped(userId: ID): [Anime]
+        validateUser(token: String!): UserLoginData
+        loginUser(email: String!, password: String!): UserLoginData
+        getAnimeCount(userId: ID!): AnimeCount
+        getUserAnime(userId: ID!): [Anime]
+        getUserWatched(userId: ID!): [Anime]
+        getUserWatching(userId: ID!): [Anime]
+        getUserPlanning(userId: ID!): [Anime]
+        getUserStalled(userId: ID!): [Anime]
+        getUserDropped(userId: ID!): [Anime]
     }
 
     type Mutation {
-        createUser(input: UserInput): User
-        updateUser(id: ID, input: UserInput): User
-        addAnime(userId: ID, animeId: ID, category: String): Anime
-        removeAnime(userId: ID, animeId: ID): Boolean
-        uploadImage(userId: ID, imageUrl: String): Boolean
+        createUser(input: UserInput!): User
+        updateUser(id: ID!, input: UserInput!): User
+        addAnime(userId: ID!, animeId: ID!, category: String!): Anime
+        removeAnime(userId: ID!, animeId: ID!): Boolean
+        uploadImage(userId: ID!, imageUrl: String!): Boolean
     }
 `);

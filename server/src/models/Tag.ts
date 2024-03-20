@@ -1,4 +1,4 @@
-export default class Tag implements ETag {
+export class Tag implements ETag {
   id: number;
   name: string;
 

@@ -1,4 +1,4 @@
-export default class Anime implements EAnime {
+export class Anime implements EAnime {
   id: string;
   title: string;
   type: string;

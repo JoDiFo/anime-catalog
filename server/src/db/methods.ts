@@ -5,7 +5,7 @@ import { IUserData, IValidation } from "../types.js";
 import generateToken from "../utils/generateToken.js";
 
 import { client } from "./postgresConn.js";
-import Anime from "../models/Anime.js";
+import { Anime } from "../models/Anime.js";
 import {
   FIND_USER_BY_EMAIL,
   GET_ALL_ANIME,
@@ -14,7 +14,7 @@ import {
   GET_ONE_ANIME_WITHOUT_USER_ID,
   UPDATE_USER_TOKEN,
 } from "./queries.js";
-import Tag from "../models/Tag.js";
+import { Tag } from "../models/Tag.js";
 import { User, UserLoginData } from "../models/User.js";
 
 async function queryAllAnime(
