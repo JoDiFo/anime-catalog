@@ -23,6 +23,11 @@ interface DTag {
   name: string;
 }
 
+interface DTags {
+  tags_ids: number[],
+  names: string[]
+}
+
 interface DAnimeTag {
   id: number;
   anime_id: number;
