@@ -17,37 +17,16 @@ import {
   queryRemoveAnime,
 } from "../db/methods.js";
 
-interface IGetAllAnime {
-  userId: string;
-  searchString: string;
-  tags: string[];
-}
-
-export interface IAddAnime {
-  userId: string;
-  animeId: string;
-  category: string;
-}
-
-interface IGetAnimeCount {
-  userId: string;
-}
-
-interface IUserId {
-  userId: string;
-}
-
-interface IVerify {
-  token: string;
-}
-
-interface IUploadImage {
-  userId: string;
-  imageUrl: string;
-}
-
 export const root = {
-  getAllAnime: async ({ userId, searchString, tags }: IGetAllAnime) => {
+  getAllAnime: async ({
+    userId,
+    searchString,
+    tags,
+  }: {
+    userId: string;
+    searchString: string;
+    tags: string[];
+  }) => {
     return await queryAllAnime(userId, searchString, tags);
   },
 
@@ -65,11 +44,11 @@ export const root = {
     return await queryAllTags();
   },
 
-  validateUser: async ({ token }: IVerify) => {
+  validateUser: async ({ token }: { token: string }) => {
     return await queryValidateUser(token);
   },
 
-  createUser: async ({
+  registerUser: async ({
     username,
     email,
     password,
@@ -91,43 +70,63 @@ export const root = {
     return await queryLogin(email, password);
   },
 
-  addAnime: async ({ userId, animeId, category }: IAddAnime) => {
+  addAnime: async ({
+    userId,
+    animeId,
+    category,
+  }: {
+    userId: string;
+    animeId: string;
+    category: string;
+  }) => {
     return await queryAddAnime(userId, animeId, category);
   },
 
-  removeAnime: async ({ userId, animeId }: IAddAnime) => {
+  removeAnime: async ({
+    userId,
+    animeId,
+  }: {
+    userId: string;
+    animeId: string;
+  }) => {
     return await queryRemoveAnime(userId, animeId);
   },
 
-  getAnimeCount: async ({ userId }: IGetAnimeCount) => {
+  getAnimeCount: async ({ userId }: { userId: string }) => {
     return await queryAnimeCount(userId);
   },
 
-  getUserAnime: async ({ userId }: IUserId) => {
+  getUserAnime: async ({ userId }: { userId: string }) => {
     return await queryUserAnime(userId);
   },
 
-  getUserWatched: async ({ userId }: IUserId) => {
+  getUserWatched: async ({ userId }: { userId: string }) => {
     return await queryUserWatched(userId);
   },
 
-  getUserWatching: async ({ userId }: IUserId) => {
+  getUserWatching: async ({ userId }: { userId: string }) => {
     return await queryUserWatching(userId);
   },
 
-  getUserPlanning: async ({ userId }: IUserId) => {
+  getUserPlanning: async ({ userId }: { userId: string }) => {
     return await queryUserPlanning(userId);
   },
 
-  getUserStalled: async ({ userId }: IUserId) => {
+  getUserStalled: async ({ userId }: { userId: string }) => {
     return await queryUserStalled(userId);
   },
 
-  getUserDropped: async ({ userId }: IUserId) => {
+  getUserDropped: async ({ userId }: { userId: string }) => {
     return await queryUserDropped(userId);
   },
 
-  uploadImage: async ({ userId, imageUrl }: IUploadImage) => {
+  uploadImage: async ({
+    userId,
+    imageUrl,
+  }: {
+    userId: string;
+    imageUrl: string;
+  }) => {
     return await queryUploadImage(userId, imageUrl);
   },
 };

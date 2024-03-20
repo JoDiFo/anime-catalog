@@ -23,10 +23,11 @@ import {
 } from "./queries.js";
 
 // TODO rewrite this function using query with join using anime_id
+// TODO fix performance
 async function queryAllAnime(
-  userId: string,
-  searchString: string,
-  tags: string[]
+  userId: string | undefined,
+  searchString: string | undefined,
+  tags: string[] | undefined
 ) {
   try {
     const { rows } = await client.query(GET_ALL_ANIME, [
@@ -36,7 +37,10 @@ async function queryAllAnime(
     const animes: EAnime[] = await Promise.all(
       rows
         .filter((row: DAnime & DTags) =>
-          row.names.some((value) => tags.includes(value))
+          row.names.some((value) => {
+            if (tags) return tags.includes(value);
+            else return true;
+          })
         )
         .map(async (row: DAnime & DTags) => {
           let watch_status = "not-watched";
@@ -72,7 +76,7 @@ async function queryAllAnime(
   }
 }
 
-async function queryOneAnime(animeId: number, userId: number) {
+async function queryOneAnime(animeId: number, userId: number | undefined) {
   try {
     let watch_status = "not-watched";
 

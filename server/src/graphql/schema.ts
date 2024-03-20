@@ -65,7 +65,7 @@ export const schema = buildSchema(`
     }
 
     type Mutation {
-        createUser(username: String!, email: String!, password: String!): UserLoginData
+        registerUser(username: String!, email: String!, password: String!): UserLoginData
         addAnime(userId: ID!, animeId: ID!, category: String!): Boolean
         removeAnime(userId: ID!, animeId: ID!): Boolean
         uploadImage(userId: ID!, imageUrl: String!): Boolean
