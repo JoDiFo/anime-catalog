@@ -3,25 +3,23 @@ import { gql } from "@apollo/client";
 export const GET_ALL_ANIME = gql`
   query getAllAnime($userId: ID, $searchString: String, $tags: [String]) {
     getAllAnime(userId: $userId, searchString: $searchString, tags: $tags) {
-      _id
+      id
       title
-      picture
+      imageUrl
       watchStatus
     }
   }
 `;
 
 export const GET_ONE_ANIME = gql`
-  query getOneAnime($id: ID, $userId: ID) {
-    getOneAnime(id: $id, userId: $userId) {
+  query getOneAnime($animeId: ID!, $userId: ID) {
+    getOneAnime(animeId: $animeId, userId: $userId) {
       title
       type
       episodes
       status
-      animeSeason {
-        year
-      }
-      picture
+      year
+      imageUrl
       tags
       watchStatus
     }

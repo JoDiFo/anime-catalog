@@ -26,7 +26,7 @@ function Search() {
   );
 
   const needLoad = useSelector((state: RootState) => state.anime.requestReload);
-  const userId = useSelector((state: RootState) => state.userReducer._id);
+  const userId = useSelector((state: RootState) => state.userReducer.id);
 
   const [anime, setAnime] = useState<EAnime[]>([]);
   const [searchString, setSearchString] = useState("");
@@ -36,9 +36,7 @@ function Search() {
   const [
     getAll,
     { data: animeData, loading: isAnimeLoading, called, refetch },
-  ] = useLazyQuery(GET_ALL_ANIME, {
-    pollInterval: 0,
-  });
+  ] = useLazyQuery(GET_ALL_ANIME);
 
   useEffect(() => {
     if (called && !isAnimeLoading) {

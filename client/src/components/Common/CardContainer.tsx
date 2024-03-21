@@ -7,9 +7,9 @@ function CardContainer({ items }: { items: EAnime[] }) {
       {items.length !== 0
         ? items.map((item: EAnime) => (
             <AnimeCard
-              key={item._id}
-              id={item._id}
-              animeThumbnail={item.picture}
+              key={item.id}
+              id={item.id}
+              animeThumbnail={item.imageUrl}
               title={item.title}
               watchStatus={item.watchStatus}
             />

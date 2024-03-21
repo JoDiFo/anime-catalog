@@ -53,18 +53,20 @@ function RegisterForm({ redirectTo }: IProps) {
         },
       },
     }).then(({ data }) => {
-      if (data.createUser) {
+      if (data.registerUser) {
         dispatch(
           login({
-            _id: data.createUser._id,
-            username: data.createUser.username,
-            registerDate: data.createUser.registerDate,
-            profileImage: data.createUser.imageUrl,
+            id: data.registerUser.id,
+            username: data.registerUser.username,
+            registerDate: data.registerUser.registerDate,
+            imageUrl: data.registerUser.imageUrl,
+            email: "",
+            password: ""
           })
         );
 
         document.cookie = `token=${
-          data.createUser.token
+          data.registerUser.token
         }; expires=${createExpireTime(1)}`;
 
         navigate(redirectTo);

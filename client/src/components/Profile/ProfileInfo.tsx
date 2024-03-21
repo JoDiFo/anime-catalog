@@ -17,7 +17,7 @@ interface IProps {
 
 function ProfileInfo({ username, registerDate }: IProps) {
   const dispatch = useDispatch();
-  const { _id: userId, profileImage } = useSelector(
+  const { id: userId, imageUrl } = useSelector(
     (state: RootState) => state.userReducer
   );
 
@@ -63,7 +63,7 @@ function ProfileInfo({ username, registerDate }: IProps) {
         onMouseEnter={() => setVisible(true)}
         onMouseLeave={() => setVisible(false)}
       >
-        <img src={profileImage || defaultImage} alt="profile image" />
+        <img src={imageUrl || defaultImage} alt="profile image" />
         {visible ? (
           <div className="label-wrapper">
             <label htmlFor="upload-image">Chose Image</label>

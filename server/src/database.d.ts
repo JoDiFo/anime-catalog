@@ -20,12 +20,12 @@ interface DUser {
 
 interface DTag {
   tag_id: number;
-  name: string;
+  value: string;
 }
 
 interface DTags {
   tags_ids: number[];
-  names: string[];
+  values: string[];
 }
 
 interface DAnimeTag {

@@ -6,11 +6,11 @@ export class User implements EUser {
   password: string;
   watched: string[];
   watching: string[];
-  planToWatch: string[];
+  planned: string[];
   stalled: string[];
   dropped: string[];
   token: string;
-  image_url: string;
+  imageUrl: string;
 
   constructor(
     id: number,
@@ -20,11 +20,11 @@ export class User implements EUser {
     password: string,
     watched: string[],
     watching: string[],
-    planToWatch: string[],
+    planned: string[],
     stalled: string[],
     dropped: string[],
     token: string,
-    image_url: string
+    imageUrl: string
   ) {
     this.id = id;
     this.username = username;
@@ -33,11 +33,11 @@ export class User implements EUser {
     this.password = password;
     this.watched = watched;
     this.watching = watching;
-    this.planToWatch = planToWatch;
+    this.planned = planned;
     this.stalled = stalled;
     this.dropped = dropped;
     this.token = token;
-    this.image_url = image_url;
+    this.imageUrl = imageUrl;
   }
 }
 
@@ -46,21 +46,22 @@ export class UserLoginData implements EUserLoginData {
   id: number;
   username: string;
   registerDate: string;
-  image_url: string;
+  imageUrl: string;
   token: string;
+  
   constructor(
     isValid: boolean,
     id: number,
     username: string,
     registerDate: string,
-    image_url: string,
+    imageUrl: string,
     token: string
   ) {
     this.isValid = isValid;
     this.id = id;
     this.username = username;
     this.registerDate = registerDate;
-    this.image_url = image_url;
+    this.imageUrl = imageUrl;
     this.token = token;
   }
 }

@@ -15,7 +15,7 @@ import "./Header.scss";
 import SearchBar from "./SearchBar";
 
 function Header() {
-  const { _id: userId, profileImage } = useSelector(
+  const { id: userId, imageUrl } = useSelector(
     (state: RootState) => state.userReducer
   );
 
@@ -85,7 +85,7 @@ function Header() {
               <Link to="/profile">
                 <img
                   className="header__profile"
-                  src={profileImage || defaultImage}
+                  src={imageUrl || defaultImage}
                   alt="profile image"
                 />
               </Link>

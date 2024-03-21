@@ -11,11 +11,11 @@ import { Loading } from "../components";
 function Anime() {
   const location = useLocation();
   const { id } = location.state;
-  const userId = useSelector((state: RootState) => state.userReducer._id);
+  const userId = useSelector((state: RootState) => state.userReducer.id);
 
   const { data, loading, refetch } = useQuery(GET_ONE_ANIME, {
     variables: {
-      id,
+      animeId: id,
       userId,
     },
   });
@@ -50,7 +50,7 @@ function Anime() {
         <div className="anime-page__content">
           <img
             className="anime-page__image image"
-            src={anime.picture}
+            src={anime.imageUrl}
             alt={anime.title}
           />
           <div className="anime-page__data">

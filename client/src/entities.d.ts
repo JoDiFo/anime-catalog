@@ -1,11 +1,11 @@
 interface EAnime {
-  _id: string;
+  id: string;
   title: string;
   type: string;
   episodes: number;
   status: string;
   year: number;
-  picture: string;
+  imageUrl: string;
   synonyms: string[];
   tags: string[];
   watchStatus: EAnimeWatchStatus;
@@ -15,28 +15,36 @@ type EAnimeWatchStatus =
   | "not-watched"
   | "watched"
   | "watching"
-  | "plan-to-watch"
+  | "planned"
   | "stalled"
   | "dropped";
 
 interface ETag {
-  _id: number;
+  id: number;
   value: string;
 }
 
 interface EUser {
-  _id: string;
+  id: string;
   username: string;
   registerDate: string;
   email: string;
   password: string;
-  profileImage: string;
+  imageUrl: string;
+}
+
+interface EAnimeCount {
+  watched: number;
+  watching: number;
+  planned: number;
+  stalled: number;
+  dropped: number;
 }
 
 type EAnimeCategoryOption =
   | "all"
   | "watched"
   | "watching"
-  | "plan-to-watch"
+  | "planned"
   | "stalled"
   | "dropped";

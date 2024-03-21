@@ -22,7 +22,7 @@ function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
     { value: "not-watched", text: "not watched" },
     { value: "watched", text: "watched" },
     { value: "watching", text: "watching" },
-    { value: "plan-to-watch", text: "plan to watch" },
+    { value: "planned", text: "plan to watch" },
     { value: "stalled", text: "stalled" },
     { value: "dropped", text: "dropped" },
   ];
@@ -37,7 +37,7 @@ function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
   const [selected, setSelected] = useState(initialValue);
   const [showModal, setShowModal] = useState(false);
 
-  const userId = useSelector((state: RootState) => state.userReducer._id);
+  const userId = useSelector((state: RootState) => state.userReducer.id);
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (!userId) {

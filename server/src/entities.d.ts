@@ -5,9 +5,9 @@ interface EAnime {
   episodes: number;
   status: string;
   year: number;
-  image_url: string;
+  imageUrl: string;
   tags: string[];
-  watch_status: string;
+  watchStatus: string;
 }
 
 interface ETag {
@@ -23,11 +23,11 @@ interface EUser {
   password: string;
   watched: string[];
   watching: string[];
-  planToWatch: string[];
+  planned: string[];
   stalled: string[];
   dropped: string[];
   token: string;
-  image_url: string;
+  imageUrl: string;
 }
 
 interface EUserLoginData {
@@ -35,22 +35,21 @@ interface EUserLoginData {
   id: number;
   username: string;
   registerDate: string;
-  image_url: string;
+  imageUrl: string;
   token: string;
 }
 
 interface EAnimeCount {
   watched: number;
   watching: number;
-  plan_to_watch: number;
+  planned: number;
   stalled: number;
   dropped: number;
 }
 
-// TODO rename plan_to_watch to planned
 type EAnimeCategory =
   | "watched"
   | "watching"
-  | "plan_to_watch"
+  | "planned"
   | "stalled"
   | "dropped";

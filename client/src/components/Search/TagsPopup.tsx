@@ -35,7 +35,7 @@ function TagsPopup({ toggleVisible }: IProps) {
   const handleDeselect = useCallback(
     (tag: ETag) => {
       const newSelectedTags = selectedTags.filter(
-        (value) => value._id !== tag._id
+        (value) => value.id !== tag.id
       );
       dispatch(setSelectedTags(newSelectedTags));
     },

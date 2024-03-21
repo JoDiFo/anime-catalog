@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
-import { IAnimeCount } from "../../types";
 
 function AnimeList({
   watched,
   watching,
-  planToWatch,
+  planned,
   stalled,
   dropped,
-}: IAnimeCount) {
+}: EAnimeCount) {
   return (
     <div className="page__anime-list">
       <Link to="/profile/anime">
@@ -22,8 +21,7 @@ function AnimeList({
           <span className="dot watching"></span>watching: {watching}
         </p>
         <p>
-          <span className="dot plan-to-watch"></span>plan to watch:{" "}
-          {planToWatch}
+          <span className="dot planned"></span>plan to watch: {planned}
         </p>
         <p>
           <span className="dot stalled"></span>stalled: {stalled}

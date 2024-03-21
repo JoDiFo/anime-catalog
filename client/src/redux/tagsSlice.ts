@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface ITagsSlice {
   selected: ETag[];
@@ -12,7 +12,7 @@ export const tagsSlice = createSlice({
   name: "tagsSlice",
   initialState,
   reducers: {
-    setSelectedTags: (state, action) => {
+    setSelectedTags: (state, action: PayloadAction<ETag[]>) => {
       state.selected = action.payload;
     },
 

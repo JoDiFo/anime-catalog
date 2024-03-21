@@ -19,7 +19,7 @@ function ListAnime({
       return <WatchedAnime userId={userId} />;
     case "watching":
       return <WatchingAnime userId={userId} />;
-    case "plan-to-watch":
+    case "planned":
       return <PlannedAnime userId={userId} />;
     case "stalled":
       return <StalledAnime userId={userId} />;

@@ -31,10 +31,12 @@ function LoginForm({ redirectTo, state }: IProps) {
       if (data.loginUser) {
         dispatch(
           login({
-            _id: data.loginUser._id,
+            id: data.loginUser.id,
             username: data.loginUser.username,
             registerDate: data.loginUser.registerDate,
-            profileImage: data.loginUser.imageUrl,
+            imageUrl: data.loginUser.imageUrl,
+            email: "",
+            password: ""
           })
         );
 

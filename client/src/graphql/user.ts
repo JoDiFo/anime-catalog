@@ -1,47 +1,54 @@
 import { gql } from "@apollo/client";
 
 export const REGISTER_USER = gql`
-  mutation createUser($input: UserInput) {
-    createUser(input: $input) {
-      _id
+  mutation registerUser(
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    registerUser(username: $username, email: $email, password: $password) {
+      isValid
+      id
       username
       registerDate
-      token
       imageUrl
+      token
     }
   }
 `;
 
 export const LOGIN_USER = gql`
-  query loginUser($email: String, $password: String) {
+  query loginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {
-      _id
+      isValid
+      id
       username
       registerDate
-      token
       imageUrl
+      token
     }
   }
 `;
 
 export const VALIDATE_USER = gql`
-  query validateUser($token: String) {
+  query validateUser($token: String!) {
     validateUser(token: $token) {
       isValid
-      _userId
+      id
       username
       registerDate
       imageUrl
+      token
     }
   }
 `;
 
 export const GET_ANIME_COUNT = gql`
-  query getAnimeCount($userId: ID) {
+  query getAnimeCount($userId: ID!) {
     getAnimeCount(userId: $userId) {
       watched
       watching
-      planToWatch
+      planned
       stalled
       dropped
     }
@@ -49,82 +56,81 @@ export const GET_ANIME_COUNT = gql`
 `;
 
 export const ADD_ANIME = gql`
-  mutation addAnime($userId: ID, $animeId: ID, $category: String) {
-    addAnime(userId: $userId, animeId: $animeId, category: $category) {
-      watchStatus
-    }
+  mutation addAnime($userId: ID!, $animeId: ID!, $category: String!) {
+    addAnime(userId: $userId, animeId: $animeId, category: $category)
   }
 `;
 
 export const REMOVE_ANIME = gql`
-  mutation removeAnime($userId: ID, $animeId: ID) {
+  mutation removeAnime($userId: ID!, $animeId: ID!) {
     removeAnime(userId: $userId, animeId: $animeId)
   }
 `;
 
+// TODO rename
 export const GET_ALL = gql`
-  query getUserAnime($userId: ID) {
+  query getUserAnime($userId: ID!) {
     getUserAnime(userId: $userId) {
-      _id
+      id
       title
-      picture
+      imageUrl
       watchStatus
     }
   }
 `;
 
 export const GET_WATCHED = gql`
-  query getUserWatched($userId: ID) {
+  query getUserWatched($userId: ID!) {
     getUserWatched(userId: $userId) {
-      _id
+      id
       title
-      picture
+      imageUrl
     }
   }
 `;
 
 export const GET_WATCHING = gql`
-  query getUserWatching($userId: ID) {
+  query getUserWatching($userId: ID!) {
     getUserWatching(userId: $userId) {
-      _id
+      id
       title
-      picture
+      imageUrl
     }
   }
 `;
 
 export const GET_PLANNED = gql`
-  query getUserPlanning($userId: ID) {
+  query getUserPlanning($userId: ID!) {
     getUserPlanning(userId: $userId) {
-      _id
+      id
       title
-      picture
+      imageUrl
     }
   }
 `;
 
 export const GET_STALLED = gql`
-  query getUserStalled($userId: ID) {
+  query getUserStalled($userId: ID!) {
     getUserStalled(userId: $userId) {
-      _id
+      id
       title
-      picture
+      imageUrl
     }
   }
 `;
 
 export const GET_DROPPED = gql`
-  query getUserDropped($userId: ID) {
+  query getUserDropped($userId: ID!) {
     getUserDropped(userId: $userId) {
-      _id
+      id
       title
-      picture
+      imageUrl
     }
   }
 `;
 
 export const UPLOAD_IMAGE = gql`
-  mutation uploadImage($userId: ID, $imageUrl: String) {
+  mutation uploadImage($userId: ID!, $imageUrl: String!) {
     uploadImage(userId: $userId, imageUrl: $imageUrl)
   }
 `;

@@ -30,10 +30,12 @@ function App() {
       if (validationData.validateUser.isValid) {
         dispatch(
           login({
-            _id: validationData.validateUser._userId,
+            id: validationData.validateUser.id,
             username: validationData.validateUser.username,
             registerDate: validationData.validateUser.registerDate,
-            profileImage: validationData.validateUser.imageUrl,
+            imageUrl: validationData.validateUser.imageUrl,
+            email: "",
+            password: ""
           })
         );
       }

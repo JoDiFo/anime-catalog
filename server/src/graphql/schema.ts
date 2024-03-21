@@ -8,25 +8,25 @@ export const schema = buildSchema(`
         episodes: Int
         status: String
         year: Int
-        image_url: String
+        imageUrl: String
         tags: [String]
-        watch_status: String
+        watchStatus: String
     }
 
     type Tag {
         id: ID
-        name: String
+        value: String
     }
 
     type User {
-        _id: ID
+        id: ID
         username: String
         registerDate: String
         email: String
         password: String
         watched: [String]
         watching: [String]
-        planToWatch: [String]
+        planned: [String]
         stalled: [String]
         dropped: [String]
         token: String
@@ -36,7 +36,7 @@ export const schema = buildSchema(`
     type AnimeCount {
         watched: Int
         watching: Int
-        plan_to_watch: Int
+        planned: Int
         stalled: Int
         dropped: Int
     }
@@ -46,7 +46,8 @@ export const schema = buildSchema(`
         id: ID
         username: String
         registerDate: String
-        image_url: String
+        imageUrl: String
+        token: String
     }
 
     type Query {

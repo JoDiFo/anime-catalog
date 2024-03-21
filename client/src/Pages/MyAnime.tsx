@@ -14,7 +14,7 @@ function MyAnime() {
     { value: "all", text: "all" },
     { value: "watched", text: "watched" },
     { value: "watching", text: "watching" },
-    { value: "plan-to-watch", text: "plan to watch" },
+    { value: "planned", text: "plan to watch" },
     { value: "stalled", text: "stalled" },
     { value: "dropped", text: "dropped" },
   ];
@@ -22,7 +22,7 @@ function MyAnime() {
   const [selected, setSelected] = useState<EAnimeCategoryOption>("all");
 
   const {
-    _id: userId,
+    id: userId,
     username,
     registerDate,
   } = useSelector((state: RootState) => state.userReducer);

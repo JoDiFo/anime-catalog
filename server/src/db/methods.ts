@@ -31,14 +31,14 @@ async function queryAllAnime(
 ) {
   try {
     const { rows } = await client.query(GET_ALL_ANIME, [
-      searchString ?? "" + "%",
+      searchString || "" + "%",
     ]);
 
-    const animes: EAnime[] = await Promise.all(
+    const anime: EAnime[] = await Promise.all(
       rows
         .filter((row: DAnime & DTags) =>
-          row.names.some((value) => {
-            if (tags) return tags.includes(value);
+          row.values.some((value) => {
+            if (tags && tags.length > 0) return tags.includes(value);
             else return true;
           })
         )
@@ -64,13 +64,13 @@ async function queryAllAnime(
             row.status,
             row.year,
             row.image_url,
-            row.names,
+            row.values,
             watch_status
           );
         })
     );
 
-    return animes;
+    return anime;
   } catch (e) {
     console.log(e);
   }
@@ -96,7 +96,7 @@ async function queryOneAnime(animeId: number, userId: number | undefined) {
       }
     }
 
-    const tags = animeData.map((row: DTag) => row.name);
+    const tags = animeData.map((row: DTag) => row.value);
     const row: DAnime = animeData[0];
 
     const anime = new Anime(
@@ -121,7 +121,9 @@ async function queryAllTags() {
   try {
     const { rows } = await client.query(GET_ALL_TAGS);
 
-    const tags: ETag[] = rows.map((row: DTag) => new Tag(row.tag_id, row.name));
+    const tags: ETag[] = rows.map(
+      (row: DTag) => new Tag(row.tag_id, row.value)
+    );
     return tags;
   } catch (e) {
     console.log(e);
@@ -164,15 +166,19 @@ async function updateUserToken(userId: number, newToken: string) {
 async function queryValidateUser(token: string) {
   try {
     const { rows } = await client.query(VALIDATE_USER_TOKEN, [token]);
-    const userData: EUserLoginData = rows[0];
-    return new UserLoginData(
-      true,
-      userData.id,
-      userData.username,
-      userData.registerDate,
-      userData.image_url,
-      userData.token
-    );
+    if (rows.length > 0) {
+      const userData: DUser = rows[0];
+      return new UserLoginData(
+        true,
+        userData.user_id,
+        userData.username,
+        userData.register_date,
+        userData.image_url,
+        userData.token
+      );
+    } else {
+      return new UserLoginData(false, -1, "", "", "", "");
+    }
   } catch (error) {
     console.log(error);
   }
@@ -253,7 +259,7 @@ async function queryUserWatched(userId: string) {
       "watched",
     ]);
 
-    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
       return new Anime(
         row.anime_id,
         row.title,
@@ -262,12 +268,12 @@ async function queryUserWatched(userId: string) {
         row.status,
         row.year,
         row.image_url,
-        row.names,
+        row.values,
         row.category
       );
     });
 
-    return animes;
+    return anime;
   } catch (error) {
     console.log(error);
   }
@@ -280,7 +286,7 @@ async function queryUserWatching(userId: string) {
       "watching",
     ]);
 
-    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
       return new Anime(
         row.anime_id,
         row.title,
@@ -289,12 +295,12 @@ async function queryUserWatching(userId: string) {
         row.status,
         row.year,
         row.image_url,
-        row.names,
+        row.values,
         row.category
       );
     });
 
-    return animes;
+    return anime;
   } catch (error) {
     console.log(error);
   }
@@ -304,10 +310,10 @@ async function queryUserPlanning(userId: string) {
   try {
     const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
       userId,
-      "plan_to_watch",
+      "planned",
     ]);
 
-    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
       return new Anime(
         row.anime_id,
         row.title,
@@ -316,12 +322,12 @@ async function queryUserPlanning(userId: string) {
         row.status,
         row.year,
         row.image_url,
-        row.names,
+        row.values,
         row.category
       );
     });
 
-    return animes;
+    return anime;
   } catch (error) {
     console.log(error);
   }
@@ -334,7 +340,7 @@ async function queryUserStalled(userId: string) {
       "stalled",
     ]);
 
-    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
       return new Anime(
         row.anime_id,
         row.title,
@@ -343,12 +349,12 @@ async function queryUserStalled(userId: string) {
         row.status,
         row.year,
         row.image_url,
-        row.names,
+        row.values,
         row.category
       );
     });
 
-    return animes;
+    return anime;
   } catch (error) {
     console.log(error);
   }
@@ -361,7 +367,7 @@ async function queryUserDropped(userId: string) {
       "dropped",
     ]);
 
-    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
       return new Anime(
         row.anime_id,
         row.title,
@@ -370,12 +376,12 @@ async function queryUserDropped(userId: string) {
         row.status,
         row.year,
         row.image_url,
-        row.names,
+        row.values,
         row.category
       );
     });
 
-    return animes;
+    return anime;
   } catch (error) {
     console.log(error);
   }
@@ -385,7 +391,7 @@ async function queryUserAnime(userId: string) {
   try {
     const { rows } = await client.query(GET_ALL_ANIME_WITHOUT_USER, [userId]);
 
-    const animes = rows.map((row: DAnime & DTags & DUserCategory) => {
+    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
       return new Anime(
         row.anime_id,
         row.title,
@@ -394,12 +400,12 @@ async function queryUserAnime(userId: string) {
         row.status,
         row.year,
         row.image_url,
-        row.names,
+        row.values,
         row.category
       );
     });
 
-    return animes;
+    return anime;
   } catch (e) {
     console.log(e);
   }

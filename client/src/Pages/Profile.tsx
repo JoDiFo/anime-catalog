@@ -8,21 +8,20 @@ import { RootState } from "../redux/store";
 
 import thumbnailImage from "../assets/thumbnail-image.png";
 import { ProfileInfo, AnimeList } from "../components";
-import { IAnimeCount } from "../types";
 import Button from "../components/UI/Button";
 import { logout } from "../redux/userSlice";
 
 function Profile() {
-  const [list, setList] = useState<IAnimeCount>({
+  const [list, setList] = useState<EAnimeCount>({
     watched: 0,
     watching: 0,
-    planToWatch: 0,
+    planned: 0,
     stalled: 0,
     dropped: 0,
   });
 
   const {
-    _id: userId,
+    id: userId,
     username,
     registerDate,
   } = useSelector((state: RootState) => state.userReducer);
@@ -68,7 +67,7 @@ function Profile() {
           <AnimeList
             watched={list.watched}
             watching={list.watching}
-            planToWatch={list.planToWatch}
+            planned={list.planned}
             stalled={list.stalled}
             dropped={list.dropped}
           />

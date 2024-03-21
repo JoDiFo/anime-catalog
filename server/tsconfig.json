@@ -19,10 +19,7 @@
       "module": "NodeNext"
     }
   },
-  "files": [
-    "src/entities.d.ts",
-    "src/database.d.ts",
-  ]
+  "files": ["src/entities.d.ts", "src/database.d.ts"]
 }
 
 // TODO try to get rid of file extensions names (set module to bundler)

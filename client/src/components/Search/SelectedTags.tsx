@@ -24,7 +24,7 @@ function SelectedTags({ toggleVisible }: IProps) {
       <h4 className="tags-container__selected__title">Selected tags:</h4>
       {selectedTags
         ? selectedTags.map((item) => (
-            <div key={item._id} className="tag">
+            <div key={item.id} className="tag">
               {item.value}
             </div>
           ))
