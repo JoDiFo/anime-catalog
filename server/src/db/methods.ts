@@ -10,6 +10,7 @@ import {
   GET_ALL_ANIME,
   GET_ALL_ANIME_WITHOUT_USER,
   GET_ALL_ANIME_WITH_CATEGORY_USER,
+  GET_ALL_ANIME_WITH_USER_ID,
   GET_ALL_TAGS,
   GET_ANIME_COUNT,
   GET_ANIME_WATCH_STATUS,
@@ -22,55 +23,72 @@ import {
   VALIDATE_USER_TOKEN,
 } from "./queries.js";
 
-// TODO rewrite this function using query with join using anime_id
-// TODO fix performance
 async function queryAllAnime(
   userId: string | undefined,
   searchString: string | undefined,
   tags: string[] | undefined
 ) {
   try {
-    const { rows } = await client.query(GET_ALL_ANIME, [
-      searchString || "" + "%",
-    ]);
+    if (userId) {
+      const { rows } = await client.query(GET_ALL_ANIME_WITH_USER_ID, [
+        searchString || "" + "%",
+        userId,
+      ]);
 
-    const anime: EAnime[] = await Promise.all(
-      rows
-        .filter((row: DAnime & DTags) =>
-          row.values.some((value) => {
-            if (tags && tags.length > 0) return tags.includes(value);
-            else return true;
-          })
-        )
-        .map(async (row: DAnime & DTags) => {
-          let watch_status = "not-watched";
-
-          if (userId) {
-            const { rows: watchStatus } = await client.query(
-              GET_ANIME_WATCH_STATUS,
-              [row.anime_id, userId]
+      const anime: EAnime[] = await Promise.all(
+        rows
+          .filter((row: DAnime & DTags) =>
+            row.values.some((value) => {
+              if (tags && tags.length > 0) return tags.includes(value);
+              else return true;
+            })
+          )
+          .map(async (row: DAnime & DTags & DUserCategory) => {
+            return new Anime(
+              row.anime_id,
+              row.title,
+              row.type,
+              row.episodes,
+              row.status,
+              row.year,
+              row.image_url,
+              row.values,
+              row.category ? row.category : "not-watched"
             );
+          })
+      );
 
-            if (watchStatus.length > 0) {
-              watch_status = watchStatus[0].category;
-            }
-          }
+      return anime;
+    } else {
+      const { rows } = await client.query(GET_ALL_ANIME, [
+        searchString || "" + "%",
+      ]);
 
-          return new Anime(
-            row.anime_id,
-            row.title,
-            row.type,
-            row.episodes,
-            row.status,
-            row.year,
-            row.image_url,
-            row.values,
-            watch_status
-          );
-        })
-    );
+      const anime: EAnime[] = await Promise.all(
+        rows
+          .filter((row: DAnime & DTags) =>
+            row.values.some((value) => {
+              if (tags && tags.length > 0) return tags.includes(value);
+              else return true;
+            })
+          )
+          .map(async (row: DAnime & DTags) => {
+            return new Anime(
+              row.anime_id,
+              row.title,
+              row.type,
+              row.episodes,
+              row.status,
+              row.year,
+              row.image_url,
+              row.values,
+              "not-watched"
+            );
+          })
+      );
 
-    return anime;
+      return anime;
+    }
   } catch (e) {
     console.log(e);
   }

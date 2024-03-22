@@ -57,6 +57,52 @@ order by
 	anime_id
 `;
 
+export const GET_ALL_ANIME_WITH_USER_ID = `
+with s_category as(
+	select
+		anime_id,
+		category
+	from
+		user_category
+	inner join anime
+			using(anime_id)
+	where
+		user_id = $2
+	)
+	
+	select
+		anime.anime_id,
+		anime.title,
+		anime."type" ,
+		anime.episodes, 
+		anime."year" ,
+		anime.image_url, 
+		anime.status ,
+		category,
+		array_agg(tags.value) as
+	values
+	from
+		anime
+	join anime_tag
+		using (anime_id)
+	join tags
+		using (tag_id)
+	left join s_category
+		using (anime_id)
+	where lower(anime.title) like lower($1)
+	group by
+		anime.anime_id,
+		anime.title,
+		anime."type" ,
+		anime.episodes, 
+		anime."year" ,
+		anime.image_url, 
+		anime.status ,
+		category
+	order by
+		anime_id	
+`;
+
 export const FIND_USER_BY_EMAIL = `
 select
 	*
