@@ -16,31 +16,31 @@ import { login } from "./redux/userSlice";
 function App() {
   const dispatch = useDispatch();
 
-  const { data: validationData, loading: isValidationLoading } = useQuery(
-    VALIDATE_USER,
-    {
-      variables: {
-        token: document.cookie.split("=")[1] || "a",
-      },
-    }
-  );
+  // const { data: validationData, loading: isValidationLoading } = useQuery(
+  //   VALIDATE_USER,
+  //   {
+  //     variables: {
+  //       token: document.cookie.split("=")[1] || "a",
+  //     },
+  //   }
+  // );
 
-  useEffect(() => {
-    if (!isValidationLoading) {
-      if (validationData.validateUser.isValid) {
-        dispatch(
-          login({
-            id: validationData.validateUser.id,
-            username: validationData.validateUser.username,
-            registerDate: validationData.validateUser.registerDate,
-            imageUrl: validationData.validateUser.imageUrl,
-            email: "",
-            password: ""
-          })
-        );
-      }
-    }
-  }, [isValidationLoading]);
+  // useEffect(() => {
+  //   if (!isValidationLoading) {
+  //     if (validationData.validateUser.isValid) {
+  //       dispatch(
+  //         login({
+  //           id: validationData.validateUser.id,
+  //           username: validationData.validateUser.username,
+  //           registerDate: validationData.validateUser.registerDate,
+  //           imageUrl: validationData.validateUser.imageUrl,
+  //           email: "",
+  //           password: ""
+  //         })
+  //       );
+  //     }
+  //   }
+  // }, [isValidationLoading]);
 
   return (
     <>
