@@ -1,9 +1,9 @@
 import { AnimeCard } from "@/widgets/AnimeCard";
-import "./CardContainer.scss";
+import cls from "./CardContainer.module.scss";
 
 function CardContainer({ items }: { items: EAnime[] }) {
   return (
-    <div className="page__list card-container">
+    <div className={cls.CardContainer}>
       {items.length !== 0
         ? items.map((item: EAnime) => (
             <AnimeCard

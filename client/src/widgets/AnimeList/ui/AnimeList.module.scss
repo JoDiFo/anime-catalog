@@ -1,0 +1,24 @@
+.AnimeList {
+  margin: 50px auto;
+  width: 70%;
+  background-color: var(--light-gray);
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    font-size: var(--header-2);
+    margin: 0.5em auto;
+  }
+
+  div {
+    padding: 0.5em 50px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+  }
+}

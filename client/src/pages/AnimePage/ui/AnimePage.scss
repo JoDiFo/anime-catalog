@@ -54,23 +54,4 @@
     font-weight: 400;
     font-size: var(--header-2);
   }
-
-  &__select {
-    display: flex;
-    align-items: center;
-  }
-
-  &__my-list {
-    display: flex;
-    column-gap: 1em;
-
-    &__dropdown {
-      font-size: var(--small-text);
-      background-color: var(--black);
-      outline: none;
-      border: none;
-      border-radius: 2px;
-      color: var(--content);
-    }
-  }
 }

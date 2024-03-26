@@ -1,0 +1,18 @@
+.CardContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  row-gap: 80px;
+}
+
+@media (max-width: 1300px) {
+  .CardContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .CardContainer {
+    row-gap: 70px;
+  }
+}

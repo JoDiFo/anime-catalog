@@ -9,6 +9,7 @@ import { RootState } from "@/app/redux/store";
 import ModalWindow from "../../../shared/ui/ModalWindow";
 import LoginForm from "../../../components/Common/LoginForm";
 import { load } from "@/app/redux/animeSlice";
+import cls from "./CategorySelector.module.scss";
 
 interface IProps {
   animeId: string;
@@ -76,15 +77,15 @@ function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
   }, [userId]);
 
   return (
-    <div className="anime-page__my-list">
+    <div className={cls.CategorySelector}>
       <ModalWindow
         visible={showModal}
         setVisible={(flag) => setShowModal(flag)}
       >
         <LoginForm redirectTo={"/anime"} state={{ id: animeId }} />
       </ModalWindow>
-      <h4 className="anime-page__my-list__title">MY ANIME:</h4>
-      <div className="anime-page__select">
+      <h4>MY ANIME:</h4>
+      <div className={cls.selector}>
         <span className={`dot ${selected}`}></span>
         <Select
           value={selected}

@@ -10,6 +10,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useMutation } from "@apollo/client";
 import { UPLOAD_IMAGE } from "@/app/graphql/user";
 
+import cls from "./ProfileInfo.module.scss";
+
 interface IProps {
   username: string;
   registerDate: string;
@@ -58,14 +60,14 @@ function ProfileInfo({ username, registerDate }: IProps) {
   }, [loading, data]);
 
   return (
-    <div className="page__info">
+    <div className={cls.ProfileInfo}>
       <div
         onMouseEnter={() => setVisible(true)}
         onMouseLeave={() => setVisible(false)}
       >
         <img src={imageUrl || defaultImage} alt="profile image" />
         {visible ? (
-          <div className="label-wrapper">
+          <div className={cls.labelWrapper}>
             <label htmlFor="upload-image">Chose Image</label>
           </div>
         ) : null}

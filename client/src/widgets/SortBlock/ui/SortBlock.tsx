@@ -1,5 +1,6 @@
 import { memo, useState } from "react";
-import Select from "../../shared/ui/Select";
+import Select from "@/shared/ui/Select";
+import cls from "./SortBlock.module.scss";
 
 function SortBlock() {
   const sortOptions = [
@@ -14,7 +15,7 @@ function SortBlock() {
   };
 
   return (
-    <div className="sort">
+    <div className={cls.SortBlock}>
       <p>Sort by:</p>
       <Select value={selected} onChange={handleChange}>
         {sortOptions.map((item) => (

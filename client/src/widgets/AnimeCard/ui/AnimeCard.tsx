@@ -1,20 +1,21 @@
 import { Link } from "react-router-dom";
+import cls from "./AnimeCard.module.scss";
 
-interface IAnimeCard {
+interface AnimeCard {
   id: string;
   title: string;
   animeThumbnail: string;
   watchStatus: EAnimeWatchStatus;
 }
 
-function AnimeCard({ id, title, animeThumbnail, watchStatus }: IAnimeCard) {
+function AnimeCard({ id, title, animeThumbnail, watchStatus }: AnimeCard) {
   return (
-    <div className="card">
+    <div className={cls.AnimeCard}>
       <Link to="/anime" state={{ id: id }}>
         <img src={animeThumbnail} alt={title} />
       </Link>
-      <div className="card__info">
-        <div className="status">
+      <div className={cls.info}>
+        <div className={cls.status}>
           <span className={`dot ${watchStatus}`}></span>
           {watchStatus}
         </div>

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import cls from "./AnimeList.module.scss";
 
 function AnimeList({
   watched,
@@ -8,7 +9,7 @@ function AnimeList({
   dropped,
 }: EAnimeCount) {
   return (
-    <div className="page__anime-list">
+    <div className={cls.AnimeList}>
       <Link to="/profile/anime">
         <h3>Anime list</h3>
       </Link>
