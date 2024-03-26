@@ -1,8 +1,8 @@
 import { memo, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-import { CardContainer } from "..";
-import Select from "../UI/Select";
+import { CardContainer } from "@/widgets/CardContainer";
+import Select from "@/shared/ui/Select";
 import "./ContentNavigation.scss";
 
 interface SelectedItem {

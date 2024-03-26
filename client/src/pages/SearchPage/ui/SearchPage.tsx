@@ -1,0 +1,94 @@
+import { useEffect, useMemo, useState } from "react";
+
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import type { RootState } from "../../../app/redux/store";
+
+import { Loading } from "@/widgets/Loading";
+import { Content, TagsBlock } from "../../../components";
+
+import useDebounce from "../../../shared/Hooks/useDebounce";
+
+import { useLazyQuery } from "@apollo/client";
+import { GET_ALL_ANIME } from "../../../app/graphql/anime";
+import { notLoad } from "../../../app/redux/animeSlice";
+import SearchBar from "../../../components/Search/SearchBar";
+
+function SearchPage() {
+  const dispatch = useDispatch();
+
+  const selectedTags = useSelector(
+    (state: RootState) => state.tags.selected,
+    shallowEqual
+  );
+
+  const tags = useMemo(
+    () => selectedTags.map((item) => item.value),
+    [selectedTags]
+  );
+
+  const needLoad = useSelector((state: RootState) => state.anime.requestReload);
+  const userId = useSelector((state: RootState) => state.userReducer.id);
+
+  const [anime, setAnime] = useState<EAnime[]>([]);
+  const [searchString, setSearchString] = useState("");
+
+  const debouncedValue = useDebounce(searchString, 500);
+
+  const [
+    getAll,
+    { data: animeData, loading: isAnimeLoading, called, refetch },
+  ] = useLazyQuery(GET_ALL_ANIME);
+
+  useEffect(() => {
+    if (called && !isAnimeLoading) {
+      setAnime(animeData.getAllAnime);
+    }
+  }, [called, isAnimeLoading, animeData?.getAllAnime]);
+
+  useEffect(() => {
+    if (needLoad) {
+      refetch({
+        userId,
+        searchString,
+        tags,
+      });
+      dispatch(notLoad());
+    }
+  }, [needLoad]);
+
+  useEffect(() => {
+    if (!called) {
+      getAll({
+        variables: {
+          userId,
+          searchString,
+          tags,
+        },
+      });
+    } else {
+      refetch({
+        userId,
+        searchString,
+        tags,
+      });
+    }
+  }, [debouncedValue, selectedTags]);
+
+  return (
+    <main className="page">
+      <div className="container">
+        <div className="wrapper">
+          <div className="page__sorting">
+            <h3>BROWSE THROUGH ANIME CATALOG</h3>
+            <TagsBlock />
+            <SearchBar handleChange={(value) => setSearchString(value)} />
+            {/* <SortBlock /> */}
+          </div>
+          {!isAnimeLoading ? <Content items={anime} /> : <Loading />}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default SearchPage;

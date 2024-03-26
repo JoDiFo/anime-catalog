@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 
-import { RootState } from "../../redux/store";
+import { RootState } from "@/app/redux/store";
 
-import plusIcon from "../../assets/plus-icon.svg";
-import Button from "../UI/Button";
-import { clearSelected } from "../../redux/tagsSlice";
+import plusIcon from "@/shared/assets/plus-icon.svg";
+import Button from "@/shared/ui/Button";
+import { clearSelected } from "@/app/redux/tagsSlice";
 
 interface IProps {
   toggleVisible: (flag: boolean) => void;

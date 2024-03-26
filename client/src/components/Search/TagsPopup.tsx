@@ -1,15 +1,15 @@
 import { memo, useCallback, useEffect, useState } from "react";
 
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { RootState } from "../../redux/store";
-import { setSelectedTags } from "../../redux/tagsSlice";
+import { RootState } from "@/app/redux/store";
+import { setSelectedTags } from "@/app/redux/tagsSlice";
 
-import compareStrings from "../../utils/compareStrings";
-import useDebounce from "../../Hooks/useDebounce";
+import compareStrings from "@/shared/utils/compareStrings";
+import useDebounce from "@/shared/Hooks/useDebounce";
 
-import crossIcon from "../../assets/cross.svg";
+import crossIcon from "@/shared/assets/cross.svg";
 
-import { GET_ALL_TAGS } from "../../graphql/tags";
+import { GET_ALL_TAGS } from "@/app/graphql/tags";
 import { useQuery } from "@apollo/client";
 import TagsContainer from "./TagsContainer";
 

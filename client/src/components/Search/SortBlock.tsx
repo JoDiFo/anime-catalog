@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import Select from "../UI/Select";
+import Select from "../../shared/ui/Select";
 
 function SortBlock() {
   const sortOptions = [

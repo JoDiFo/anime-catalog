@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 
 import { useQuery, NetworkStatus } from "@apollo/client";
-import { GET_WATCHING } from "../../graphql/user";
+import { GET_WATCHING } from "../../app/graphql/user";
 
-import { Content, Loading } from "..";
+import { Loading } from "@/widgets/Loading";
+import { Content } from "..";
 
 function WatchingAnime({ userId }: { userId: string }) {
   const { data, loading, called, refetch, networkStatus } = useQuery(

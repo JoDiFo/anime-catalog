@@ -1,4 +1,4 @@
-import Input from "../UI/Input";
+import Input from "../../shared/ui/Input";
 import "./SearchBar.scss";
 
 interface IProps {

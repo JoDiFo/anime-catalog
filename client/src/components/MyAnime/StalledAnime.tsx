@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 
 import { useQuery, NetworkStatus } from "@apollo/client";
-import { GET_STALLED } from "../../graphql/user";
+import { GET_STALLED } from "../../app/graphql/user";
 
-import { Content, Loading } from "..";
+import { Loading } from "@/widgets/Loading";
+import { Content } from "..";
 
 function StalledAnime({ userId }: { userId: string }) {
   const { data, loading, called, refetch, networkStatus } = useQuery(

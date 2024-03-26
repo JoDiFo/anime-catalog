@@ -1,15 +1,15 @@
-import Form from "../UI/Form";
-import Input from "../UI/Input";
-import Button from "../UI/Button";
+import Form from "../../shared/ui/Form";
+import Input from "../../shared/ui/Input";
+import Button from "../../shared/ui/Button";
 import { useEffect, useState } from "react";
 
-import { LOGIN_USER } from "../../graphql/user";
+import { LOGIN_USER } from "../../app/graphql/user";
 import { useLazyQuery } from "@apollo/client";
 
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/userSlice";
+import { login } from "../../app/redux/userSlice";
 import { useNavigate } from "react-router-dom";
-import createExpireTime from "../../utils/createExpireTime";
+import createExpireTime from "../../shared/utils/createExpireTime";
 
 interface IProps {
   redirectTo: string;
@@ -36,7 +36,7 @@ function LoginForm({ redirectTo, state }: IProps) {
             registerDate: data.loginUser.registerDate,
             imageUrl: data.loginUser.imageUrl,
             email: "",
-            password: ""
+            password: "",
           })
         );
 
