@@ -13,6 +13,8 @@ export const REGISTER_USER = gql`
       registerDate
       imageUrl
       token
+      refreshToken
+      accessToken
     }
   }
 `;
@@ -25,21 +27,15 @@ export const LOGIN_USER = gql`
       username
       registerDate
       imageUrl
-      token
+      refreshToken
+      accessToken
     }
   }
 `;
 
 export const VALIDATE_USER = gql`
   query validateUser($token: String!) {
-    validateUser(token: $token) {
-      isValid
-      id
-      username
-      registerDate
-      imageUrl
-      token
-    }
+    validateUser(token: $token)
   }
 `;
 

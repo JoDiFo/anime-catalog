@@ -1,9 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 
-// import { useQuery } from "@apollo/client";
-
-// import { useDispatch } from "react-redux";
+import { useLazyQuery } from "@apollo/client";
 
 import { HomePage } from "@/pages/HomePage";
 import { ProfilePage } from "@/pages/ProfilePage";
@@ -17,37 +15,43 @@ import { Footer } from "@/widgets/Footer";
 import { Loading } from "@/widgets/Loading";
 
 import "./styles/index.scss";
-// import { VALIDATE_USER } from "./graphql/user";
-// import { login } from "./redux/userSlice";
+import { VALIDATE_USER } from "./graphql/user";
+import { useDispatch } from "react-redux";
+import { login } from "./redux/userSlice";
 
 function App() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const { data: validationData, loading: isValidationLoading } = useQuery(
-  //   VALIDATE_USER,
-  //   {
-  //     variables: {
-  //       token: document.cookie.split("=")[1] || "a",
-  //     },
-  //   }
-  // );
+  const [
+    callValidation,
+    { data: validationData, loading: isValidationLoading, called },
+  ] = useLazyQuery(VALIDATE_USER);
 
-  // useEffect(() => {
-  //   if (!isValidationLoading) {
-  //     if (validationData.validateUser.isValid) {
-  //       dispatch(
-  //         login({
-  //           id: validationData.validateUser.id,
-  //           username: validationData.validateUser.username,
-  //           registerDate: validationData.validateUser.registerDate,
-  //           imageUrl: validationData.validateUser.imageUrl,
-  //           email: "",
-  //           password: ""
-  //         })
-  //       );
-  //     }
-  //   }
-  // }, [isValidationLoading]);
+  useEffect(() => {
+    const [refreshToken, accessToken] = document.cookie.split(" ");
+    if (!accessToken) {
+      callValidation({
+        variables: {
+          token: refreshToken,
+        },
+      });
+    } else {
+      dispatch(
+        login({
+          id: localStorage.getItem("userId") as string,
+          username: localStorage.getItem("username") as string,
+          registerDate: localStorage.getItem("registerDate") as string,
+          imageUrl: localStorage.getItem("imageUrl") as string,
+        })
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isValidationLoading && called) {
+      console.log(validationData);
+    }
+  }, [isValidationLoading, called]);
 
   return (
     <>

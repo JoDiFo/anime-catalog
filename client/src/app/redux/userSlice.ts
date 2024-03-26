@@ -4,8 +4,6 @@ const initialState: EUser = {
   id: "",
   username: "",
   registerDate: "",
-  email: "",
-  password: "",
   imageUrl: "",
 };
 

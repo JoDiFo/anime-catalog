@@ -1,15 +1,15 @@
-import Form from "../../shared/ui/Form";
-import Input from "../../shared/ui/Input";
-import Button from "../../shared/ui/Button";
+import Form from "@/shared/ui/Form";
+import Input from "@/shared/ui/Input";
+import Button from "@/shared/ui/Button";
 import { useEffect, useState } from "react";
 
-import { LOGIN_USER } from "../../app/graphql/user";
+import { LOGIN_USER } from "@/app/graphql/user";
 import { useLazyQuery } from "@apollo/client";
 
 import { useDispatch } from "react-redux";
-import { login } from "../../app/redux/userSlice";
+import { login } from "@/app/redux/userSlice";
 import { useNavigate } from "react-router-dom";
-import createExpireTime from "../../shared/utils/createExpireTime";
+import createExpireTime from "@/shared/utils/createExpireTime";
 
 interface IProps {
   redirectTo: string;
@@ -35,14 +35,21 @@ function LoginForm({ redirectTo, state }: IProps) {
             username: data.loginUser.username,
             registerDate: data.loginUser.registerDate,
             imageUrl: data.loginUser.imageUrl,
-            email: "",
-            password: "",
           })
         );
 
-        document.cookie = `token=${
-          data.loginUser.token
+        document.cookie = `refreshToken=${
+          data.loginUser.refreshToken
         }; expires=${createExpireTime(1)}`;
+
+        document.cookie = `accessToken=${
+          data.loginUser.accessToken
+        }; expires=${createExpireTime(1)}`;
+
+        localStorage.setItem("userId", data.loginUser.id);
+        localStorage.setItem("username", data.loginUser.username);
+        localStorage.setItem("registerDate", data.loginUser.registerDate);
+        localStorage.setItem("imageUrl", data.loginUser.imageUrl);
       }
     }
   }, [called, loading]);

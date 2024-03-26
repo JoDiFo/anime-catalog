@@ -60,8 +60,6 @@ function RegisterForm({ redirectTo }: IProps) {
             username: data.registerUser.username,
             registerDate: data.registerUser.registerDate,
             imageUrl: data.registerUser.imageUrl,
-            email: "",
-            password: "",
           })
         );
 

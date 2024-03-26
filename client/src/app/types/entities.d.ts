@@ -28,8 +28,6 @@ interface EUser {
   id: string;
   username: string;
   registerDate: string;
-  email: string;
-  password: string;
   imageUrl: string;
 }
 
