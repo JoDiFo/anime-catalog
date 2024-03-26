@@ -270,144 +270,36 @@ async function queryAnimeCount(userId: string) {
   }
 }
 
-async function queryUserWatched(userId: string) {
-  try {
-    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
-      userId,
-      "watched",
-    ]);
-
-    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
-      return new Anime(
-        row.anime_id,
-        row.title,
-        row.type,
-        row.episodes,
-        row.status,
-        row.year,
-        row.image_url,
-        row.values,
-        row.category
-      );
-    });
-
-    return anime;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function queryUserWatching(userId: string) {
-  try {
-    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
-      userId,
-      "watching",
-    ]);
-
-    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
-      return new Anime(
-        row.anime_id,
-        row.title,
-        row.type,
-        row.episodes,
-        row.status,
-        row.year,
-        row.image_url,
-        row.values,
-        row.category
-      );
-    });
-
-    return anime;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function queryUserPlanning(userId: string) {
-  try {
-    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
-      userId,
-      "planned",
-    ]);
-
-    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
-      return new Anime(
-        row.anime_id,
-        row.title,
-        row.type,
-        row.episodes,
-        row.status,
-        row.year,
-        row.image_url,
-        row.values,
-        row.category
-      );
-    });
-
-    return anime;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function queryUserStalled(userId: string) {
-  try {
-    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
-      userId,
-      "stalled",
-    ]);
-
-    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
-      return new Anime(
-        row.anime_id,
-        row.title,
-        row.type,
-        row.episodes,
-        row.status,
-        row.year,
-        row.image_url,
-        row.values,
-        row.category
-      );
-    });
-
-    return anime;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function queryUserDropped(userId: string) {
-  try {
-    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
-      userId,
-      "dropped",
-    ]);
-
-    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
-      return new Anime(
-        row.anime_id,
-        row.title,
-        row.type,
-        row.episodes,
-        row.status,
-        row.year,
-        row.image_url,
-        row.values,
-        row.category
-      );
-    });
-
-    return anime;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function queryUserAnime(userId: string) {
+async function queryAllUserAnime(userId: string) {
   try {
     const { rows } = await client.query(GET_ALL_ANIME_WITHOUT_USER, [userId]);
+
+    const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
+      return new Anime(
+        row.anime_id,
+        row.title,
+        row.type,
+        row.episodes,
+        row.status,
+        row.year,
+        row.image_url,
+        row.values,
+        row.category
+      );
+    });
+
+    return anime;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function queryUserAnime(userId: string, category: string) {
+  try {
+    const { rows } = await client.query(GET_ALL_ANIME_WITH_CATEGORY_USER, [
+      userId,
+      category,
+    ]);
 
     const anime = rows.map((row: DAnime & DTags & DUserCategory) => {
       return new Anime(
@@ -447,12 +339,8 @@ export {
   queryRegister,
   queryAddAnime,
   queryAnimeCount,
+  queryAllUserAnime,
   queryUserAnime,
-  queryUserWatched,
-  queryUserWatching,
-  queryUserDropped,
-  queryUserStalled,
-  queryUserPlanning,
   queryUploadImage,
   queryRemoveAnime,
 };

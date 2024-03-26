@@ -1,17 +1,24 @@
 import { useEffect } from "react";
 
 import { useQuery, NetworkStatus } from "@apollo/client";
-import { GET_PLANNED } from "../../app/graphql/user";
+import { GET_USER_ANIME } from "@/app/graphql/user";
 
 import { Loading } from "@/widgets/Loading";
 import { Content } from "..";
 
-function PlannedAnime({ userId }: { userId: string }) {
+function CategorizedAnime({
+  userId,
+  category,
+}: {
+  userId: string;
+  category: string;
+}) {
   const { data, loading, called, refetch, networkStatus } = useQuery(
-    GET_PLANNED,
+    GET_USER_ANIME,
     {
       variables: {
         userId,
+        category,
       },
       notifyOnNetworkStatusChange: true,
     }
@@ -21,11 +28,11 @@ function PlannedAnime({ userId }: { userId: string }) {
     if (called) {
       refetch();
     }
-  }, [called, refetch]);
+  }, [called, refetch, category]);
 
   if (loading || networkStatus === NetworkStatus.refetch) return <Loading />;
 
-  return <Content items={data.getUserPlanning} />;
+  return <Content items={data.getUserAnime} />;
 }
 
-export default PlannedAnime;
+export default CategorizedAnime;

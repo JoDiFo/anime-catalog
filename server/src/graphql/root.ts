@@ -8,13 +8,9 @@ import {
   queryOneAnime,
   queryRegister,
   queryUserAnime,
-  queryUserDropped,
-  queryUserPlanning,
-  queryUserStalled,
-  queryUserWatched,
-  queryUserWatching,
   queryUploadImage,
   queryRemoveAnime,
+  queryAllUserAnime,
 } from "../db/methods.js";
 
 export const root = {
@@ -96,28 +92,18 @@ export const root = {
     return await queryAnimeCount(userId);
   },
 
-  getUserAnime: async ({ userId }: { userId: string }) => {
-    return await queryUserAnime(userId);
+  getAllUserAnime: async ({ userId }: { userId: string }) => {
+    return await queryAllUserAnime(userId);
   },
 
-  getUserWatched: async ({ userId }: { userId: string }) => {
-    return await queryUserWatched(userId);
-  },
-
-  getUserWatching: async ({ userId }: { userId: string }) => {
-    return await queryUserWatching(userId);
-  },
-
-  getUserPlanning: async ({ userId }: { userId: string }) => {
-    return await queryUserPlanning(userId);
-  },
-
-  getUserStalled: async ({ userId }: { userId: string }) => {
-    return await queryUserStalled(userId);
-  },
-
-  getUserDropped: async ({ userId }: { userId: string }) => {
-    return await queryUserDropped(userId);
+  getUserAnime: async ({
+    userId,
+    category,
+  }: {
+    userId: string;
+    category: string;
+  }) => {
+    return await queryUserAnime(userId, category);
   },
 
   uploadImage: async ({

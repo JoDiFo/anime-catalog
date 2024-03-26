@@ -67,10 +67,9 @@ export const REMOVE_ANIME = gql`
   }
 `;
 
-// TODO rename
-export const GET_ALL = gql`
-  query getUserAnime($userId: ID!) {
-    getUserAnime(userId: $userId) {
+export const GET_ALL_USER_ANIME = gql`
+  query getAllUserAnime($userId: ID!) {
+    getAllUserAnime(userId: $userId) {
       id
       title
       imageUrl
@@ -79,52 +78,13 @@ export const GET_ALL = gql`
   }
 `;
 
-export const GET_WATCHED = gql`
-  query getUserWatched($userId: ID!) {
-    getUserWatched(userId: $userId) {
+export const GET_USER_ANIME = gql`
+  query getUserAnime($userId: ID!, $category: String!) {
+    getUserAnime(userId: $userId, category: $category) {
       id
       title
       imageUrl
-    }
-  }
-`;
-
-export const GET_WATCHING = gql`
-  query getUserWatching($userId: ID!) {
-    getUserWatching(userId: $userId) {
-      id
-      title
-      imageUrl
-    }
-  }
-`;
-
-export const GET_PLANNED = gql`
-  query getUserPlanning($userId: ID!) {
-    getUserPlanning(userId: $userId) {
-      id
-      title
-      imageUrl
-    }
-  }
-`;
-
-export const GET_STALLED = gql`
-  query getUserStalled($userId: ID!) {
-    getUserStalled(userId: $userId) {
-      id
-      title
-      imageUrl
-    }
-  }
-`;
-
-export const GET_DROPPED = gql`
-  query getUserDropped($userId: ID!) {
-    getUserDropped(userId: $userId) {
-      id
-      title
-      imageUrl
+      watchStatus
     }
   }
 `;
