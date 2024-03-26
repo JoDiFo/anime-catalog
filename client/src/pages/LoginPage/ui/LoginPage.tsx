@@ -1,10 +1,10 @@
 import LoginForm from "../../../components/Common/LoginForm";
-import "./LoginPage.scss";
+import cls from "./LoginPage.module.scss";
 
 function LoginPage() {
   return (
-    <div className="login-page">
-      <div className="login-page__form">
+    <div className={cls.LoginPage}>
+      <div className={cls.form}>
         <LoginForm redirectTo="/" state={{}} />
       </div>
     </div>

@@ -9,15 +9,19 @@ import { RootState } from "@/app/redux/store";
 import ModalWindow from "../../../shared/ui/ModalWindow";
 import LoginForm from "../../../components/Common/LoginForm";
 import { load } from "@/app/redux/animeSlice";
-import cls from "./CategorySelector.module.scss";
+import cls from "./AnimeCategorySelector.module.scss";
 
-interface IProps {
+interface AnimeCategorySelector {
   animeId: string;
   defaultValue: string;
   onChange: () => void;
 }
 
-function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
+function AnimeCategorySelector({
+  animeId,
+  defaultValue,
+  onChange,
+}: AnimeCategorySelector) {
   const dispatch = useDispatch();
   const categoryOptions = [
     { value: "not-watched", text: "not watched" },
@@ -77,7 +81,7 @@ function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
   }, [userId]);
 
   return (
-    <div className={cls.CategorySelector}>
+    <div className={cls.AnimeCategorySelector}>
       <ModalWindow
         visible={showModal}
         setVisible={(flag) => setShowModal(flag)}
@@ -104,4 +108,4 @@ function CategorySelector({ animeId, defaultValue, onChange }: IProps) {
   );
 }
 
-export default CategorySelector;
+export default AnimeCategorySelector;

@@ -1,12 +1,11 @@
-import { useSelector } from "react-redux";
-import thumbnailImage from "@/shared/assets/thumbnail-image.png";
-
-import { ProfileInfo } from "@/widgets/ProfileInfo";
-import { RootState } from "@/app/redux/store";
 import { useEffect, useState } from "react";
-
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import ListSelector from "../../../components/MyAnime/ListSelector";
+
+import { RootState } from "@/app/redux/store";
+import { ProfileInfo } from "@/widgets/ProfileInfo";
+import { DisplayedCategorySelector } from "@/widgets/DisplayedCategorySelector";
+import thumbnailImage from "@/shared/assets/thumbnail-image.png";
 import ListAnime from "../../../components/MyAnime/ListAnime";
 
 function UserAnimePage() {
@@ -14,7 +13,7 @@ function UserAnimePage() {
     { value: "all", text: "all" },
     { value: "watched", text: "watched" },
     { value: "watching", text: "watching" },
-    { value: "planned", text: "plan to watch" },
+    { value: "planned", text: "planned" },
     { value: "stalled", text: "stalled" },
     { value: "dropped", text: "dropped" },
   ];
@@ -47,7 +46,7 @@ function UserAnimePage() {
       <div className="container">
         <div className="wrapper">
           <ProfileInfo username={username} registerDate={registerDate} />
-          <ListSelector
+          <DisplayedCategorySelector
             options={options}
             selected={selected}
             onClick={(value) => handleSelect(value)}

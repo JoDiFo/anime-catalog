@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_ONE_ANIME } from "../../../app/graphql/anime";
-import CategorySelector from "../../../widgets/CategorySelector/ui/CategorySelector";
+import AnimeCategorySelector from "../../../widgets/AnimeCategorySelector/ui/AnimeCategorySelector";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../app/redux/store";
 import { Loading } from "@/widgets/Loading";
@@ -67,7 +67,7 @@ function AnimePage() {
                 </div>
               ))}
             </div>
-            <CategorySelector
+            <AnimeCategorySelector
               animeId={id}
               defaultValue={anime.watchStatus}
               onChange={update}
