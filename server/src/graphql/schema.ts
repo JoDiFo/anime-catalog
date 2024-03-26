@@ -47,14 +47,15 @@ export const schema = buildSchema(`
         username: String
         registerDate: String
         imageUrl: String
-        token: String
+        refreshToken: String
+        accessToken: String
     }
 
     type Query {
         getAllAnime(userId: ID, searchString: String, tags: [String]): [Anime]
         getOneAnime(animeId: ID!, userId: ID): Anime
         getAllTags: [Tag]
-        validateUser(token: String!): UserLoginData
+        validateUser(token: String!): String
         loginUser(email: String!, password: String!): UserLoginData
         getAnimeCount(userId: ID!): AnimeCount
         getAllUserAnime(userId: ID!): [Anime]

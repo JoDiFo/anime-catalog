@@ -1,5 +1,6 @@
 import getDate from "../utils/getDate.js";
-import generateToken from "../utils/generateToken.js";
+import { generateRefreshToken } from "../utils/generateRefreshToken.js";
+import { generateAccessToken } from "../utils/generateAccessToken.js";
 
 import { client } from "./postgresConn.js";
 import { UserLoginData } from "../models/User.js";
@@ -18,10 +19,9 @@ import {
   INSERT_INTO_CATEGORY,
   REGISTER_USER,
   REMOVE_FROM_CATEGORIES,
-  UPDATE_USER_TOKEN,
   UPLOAD_IMAGE,
-  VALIDATE_USER_TOKEN,
 } from "./queries.js";
+import verifyToken from "../utils/verifyToken.js";
 
 async function queryAllAnime(
   userId: string | undefined,
@@ -152,29 +152,29 @@ async function queryAllTags() {
 async function queryLogin(email: string, password: string) {
   try {
     const { rows } = await client.query(FIND_USER_BY_EMAIL, [email]);
+
+    if (rows.length <= 0) {
+      // TODO throw USER NOT FOUND
+    }
+
     const user: DUser = rows[0];
 
-    if (user.password === password) {
-      const token = generateToken();
-      user.token = token;
-      updateUserToken(user.user_id, token);
-      return new UserLoginData(
-        true,
-        user.user_id,
-        user.username,
-        user.register_date,
-        user.image_url,
-        user.token
-      );
+    if (user.password !== password) {
+      // TODO throw WRONG PASSWORD
     }
-  } catch (e) {
-    console.log(e);
-  }
-}
 
-async function updateUserToken(userId: number, newToken: string) {
-  try {
-    await client.query(UPDATE_USER_TOKEN, [newToken, userId]);
+    const refreshToken = generateRefreshToken(user.user_id, user.email);
+    const accessToken = generateAccessToken(user.user_id, user.email);
+
+    return new UserLoginData(
+      true,
+      user.user_id,
+      user.username,
+      user.register_date,
+      user.image_url,
+      refreshToken,
+      accessToken
+    );
   } catch (e) {
     console.log(e);
   }
@@ -183,20 +183,9 @@ async function updateUserToken(userId: number, newToken: string) {
 // TODO handle if not valid
 async function queryValidateUser(token: string) {
   try {
-    const { rows } = await client.query(VALIDATE_USER_TOKEN, [token]);
-    if (rows.length > 0) {
-      const userData: DUser = rows[0];
-      return new UserLoginData(
-        true,
-        userData.user_id,
-        userData.username,
-        userData.register_date,
-        userData.image_url,
-        userData.token
-      );
-    } else {
-      return new UserLoginData(false, -1, "", "", "", "");
-    }
+    const result = verifyToken(token) as { userId: number; email: string };
+    const accessToken = generateAccessToken(result.userId, result.email);
+    return accessToken;
   } catch (error) {
     console.log(error);
   }
@@ -214,17 +203,21 @@ async function queryRegister(
       email,
       password,
       getDate(),
-      generateToken(),
     ]);
 
-    const userData: DUser = rows[0];
+    const user: DUser = rows[0];
+
+    const refreshToken = generateRefreshToken(user.user_id, user.email);
+    const accessToken = generateAccessToken(user.user_id, user.email);
+
     return new UserLoginData(
       true,
-      userData.user_id,
-      userData.username,
-      userData.register_date,
-      userData.image_url,
-      userData.token
+      user.user_id,
+      user.username,
+      user.register_date,
+      user.image_url,
+      refreshToken,
+      accessToken
     );
   } catch (error) {
     console.log(error);

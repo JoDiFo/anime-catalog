@@ -15,7 +15,6 @@ interface DUser {
   password: string;
   register_date: string;
   image_url: string;
-  token: string;
 }
 
 interface DTag {

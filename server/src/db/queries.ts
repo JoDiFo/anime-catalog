@@ -112,23 +112,6 @@ where
 	users.email = $1
 `;
 
-export const UPDATE_USER_TOKEN = `
-update
-	users
-set
-	"token" = $1
-where
-	users.user_id = $2
-`;
-
-export const VALIDATE_USER_TOKEN = `
-select
-	*
-from
-	users
-where
-	users."token" = $1
-`;
 export const REGISTER_USER = `
 insert
 	into
@@ -136,9 +119,8 @@ insert
 	email,
 	"password",
 	register_date,
-	image_url,
-	"token")
-values ($1, $2, $3, $4, '', $5)
+	image_url)
+values ($1, $2, $3, $4, '')
 returning *
 `;
 

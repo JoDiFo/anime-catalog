@@ -47,21 +47,24 @@ export class UserLoginData implements EUserLoginData {
   username: string;
   registerDate: string;
   imageUrl: string;
-  token: string;
-  
+  refreshToken: string;
+  accessToken: string;
+
   constructor(
     isValid: boolean,
     id: number,
     username: string,
     registerDate: string,
     imageUrl: string,
-    token: string
+    refreshToken: string,
+    accessToken: string
   ) {
     this.isValid = isValid;
     this.id = id;
     this.username = username;
     this.registerDate = registerDate;
     this.imageUrl = imageUrl;
-    this.token = token;
+    this.refreshToken = refreshToken;
+    this.accessToken = accessToken;
   }
 }

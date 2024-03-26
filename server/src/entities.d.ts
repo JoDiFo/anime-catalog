@@ -36,7 +36,8 @@ interface EUserLoginData {
   username: string;
   registerDate: string;
   imageUrl: string;
-  token: string;
+  refreshToken: string;
+  accessToken: string;
 }
 
 interface EAnimeCount {
