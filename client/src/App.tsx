@@ -1,20 +1,20 @@
 import { Routes, Route } from "react-router-dom";
 import { lazily } from "react-lazily";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 
-import { useQuery } from "@apollo/client";
+// import { useQuery } from "@apollo/client";
 
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 const { Home, Anime, MyAnime, Profile, Search, Login } = lazily(
   () => import("./pages")
 );
 import { Header, Footer, Loading } from "./components";
-import { VALIDATE_USER } from "./graphql/user";
-import { login } from "./redux/userSlice";
+// import { VALIDATE_USER } from "./graphql/user";
+// import { login } from "./redux/userSlice";
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // const { data: validationData, loading: isValidationLoading } = useQuery(
   //   VALIDATE_USER,
