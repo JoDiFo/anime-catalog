@@ -1,0 +1,13 @@
+.HeaderSearchBar {
+  input {
+    width: 200px;
+    height: 35px;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: var(--small-text);
+    padding: 0 0.4em;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+  }
+}

@@ -1,0 +1,22 @@
+.AnimePopup {
+  z-index: 2;
+  position: absolute;
+  right: 0px;
+  width: 300px;
+  max-height: 500px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  background-color: var(--background);
+  padding-right: 5px;
+
+  img {
+    width: 70px;
+  }
+}
+
+.notFound {
+  font-size: var(--text);
+  padding: 5px 10px;
+}

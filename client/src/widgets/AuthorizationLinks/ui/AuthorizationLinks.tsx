@@ -1,10 +1,10 @@
 import { useState } from "react";
-import ModalWindow from "../../shared/ui/ModalWindow";
-import Button from "../../shared/ui/Button";
-import LoginForm from "../../components/Common/LoginForm";
-import RegisterForm from "../../components/Common/RegisterForm";
+import ModalWindow from "@/shared/ui/ModalWindow";
+import Button from "@/shared/ui/Button";
+import LoginForm from "../../../components/Common/LoginForm";
+import RegisterForm from "../../../components/Common/RegisterForm";
 
-function Authorization() {
+function AuthorizationLinks() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
@@ -36,4 +36,4 @@ function Authorization() {
   );
 }
 
-export default Authorization;
+export default AuthorizationLinks;

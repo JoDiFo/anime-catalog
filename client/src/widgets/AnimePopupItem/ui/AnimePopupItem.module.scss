@@ -1,0 +1,9 @@
+.AnimePopupItem {
+  display: flex;
+  column-gap: 10px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

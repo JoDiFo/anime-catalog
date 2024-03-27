@@ -32,7 +32,7 @@ async function queryAllAnime(
   try {
     if (userId) {
       const { rows } = await client.query(GET_ALL_ANIME_WITH_USER_ID(sortBy), [
-        searchString || "" + "%",
+        (searchString || "") + "%",
         userId,
       ]);
 

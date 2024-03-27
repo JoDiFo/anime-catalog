@@ -29,20 +29,6 @@
     }
   }
 
-  &__search {
-    input {
-      width: 200px;
-      height: 35px;
-      background-color: var(--black);
-      color: var(--white);
-      font-size: var(--small-text);
-      padding: 0 0.4em;
-      border: none;
-      outline: none;
-      border-radius: 8px;
-    }
-  }
-
   &__profile {
     width: 40px;
     height: 40px;
@@ -50,35 +36,8 @@
   }
 }
 
-.anime-popup {
-  z-index: 2;
-  position: absolute;
-  right: 0px;
-  width: 300px;
-  max-height: 500px;
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  background-color: var(--background);
-  padding-right: 5px;
-
-  img {
-    width: 70px;
-  }
-
-  &__item {
-    display: flex;
-    column-gap: 10px;
-    cursor: pointer;
-    
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-}
-
-@media screen and (max-width: 800px) { // variable
+@media screen and (max-width: 800px) {
+  // variable
   .header {
     display: none;
   }

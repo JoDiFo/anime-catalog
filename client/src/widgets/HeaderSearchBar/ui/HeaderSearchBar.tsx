@@ -1,14 +1,14 @@
 import { memo } from "react";
+import cls from "./HeaderSearchBar.module.scss";
 
-function SearchBar({
-  value,
-  onChange,
-}: {
+interface HeaderSearchBarProps {
   value: string;
   onChange: (value: string) => void;
-}) {
+}
+
+function HeaderSearchBar({ value, onChange }: HeaderSearchBarProps) {
   return (
-    <div className="header__search">
+    <div className={cls.HeaderSearchBar}>
       <input
         type="text"
         placeholder="Enter anime name here"
@@ -19,4 +19,4 @@ function SearchBar({
   );
 }
 
-export default memo(SearchBar);
+export default memo(HeaderSearchBar);

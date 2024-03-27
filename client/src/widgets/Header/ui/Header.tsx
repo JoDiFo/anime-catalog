@@ -6,13 +6,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 
 import defaultImage from "@/shared/assets/profile-icon.svg";
-import AnimePopup from "../AnimePopup";
-import Authorization from "../Authorization";
+import { AnimePopup } from "@/widgets/AnimePopup";
+import { AuthorizationLinks } from "@/widgets/AuthorizationLinks";
+import { HeaderSearchBar } from "@/widgets/HeaderSearchBar";
 import { GET_ALL_ANIME } from "@/app/graphql/anime";
 import { useLazyQuery } from "@apollo/client";
 
 import "./Header.scss";
-import SearchBar from "../SearchBar";
 
 function Header() {
   const { id: userId, imageUrl } = useSelector(
@@ -40,6 +40,7 @@ function Header() {
           userId,
           searchString,
           tags: [],
+          sort: "anime_id",
         },
       });
     else
@@ -47,6 +48,7 @@ function Header() {
         userId,
         searchString,
         tags: [],
+        sort: "anime_id",
       });
   }, [debouncedValue]);
 
@@ -76,7 +78,7 @@ function Header() {
             </div>
           </Link>
           <div className="left">
-            <SearchBar
+            <HeaderSearchBar
               value={searchString}
               onChange={(value) => setSearchString(value)}
             />
@@ -90,11 +92,11 @@ function Header() {
                 />
               </Link>
             ) : (
-              <Authorization />
+              <AuthorizationLinks />
             )}
           </div>
         </div>
-        {anime.length !== 0 ? <AnimePopup items={anime} /> : null}
+        <AnimePopup animeItems={anime} searchString={debouncedValue} />
       </div>
     </header>
   );
