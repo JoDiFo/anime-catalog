@@ -143,7 +143,7 @@ async function queryAllTags() {
     const tags: ETag[] = rows.map(
       (row: DTag) => new Tag(row.tag_id, row.value)
     );
-    return tags;
+    return tags;  
   } catch (e) {
     console.log(e);
   }

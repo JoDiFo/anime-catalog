@@ -12,7 +12,7 @@ interface EAnime {
 
 interface ETag {
   id: number;
-  name: string;
+  value: string;
 }
 
 interface EUser {
