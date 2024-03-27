@@ -52,7 +52,7 @@ export const schema = buildSchema(`
     }
 
     type Query {
-        getAllAnime(userId: ID, searchString: String, tags: [String]): [Anime]
+        getAllAnime(userId: ID, searchString: String, tags: [String], sortBy: String!): [Anime]
         getOneAnime(animeId: ID!, userId: ID): Anime
         getAllTags: [Tag]
         validateUser(token: String!): String

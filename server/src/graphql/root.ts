@@ -18,12 +18,14 @@ export const root = {
     userId,
     searchString,
     tags,
+    sortBy
   }: {
     userId: string;
     searchString: string;
     tags: string[];
+    sortBy: string
   }) => {
-    return await queryAllAnime(userId, searchString, tags);
+    return await queryAllAnime(userId, searchString, tags, sortBy);
   },
 
   getOneAnime: async ({

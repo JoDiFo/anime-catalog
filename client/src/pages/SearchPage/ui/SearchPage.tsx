@@ -1,20 +1,27 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import type { RootState } from "../../../app/redux/store";
+import type { RootState } from "@/app/redux/store";
 
 import { Loading } from "@/widgets/Loading";
 import { Content, TagsBlock } from "../../../components";
 
-import useDebounce from "../../../shared/Hooks/useDebounce";
+import useDebounce from "@/shared/Hooks/useDebounce";
 
 import { useLazyQuery } from "@apollo/client";
-import { GET_ALL_ANIME } from "../../../app/graphql/anime";
-import { notLoad } from "../../../app/redux/animeSlice";
+import { GET_ALL_ANIME } from "@/app/graphql/anime";
+import { notLoad } from "@/app/redux/animeSlice";
 import SearchBar from "../../../components/Search/SearchBar";
+import { SortBlock } from "@/widgets/SortBlock";
 
 function SearchPage() {
   const dispatch = useDispatch();
+
+  const sortOptions = [
+    { value: "anime_id", text: "default" },
+    { value: "episodes", text: "number of episodes" },
+    { value: "year", text: "release date" },
+  ];
 
   const selectedTags = useSelector(
     (state: RootState) => state.tags.selected,
@@ -31,6 +38,7 @@ function SearchPage() {
 
   const [anime, setAnime] = useState<EAnime[]>([]);
   const [searchString, setSearchString] = useState("");
+  const [sort, setSort] = useState(sortOptions[0].value);
 
   const debouncedValue = useDebounce(searchString, 500);
 
@@ -51,6 +59,7 @@ function SearchPage() {
         userId,
         searchString,
         tags,
+        sort
       });
       dispatch(notLoad());
     }
@@ -63,6 +72,7 @@ function SearchPage() {
           userId,
           searchString,
           tags,
+          sort
         },
       });
     } else {
@@ -70,9 +80,10 @@ function SearchPage() {
         userId,
         searchString,
         tags,
+        sort
       });
     }
-  }, [debouncedValue, selectedTags]);
+  }, [debouncedValue, selectedTags, sort]);
 
   return (
     <main className="page">
@@ -82,7 +93,10 @@ function SearchPage() {
             <h3>BROWSE THROUGH ANIME CATALOG</h3>
             <TagsBlock />
             <SearchBar handleChange={(value) => setSearchString(value)} />
-            {/* <SortBlock /> */}
+            <SortBlock
+              sortOptions={sortOptions}
+              onSelect={(value) => setSort(value)}
+            />
           </div>
           {!isAnimeLoading ? <Content items={anime} /> : <Loading />}
         </div>

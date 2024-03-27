@@ -2,16 +2,17 @@ import { memo, useState } from "react";
 import Select from "@/shared/ui/Select";
 import cls from "./SortBlock.module.scss";
 
-function SortBlock() {
-  const sortOptions = [
-    { value: "episodes", text: "number of episodes" },
-    { value: "date", text: "release date" },
-  ];
+interface SortBlock {
+  sortOptions: { value: string; text: string }[];
+  onSelect: (value: string) => void;
+}
 
+function SortBlock({ sortOptions, onSelect }: SortBlock) {
   const [selected, setSelected] = useState(sortOptions[0].value);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value);
+    onSelect(e.target.value);
   };
 
   return (

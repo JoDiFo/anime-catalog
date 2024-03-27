@@ -28,7 +28,7 @@ where
 	user_category.user_id = $2
 `;
 
-export const GET_ALL_ANIME = `
+export const GET_ALL_ANIME = (orderBy: string) => `
 select
 	anime.anime_id,
 	anime.title,
@@ -54,10 +54,10 @@ group by
 	anime.image_url, 
 	anime.status 
 order by
-	anime_id
+	${orderBy} asc
 `;
 
-export const GET_ALL_ANIME_WITH_USER_ID = `
+export const GET_ALL_ANIME_WITH_USER_ID = (orderBy: string) => `
 with s_category as(
 	select
 		anime_id,
@@ -100,7 +100,7 @@ with s_category as(
 		anime.status ,
 		category
 	order by
-		anime_id	
+		${orderBy} asc
 `;
 
 export const FIND_USER_BY_EMAIL = `

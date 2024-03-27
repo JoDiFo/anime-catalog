@@ -26,11 +26,12 @@ import verifyToken from "../utils/verifyToken.js";
 async function queryAllAnime(
   userId: string | undefined,
   searchString: string | undefined,
-  tags: string[] | undefined
+  tags: string[] | undefined,
+  sortBy: string
 ) {
   try {
     if (userId) {
-      const { rows } = await client.query(GET_ALL_ANIME_WITH_USER_ID, [
+      const { rows } = await client.query(GET_ALL_ANIME_WITH_USER_ID(sortBy), [
         searchString || "" + "%",
         userId,
       ]);
@@ -60,7 +61,7 @@ async function queryAllAnime(
 
       return anime;
     } else {
-      const { rows } = await client.query(GET_ALL_ANIME, [
+      const { rows } = await client.query(GET_ALL_ANIME(sortBy), [
         searchString || "" + "%",
       ]);
 
