@@ -1,13 +1,12 @@
-import AllAnime from "./AllAnime";
-import CategorizedAnime from "./CategorizedAnime";
+import { AllAnime } from "@/widgets/AllAnime";
+import { CategorizedAnime } from "@/widgets/CategorizedAnime";
 
-function ListAnime({
-  listName,
-  userId,
-}: {
+interface DisplayedAnimeProps {
   listName: EAnimeCategoryOption;
   userId: string;
-}) {
+}
+
+export function DisplayedAnime({ listName, userId }: DisplayedAnimeProps) {
   switch (listName) {
     case "all":
       return <AllAnime userId={userId} />;
@@ -19,5 +18,3 @@ function ListAnime({
       return <CategorizedAnime userId={userId} category={listName} />;
   }
 }
-
-export default ListAnime;

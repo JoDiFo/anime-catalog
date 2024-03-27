@@ -3,13 +3,13 @@ import ReactPaginate from "react-paginate";
 
 import { CardContainer } from "@/widgets/CardContainer";
 import Select from "@/shared/ui/Select";
-import "./ContentNavigation.scss";
+import "./ContentContainer.scss";
 
 interface SelectedItem {
   selected: number;
 }
 
-function Content({ items }: { items: EAnime[] }) {
+function ContentContainer({ items }: { items: EAnime[] }) {
   const selectOptions = [
     { id: 1, value: 35, text: "35" },
     { id: 2, value: 70, text: "70" },
@@ -76,4 +76,4 @@ function Content({ items }: { items: EAnime[] }) {
   );
 }
 
-export default memo(Content);
+export const MemoContentContainer = memo(ContentContainer);

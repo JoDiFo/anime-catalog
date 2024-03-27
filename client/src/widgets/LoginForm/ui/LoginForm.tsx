@@ -1,22 +1,22 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useLazyQuery } from "@apollo/client";
+
 import Form from "@/shared/ui/Form";
 import Input from "@/shared/ui/Input";
 import Button from "@/shared/ui/Button";
-import { useEffect, useState } from "react";
+import { login } from "@/app/redux/userSlice";
 
 import { LOGIN_USER } from "@/app/graphql/user";
-import { useLazyQuery } from "@apollo/client";
-
-import { useDispatch } from "react-redux";
-import { login } from "@/app/redux/userSlice";
-import { useNavigate } from "react-router-dom";
 import createExpireTime from "@/shared/utils/createExpireTime";
 
-interface IProps {
+interface LoginFormProps {
   redirectTo: string;
   state: any;
 }
 
-function LoginForm({ redirectTo, state }: IProps) {
+export function LoginForm({ redirectTo, state }: LoginFormProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -112,5 +112,3 @@ function LoginForm({ redirectTo, state }: IProps) {
     </Form>
   );
 }
-
-export default LoginForm;

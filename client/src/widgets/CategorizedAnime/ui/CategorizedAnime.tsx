@@ -1,18 +1,17 @@
 import { useEffect } from "react";
-
 import { useQuery, NetworkStatus } from "@apollo/client";
-import { GET_USER_ANIME } from "@/app/graphql/user";
 
 import { Loading } from "@/widgets/Loading";
-import { Content } from "..";
+import { ContentContainer } from "@/widgets/ContentContainer";
 
-function CategorizedAnime({
-  userId,
-  category,
-}: {
+import { GET_USER_ANIME } from "@/app/graphql/user";
+
+interface CategorizedAnimeProps {
   userId: string;
   category: string;
-}) {
+}
+
+export function CategorizedAnime({ userId, category }: CategorizedAnimeProps) {
   const { data, loading, called, refetch, networkStatus } = useQuery(
     GET_USER_ANIME,
     {
@@ -32,7 +31,5 @@ function CategorizedAnime({
 
   if (loading || networkStatus === NetworkStatus.refetch) return <Loading />;
 
-  return <Content items={data.getUserAnime} />;
+  return <ContentContainer items={data.getUserAnime} />;
 }
-
-export default CategorizedAnime;

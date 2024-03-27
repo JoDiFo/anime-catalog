@@ -1,4 +1,4 @@
-import LoginForm from "../../../components/Common/LoginForm";
+import { LoginForm } from "@/widgets/LoginForm";
 import cls from "./LoginPage.module.scss";
 
 function LoginPage() {

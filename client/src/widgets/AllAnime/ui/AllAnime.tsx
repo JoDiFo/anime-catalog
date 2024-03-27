@@ -1,12 +1,16 @@
 import { useEffect } from "react";
-
 import { useQuery, NetworkStatus } from "@apollo/client";
-import { GET_ALL_USER_ANIME } from "@/app/graphql/user";
 
 import { Loading } from "@/widgets/Loading";
-import { Content } from "..";
+import { ContentContainer } from "@/widgets/ContentContainer";
 
-function AllAnime({ userId }: { userId: string }) {
+import { GET_ALL_USER_ANIME } from "@/app/graphql/user";
+
+interface AllAnimeProps {
+  userId: string;
+}
+
+export function AllAnime({ userId }: AllAnimeProps) {
   const { data, loading, called, refetch, networkStatus } = useQuery(
     GET_ALL_USER_ANIME,
     {
@@ -25,7 +29,5 @@ function AllAnime({ userId }: { userId: string }) {
 
   if (loading || networkStatus === NetworkStatus.refetch) return <Loading />;
 
-  return <Content items={data.getAllUserAnime} />;
+  return <ContentContainer items={data.getAllUserAnime} />;
 }
-
-export default AllAnime;

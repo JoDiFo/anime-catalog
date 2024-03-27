@@ -1,8 +1,9 @@
 import { memo, useState } from "react";
 
-import SelectedTags from "./SelectedTags";
-import TagsPopup from "./TagsPopup";
-import "./TagsBlock.scss";
+import { SelectedTags } from "@/widgets/SelectedTags";
+import { TagsPopup } from "@/widgets/TagsPopup";
+
+import "./TagsBlock.module.scss";
 
 function TagsBlock() {
   const [visible, setVisible] = useState(false);
@@ -19,4 +20,4 @@ function TagsBlock() {
   );
 }
 
-export default memo(TagsBlock);
+export const MemoTagsBlock = memo(TagsBlock);

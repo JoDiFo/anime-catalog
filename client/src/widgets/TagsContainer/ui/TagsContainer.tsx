@@ -1,3 +1,5 @@
+import cls from "./TagsContainer.module.scss";
+
 function TagsContainer({
   tags,
   handleClick,
@@ -7,16 +9,20 @@ function TagsContainer({
 }) {
   if (!tags.length) {
     return (
-      <div className="tags-container__block__selected">
+      <div className={cls.selected}>
         <div>No selected tags</div>
       </div>
     );
   }
 
   return (
-    <div className="tags-container__block__selected">
+    <div className={cls.selected}>
       {tags.map((item) => (
-        <div key={item.id} className="tag" onClick={() => handleClick(item)}>
+        <div
+          key={item.id}
+          className={cls.tag}
+          onClick={() => handleClick(item)}
+        >
           {item.value}
         </div>
       ))}

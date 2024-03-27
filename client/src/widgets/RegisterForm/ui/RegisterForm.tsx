@@ -1,23 +1,23 @@
 import { useState } from "react";
-import Form from "../../shared/ui/Form";
-import Button from "../../shared/ui/Button";
-import Input from "../../shared/ui/Input";
-
-import { REGISTER_USER } from "../../app/graphql/user";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 
-import { useDispatch } from "react-redux";
-import { login } from "../../app/redux/userSlice";
-import { useNavigate } from "react-router-dom";
-import createExpireTime from "../../shared/utils/createExpireTime";
+import Form from "@/shared/ui/Form";
+import Button from "@/shared/ui/Button";
+import Input from "@/shared/ui/Input";
+import { login } from "@/app/redux/userSlice";
 
-interface IProps {
+import { REGISTER_USER } from "@/app/graphql/user";
+import createExpireTime from "@/shared/utils/createExpireTime";
+
+interface RegisterFormProps {
   redirectTo: string;
 }
 
 // TODO abstract fields validation into separate functions
 
-function RegisterForm({ redirectTo }: IProps) {
+export function RegisterForm({ redirectTo }: RegisterFormProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -136,5 +136,3 @@ function RegisterForm({ redirectTo }: IProps) {
     </Form>
   );
 }
-
-export default RegisterForm;

@@ -1,18 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
-
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import type { RootState } from "@/app/redux/store";
 
 import { Loading } from "@/widgets/Loading";
-import { Content, TagsBlock } from "../../../components";
+import { ContentContainer } from "@/widgets/ContentContainer";
+import { TagsBlock } from "@/widgets/TagsBlock";
+import { SearchBar } from "@/widgets/SearchBar";
+import { SortBlock } from "@/widgets/SortBlock";
 
 import useDebounce from "@/shared/Hooks/useDebounce";
-
+import { RootState } from "@/app/redux/store";
 import { useLazyQuery } from "@apollo/client";
 import { GET_ALL_ANIME } from "@/app/graphql/anime";
 import { notLoad } from "@/app/redux/animeSlice";
-import SearchBar from "../../../components/Search/SearchBar";
-import { SortBlock } from "@/widgets/SortBlock";
 
 function SearchPage() {
   const dispatch = useDispatch();
@@ -59,7 +58,7 @@ function SearchPage() {
         userId,
         searchString,
         tags,
-        sort
+        sort,
       });
       dispatch(notLoad());
     }
@@ -72,7 +71,7 @@ function SearchPage() {
           userId,
           searchString,
           tags,
-          sort
+          sort,
         },
       });
     } else {
@@ -80,7 +79,7 @@ function SearchPage() {
         userId,
         searchString,
         tags,
-        sort
+        sort,
       });
     }
   }, [debouncedValue, selectedTags, sort]);
@@ -98,7 +97,7 @@ function SearchPage() {
               onSelect={(value) => setSort(value)}
             />
           </div>
-          {!isAnimeLoading ? <Content items={anime} /> : <Loading />}
+          {!isAnimeLoading ? <ContentContainer items={anime} /> : <Loading />}
         </div>
       </div>
     </main>

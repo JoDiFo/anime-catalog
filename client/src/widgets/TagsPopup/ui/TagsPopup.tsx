@@ -1,23 +1,23 @@
 import { memo, useCallback, useEffect, useState } from "react";
-
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { RootState } from "@/app/redux/store";
-import { setSelectedTags } from "@/app/redux/tagsSlice";
+import { useQuery } from "@apollo/client";
+
+import { TagsContainer } from "@/widgets/TagsContainer";
 
 import compareStrings from "@/shared/utils/compareStrings";
+import { setSelectedTags } from "@/app/redux/tagsSlice";
+import { RootState } from "@/app/redux/store";
 import useDebounce from "@/shared/Hooks/useDebounce";
+import { GET_ALL_TAGS } from "@/app/graphql/tags";
 
 import crossIcon from "@/shared/assets/cross.svg";
+import cls from "./TagsPopup.module.scss";
 
-import { GET_ALL_TAGS } from "@/app/graphql/tags";
-import { useQuery } from "@apollo/client";
-import TagsContainer from "./TagsContainer";
-
-interface IProps {
+interface TagsPopupProps {
   toggleVisible: (flag: boolean) => void;
 }
 
-function TagsPopup({ toggleVisible }: IProps) {
+function TagsPopup({ toggleVisible }: TagsPopupProps) {
   const dispatch = useDispatch();
   const selectedTags = useSelector(
     (state: RootState) => state.tags.selected,
@@ -69,8 +69,8 @@ function TagsPopup({ toggleVisible }: IProps) {
   }, [debouncedValue, selectedTags, tags]);
 
   return (
-    <div className="tags-container__block">
-      <div className="tags-container__block__navigation">
+    <div className={cls.TagsPopup}>
+      <div className={cls.navigation}>
         <input
           type="text"
           placeholder="Search for tags"
@@ -80,7 +80,7 @@ function TagsPopup({ toggleVisible }: IProps) {
           role="button"
           src={crossIcon}
           alt="close button"
-          className="close-button"
+          className={cls.closeButton}
           onClick={handleClose}
         />
       </div>
@@ -92,4 +92,4 @@ function TagsPopup({ toggleVisible }: IProps) {
   );
 }
 
-export default memo(TagsPopup);
+export const MemoTagsPopup = memo(TagsPopup);

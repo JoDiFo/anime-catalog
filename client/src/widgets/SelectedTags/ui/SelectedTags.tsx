@@ -1,17 +1,19 @@
 import { memo } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 
-import { RootState } from "@/app/redux/store";
-
-import plusIcon from "@/shared/assets/plus-icon.svg";
 import Button from "@/shared/ui/Button";
+
+import { RootState } from "@/app/redux/store";
 import { clearSelected } from "@/app/redux/tagsSlice";
 
-interface IProps {
+import plusIcon from "@/shared/assets/plus-icon.svg";
+import cls from "./SelectedTags.module.scss";
+
+interface SelectedTagsProps {
   toggleVisible: (flag: boolean) => void;
 }
 
-function SelectedTags({ toggleVisible }: IProps) {
+function SelectedTags({ toggleVisible }: SelectedTagsProps) {
   const dispatch = useDispatch();
 
   const selectedTags = useSelector(
@@ -20,18 +22,18 @@ function SelectedTags({ toggleVisible }: IProps) {
   );
 
   return (
-    <div className="tags-container__selected">
-      <h4 className="tags-container__selected__title">Selected tags:</h4>
+    <div className={cls.SelectedTags}>
+      <h4 className={cls.title}>Selected tags:</h4>
       {selectedTags
         ? selectedTags.map((item) => (
-            <div key={item.id} className="tag">
+            <div key={item.id} className={cls.tag}>
               {item.value}
             </div>
           ))
         : null}
       <img
         role="button"
-        className="plus-button"
+        className={cls.plusButton}
         src={plusIcon}
         alt="plus button"
         onClick={() => toggleVisible(true)}
@@ -41,4 +43,4 @@ function SelectedTags({ toggleVisible }: IProps) {
   );
 }
 
-export default memo(SelectedTags);
+export const MemoSelectedTags = memo(SelectedTags);

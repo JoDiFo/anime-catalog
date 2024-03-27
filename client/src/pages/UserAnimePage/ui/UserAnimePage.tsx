@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { RootState } from "@/app/redux/store";
 import { ProfileInfo } from "@/widgets/ProfileInfo";
 import { DisplayedCategorySelector } from "@/widgets/DisplayedCategorySelector";
+import { DisplayedAnime } from "@/widgets/DisplayedAnime";
+
+import { RootState } from "@/app/redux/store";
 import thumbnailImage from "@/shared/assets/thumbnail-image.png";
-import ListAnime from "../../../components/MyAnime/ListAnime";
 
 function UserAnimePage() {
   const options: { value: EAnimeCategoryOption; text: string }[] = [
@@ -51,7 +52,7 @@ function UserAnimePage() {
             selected={selected}
             onClick={(value) => handleSelect(value)}
           />
-          <ListAnime listName={selected} userId={userId} />
+          <DisplayedAnime listName={selected} userId={userId} />
         </div>
       </div>
     </main>

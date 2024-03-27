@@ -1,8 +1,9 @@
 import { useState } from "react";
+
 import ModalWindow from "@/shared/ui/ModalWindow";
 import Button from "@/shared/ui/Button";
-import LoginForm from "../../../components/Common/LoginForm";
-import RegisterForm from "../../../components/Common/RegisterForm";
+import { LoginForm } from "@/widgets/LoginForm";
+import { RegisterForm } from "@/widgets/RegisterForm";
 
 function AuthorizationLinks() {
   const [showLogin, setShowLogin] = useState(false);
