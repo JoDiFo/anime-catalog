@@ -40,7 +40,8 @@ function ProfilePage() {
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
-    document.cookie = "token=a";
+    document.cookie = "refreshToken=";
+    localStorage.removeItem("accessToken")
   };
 
   useEffect(() => {

@@ -42,14 +42,11 @@ function LoginForm({ redirectTo, state }: IProps) {
           data.loginUser.refreshToken
         }; expires=${createExpireTime(1)}`;
 
-        document.cookie = `accessToken=${
-          data.loginUser.accessToken
-        }; expires=${createExpireTime(1)}`;
-
         localStorage.setItem("userId", data.loginUser.id);
         localStorage.setItem("username", data.loginUser.username);
         localStorage.setItem("registerDate", data.loginUser.registerDate);
         localStorage.setItem("imageUrl", data.loginUser.imageUrl);
+        localStorage.setItem("accessToken", data.loginUser.accessToken);
       }
     }
   }, [called, loading]);

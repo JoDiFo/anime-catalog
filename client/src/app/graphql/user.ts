@@ -12,7 +12,6 @@ export const REGISTER_USER = gql`
       username
       registerDate
       imageUrl
-      token
       refreshToken
       accessToken
     }

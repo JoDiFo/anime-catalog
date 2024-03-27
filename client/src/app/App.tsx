@@ -28,7 +28,8 @@ function App() {
   ] = useLazyQuery(VALIDATE_USER);
 
   useEffect(() => {
-    const [refreshToken, accessToken] = document.cookie.split(" ");
+    const refreshToken = document.cookie.split("=");
+    const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       callValidation({
         variables: {

@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import defaultImage from "@/shared/assets/profile-image.jpeg";
+import defaultImage from "@/shared/assets/profile-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 import { setProfileImage } from "@/app/redux/userSlice";

@@ -26,7 +26,7 @@ function RegisterForm({ redirectTo }: IProps) {
   const [password, setPassword] = useState("");
   const [isIncorrect, setIsIncorrect] = useState(false);
 
-  const [newUser] = useMutation(REGISTER_USER);
+  const [register] = useMutation(REGISTER_USER);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -44,13 +44,11 @@ function RegisterForm({ redirectTo }: IProps) {
       return;
     }
 
-    newUser({
+    register({
       variables: {
-        input: {
-          username,
-          email,
-          password,
-        },
+        username,
+        email,
+        password,
       },
     }).then(({ data }) => {
       if (data.registerUser) {
@@ -63,9 +61,15 @@ function RegisterForm({ redirectTo }: IProps) {
           })
         );
 
-        document.cookie = `token=${
-          data.registerUser.token
+        document.cookie = `refreshToken=${
+          data.registerUser.refreshToken
         }; expires=${createExpireTime(1)}`;
+
+        localStorage.setItem("userId", data.registerUser.id);
+        localStorage.setItem("username", data.registerUser.username);
+        localStorage.setItem("registerDate", data.registerUser.registerDate);
+        localStorage.setItem("imageUrl", data.registerUser.imageUrl);
+        localStorage.setItem("accessToken", data.registerUser.accessToken);
 
         navigate(redirectTo);
       } else {

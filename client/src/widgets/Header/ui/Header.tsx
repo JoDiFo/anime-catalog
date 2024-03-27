@@ -5,7 +5,7 @@ import useDebounce from "@/shared/Hooks/useDebounce";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 
-import defaultImage from "@/shared/assets/profile-image.jpeg";
+import defaultImage from "@/shared/assets/profile-icon.svg";
 import AnimePopup from "../AnimePopup";
 import Authorization from "../Authorization";
 import { GET_ALL_ANIME } from "@/app/graphql/anime";
