@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { GET_ONE_ANIME } from "../../../app/graphql/anime";
-import AnimeCategorySelector from "../../../widgets/AnimeCategorySelector/ui/AnimeCategorySelector";
+import { GET_ONE_ANIME } from "@/app/graphql/anime";
+import { AnimeCategorySelector } from "@/widgets/AnimeCategorySelector";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../app/redux/store";
+import { RootState } from "@/app/redux/store";
 import { Loading } from "@/widgets/Loading";
 import "./AnimePage.scss";
 
@@ -62,7 +62,7 @@ function AnimePage() {
             <div className="anime-page__tags">
               <h4 className="anime-page__tag-title">Tags:</h4>
               {anime.tags.map((item) => (
-                <div key={`${item}_tag`} className="tag">
+                <div key={item} className="tag">
                   {item}
                 </div>
               ))}

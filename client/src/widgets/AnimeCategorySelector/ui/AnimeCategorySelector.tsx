@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Select from "../../../shared/ui/Select";
+import Select from "@/shared/ui/Select";
 
 import { useMutation } from "@apollo/client";
-import { ADD_ANIME, REMOVE_ANIME } from "../../../app/graphql/user";
+import { ADD_ANIME, REMOVE_ANIME } from "@/app/graphql/user";
 
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
-import ModalWindow from "../../../shared/ui/ModalWindow";
+import ModalWindow from "@/shared/ui/ModalWindow";
 import LoginForm from "../../../components/Common/LoginForm";
 import { load } from "@/app/redux/animeSlice";
 import cls from "./AnimeCategorySelector.module.scss";

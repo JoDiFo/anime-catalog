@@ -54,7 +54,7 @@ function SearchPage() {
   }, [called, isAnimeLoading, animeData?.getAllAnime]);
 
   useEffect(() => {
-    if (needLoad) {
+    if (called && needLoad) {
       refetch({
         userId,
         searchString,
@@ -63,7 +63,7 @@ function SearchPage() {
       });
       dispatch(notLoad());
     }
-  }, [needLoad]);
+  }, [needLoad, called]);
 
   useEffect(() => {
     if (!called) {
