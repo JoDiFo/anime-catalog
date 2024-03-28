@@ -9,7 +9,7 @@ import Button from "@/shared/ui/Button";
 import { login } from "@/app/redux/userSlice";
 
 import { LOGIN_USER } from "@/app/graphql/user";
-import createExpireTime from "@/shared/utils/createExpireTime";
+import createExpireTime from "@/shared/lib/createExpireTime";
 
 interface LoginFormProps {
   redirectTo: string;

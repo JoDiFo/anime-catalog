@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 
 import { TagsContainer } from "@/widgets/TagsContainer";
 
-import compareStrings from "@/shared/utils/compareStrings";
+import compareStrings from "@/shared/lib/compareStrings";
 import { setSelectedTags } from "@/app/redux/tagsSlice";
 import { RootState } from "@/app/redux/store";
 import useDebounce from "@/shared/Hooks/useDebounce";
