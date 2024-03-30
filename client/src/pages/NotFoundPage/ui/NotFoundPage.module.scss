@@ -1,0 +1,16 @@
+.NotFoundPage {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--small-text);
+}
+
+h2 {
+  font-size: var(--header-1);
+}
+
+.link {
+  text-decoration: underline;
+}
