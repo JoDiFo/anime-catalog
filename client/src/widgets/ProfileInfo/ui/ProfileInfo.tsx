@@ -28,18 +28,19 @@ function ProfileInfo({ username, registerDate }: IProps) {
   const [visible, setVisible] = useState(false);
 
   const uploadImage = (file: File) => {
-    console.log(file);
     const imageRef = ref(storage, `images/${file.name}`);
     uploadBytes(imageRef, file)
       .then(() => getDownloadURL(imageRef))
-      .then((url) =>
+      .then((url) => {
         uploadMutation({
           variables: {
             userId,
             imageUrl: url,
           },
-        })
-      );
+        });
+
+        localStorage.setItem("imageUrl", url);
+      });
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
