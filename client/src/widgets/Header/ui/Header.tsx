@@ -21,12 +21,8 @@ function Header() {
 
   const location = useLocation();
 
-  const [
-    getAll,
-    { data: animeData, loading: isAnimeLoading, called, refetch },
-  ] = useLazyQuery(GET_ALL_ANIME, {
-    pollInterval: 0,
-  });
+  const [, { data: animeData, loading: isAnimeLoading, called, refetch }] =
+    useLazyQuery(GET_ALL_ANIME);
 
   const [anime, setAnime] = useState<EAnime[]>([]);
   const [searchString, setSearchString] = useState("");
@@ -34,22 +30,12 @@ function Header() {
   const debouncedValue = useDebounce(searchString, 500);
 
   useEffect(() => {
-    if (!called)
-      getAll({
-        variables: {
-          userId,
-          searchString,
-          tags: [],
-          sort: "anime_id",
-        },
-      });
-    else
-      refetch({
-        userId,
-        searchString,
-        tags: [],
-        sort: "anime_id",
-      });
+    refetch({
+      userId,
+      searchString: debouncedValue,
+      tags: [],
+      sort: "anime_id",
+    });
   }, [debouncedValue]);
 
   useEffect(() => {
