@@ -1,6 +1,7 @@
 .Loading {
-  text-align: center;
-  font-size: var(--header-2);
-  color: var(--white);
-  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  height: 100%;
 }
