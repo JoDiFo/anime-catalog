@@ -1,0 +1,9 @@
+.ErrorFallback {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+  height: 100%;
+  flex-grow: 1;
+}
