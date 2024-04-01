@@ -1,12 +1,19 @@
-import { SelectProps } from "react-html-props";
-import classes from "./Select.module.scss";
+import classNames from "classnames";
+import cls from "./Select.module.scss";
+import { DetailedHTMLProps, FC, SelectHTMLAttributes } from "react";
 
-function Select({ children, ...props }: SelectProps) {
+interface SelectProps
+  extends DetailedHTMLProps<
+    SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+  > {}
+
+const Select: FC<SelectProps> = ({ className, children, ...props }) => {
   return (
-    <select className={classes.select} {...props}>
+    <select className={classNames(cls.select, className)} {...props}>
       {children}
     </select>
   );
-}
+};
 
 export default Select;

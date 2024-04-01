@@ -11,6 +11,7 @@ import { ProfileInfo } from "@/widgets/ProfileInfo";
 import { AnimeList } from "@/widgets/AnimeList";
 import Button from "@/shared/ui/Button";
 import { logout } from "@/app/redux/userSlice";
+import { LanguageSelector } from "@/widgets/LanguageSelector";
 
 function ProfilePage() {
   const [list, setList] = useState<EAnimeCount>({
@@ -81,6 +82,7 @@ function ProfilePage() {
             </div>
           </div>
           <Button onClick={handleLogout}>Logout</Button>
+          <LanguageSelector />
         </div>
       </div>
     </main>

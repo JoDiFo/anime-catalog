@@ -8,6 +8,7 @@ import App from "@/app/App.tsx";
 
 import { Provider } from "react-redux";
 import { store } from "@/app/redux/store";
+import "@/shared/config/i18n"
 
 const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",

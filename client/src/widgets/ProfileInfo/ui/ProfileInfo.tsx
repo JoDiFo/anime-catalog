@@ -9,6 +9,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { useMutation } from "@apollo/client";
 import { UPLOAD_IMAGE } from "@/app/graphql/user";
+import { useTranslation } from "react-i18next";
 
 import cls from "./ProfileInfo.module.scss";
 
@@ -19,6 +20,7 @@ interface IProps {
 
 function ProfileInfo({ username, registerDate }: IProps) {
   const dispatch = useDispatch();
+  const { t } = useTranslation("profilePage");
   const { id: userId, imageUrl } = useSelector(
     (state: RootState) => state.userReducer
   );
@@ -69,7 +71,7 @@ function ProfileInfo({ username, registerDate }: IProps) {
         <img src={imageUrl || defaultImage} alt="profile image" />
         {visible ? (
           <div className={cls.labelWrapper}>
-            <label htmlFor="upload-image">Chose Image</label>
+            <label htmlFor="upload-image">{t("Chose Image")}</label>
           </div>
         ) : null}
         <input
