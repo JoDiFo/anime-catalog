@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon src/index.ts",
-    "run": "node dist/index.js"
+    "start:dev": "nodemon src/index.ts",
+    "start:prod": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
