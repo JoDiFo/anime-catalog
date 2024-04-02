@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { ProfileInfo } from "@/widgets/ProfileInfo";
 import { AnimeList } from "@/widgets/AnimeList";
-import Button from "@/shared/ui/Button";
-import { logout } from "@/app/redux/userSlice";
 
 import { GET_ANIME_COUNT } from "@/app/graphql/user";
 import { RootState } from "@/app/redux/store";
@@ -36,16 +34,8 @@ function ProfilePage() {
       },
     });
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation("profilePage");
-
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/");
-    document.cookie = "refreshToken=";
-    localStorage.removeItem("accessToken");
-  };
 
   useEffect(() => {
     if (!userId) {
@@ -83,7 +73,6 @@ function ProfilePage() {
               <p>{t("Nothing here yet")}</p>
             </div>
           </div>
-          <Button onClick={handleLogout}>{t("Logout")}</Button>
         </div>
       </div>
     </main>

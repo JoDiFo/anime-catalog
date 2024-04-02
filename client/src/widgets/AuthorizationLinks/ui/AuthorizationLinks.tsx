@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import ModalWindow from "@/shared/ui/ModalWindow";
-import Button from "@/shared/ui/Button";
+import { Button } from "@/shared/ui/Button";
 import { LoginForm } from "@/widgets/LoginForm";
 import { RegisterForm } from "@/widgets/RegisterForm";
 

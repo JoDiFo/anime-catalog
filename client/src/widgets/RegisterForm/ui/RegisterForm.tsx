@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import { useTranslation } from "react-i18next";
 
 import Form from "@/shared/ui/Form";
-import Button from "@/shared/ui/Button";
+import { Button } from "@/shared/ui/Button";
 import Input from "@/shared/ui/Input";
 import { login } from "@/app/redux/userSlice";
 

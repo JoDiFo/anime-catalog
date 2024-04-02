@@ -1,12 +1,22 @@
 import { ButtonProps } from "react-html-props";
-import classes from "./Button.module.scss";
+import classNames from "classnames";
+import cls from "./Button.module.scss";
 
-function Button({ children, ...props }: ButtonProps) {
+export enum ButtonTheme {
+  CLEAR = "clear",
+}
+
+interface BtnProps {
+  theme?: ButtonTheme;
+}
+
+export function Button({ children, theme, ...props }: ButtonProps & BtnProps) {
   return (
-    <button className={classes.button} {...props}>
+    <button
+      className={classNames(cls.button, theme ? cls[theme] : "")}
+      {...props}
+    >
       {children}
     </button>
   );
 }
-
-export default Button;

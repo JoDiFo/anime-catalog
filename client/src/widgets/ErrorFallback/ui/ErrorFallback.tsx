@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import Button from "@/shared/ui/Button";
+import { Button } from "@/shared/ui/Button";
 
 import cls from "./ErrorFallback.module.scss";
 

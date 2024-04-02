@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import Form from "@/shared/ui/Form";
 import Input from "@/shared/ui/Input";
-import Button from "@/shared/ui/Button";
+import { Button } from "@/shared/ui/Button";
 import { login } from "@/app/redux/userSlice";
 
 import { LOGIN_USER } from "@/app/graphql/user";

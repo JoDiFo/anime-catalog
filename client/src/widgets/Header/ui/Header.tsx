@@ -1,14 +1,16 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useLazyQuery } from "@apollo/client";
 
 import { AnimePopup } from "@/widgets/AnimePopup";
 import { AuthorizationLinks } from "@/widgets/AuthorizationLinks";
 import { HeaderSearchBar } from "@/widgets/HeaderSearchBar";
 import { LanguageSelector } from "@/widgets/LanguageSelector";
+import { Button } from "@/shared/ui/Button";
 
+import { logout } from "@/app/redux/userSlice";
 import { RootState } from "@/app/redux/store";
 import useDebounce from "@/shared/Hooks/useDebounce";
 import { GET_ALL_ANIME } from "@/app/graphql/anime";
@@ -17,6 +19,8 @@ import defaultImage from "@/shared/assets/profile-icon.svg";
 import "./Header.scss";
 
 function Header() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { t } = useTranslation("translation");
 
   const { id: userId, imageUrl } = useSelector(
@@ -32,6 +36,13 @@ function Header() {
   const [searchString, setSearchString] = useState("");
 
   const debouncedValue = useDebounce(searchString, 500);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+    document.cookie = "refreshToken=";
+    localStorage.removeItem("accessToken");
+  };
 
   useEffect(() => {
     refetch({
@@ -73,13 +84,16 @@ function Header() {
               onChange={(value) => setSearchString(value)}
             />
             {userId ? (
-              <Link to="/profile">
-                <img
-                  className="header__profile"
-                  src={imageUrl || defaultImage}
-                  alt="profile image"
-                />
-              </Link>
+              <>
+                <Link to="/profile">
+                  <img
+                    className="header__profile"
+                    src={imageUrl || defaultImage}
+                    alt="profile image"
+                  />
+                </Link>
+                <Button onClick={handleLogout}>{t("Logout")}</Button>
+              </>
             ) : (
               <AuthorizationLinks />
             )}
