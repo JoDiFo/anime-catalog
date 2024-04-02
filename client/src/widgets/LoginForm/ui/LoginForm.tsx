@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
+import { useTranslation } from "react-i18next";
 
 import Form from "@/shared/ui/Form";
 import Input from "@/shared/ui/Input";
@@ -19,6 +20,7 @@ interface LoginFormProps {
 export function LoginForm({ redirectTo, state }: LoginFormProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation("translation");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -83,9 +85,9 @@ export function LoginForm({ redirectTo, state }: LoginFormProps) {
 
   return (
     <Form action="submit">
-      <h3>Login</h3>
+      <h3>{t("Login")}</h3>
       <div>
-        <label htmlFor="email">Please enter your email</label>
+        <label htmlFor="email">{t("Please enter your email")}</label>
         <Input
           value={email}
           onChange={handleEmailChange}
@@ -97,7 +99,7 @@ export function LoginForm({ redirectTo, state }: LoginFormProps) {
         <span>{isIncorrect ? "Incorrect email" : ""}</span>
       </div>
       <div>
-        <label htmlFor="password">Please enter your password</label>
+        <label htmlFor="password">{t("Please enter your password")}</label>
         <Input
           value={password}
           onChange={handlePasswordChange}
@@ -108,7 +110,7 @@ export function LoginForm({ redirectTo, state }: LoginFormProps) {
         />
         <span>{isIncorrect ? "Incorrect password" : ""}</span>
       </div>
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button onClick={handleSubmit}>{t("Submit")}</Button>
     </Form>
   );
 }

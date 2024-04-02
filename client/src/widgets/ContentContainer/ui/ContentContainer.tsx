@@ -1,8 +1,10 @@
 import { memo, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useTranslation } from "react-i18next";
 
 import { CardContainer } from "@/widgets/CardContainer";
 import Select from "@/shared/ui/Select";
+
 import "./ContentContainer.scss";
 
 interface SelectedItem {
@@ -16,6 +18,8 @@ function ContentContainer({ items }: { items: EAnime[] }) {
     { id: 3, value: 120, text: "120" },
     { id: 4, value: 200, text: "200" },
   ];
+
+  const { t } = useTranslation("translation");
 
   const [itemOffset, setItemOffset] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -39,7 +43,7 @@ function ContentContainer({ items }: { items: EAnime[] }) {
   };
 
   if (!items.length) {
-    return <div className="not-found-text">No anime found</div>;
+    return <div className="not-found-text">{t("No anime found")}</div>;
   }
 
   return (

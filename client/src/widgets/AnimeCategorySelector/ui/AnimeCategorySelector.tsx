@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@apollo/client";
+import { useTranslation } from "react-i18next";
 
 import Select from "@/shared/ui/Select";
 import ModalWindow from "@/shared/ui/ModalWindow";
@@ -24,6 +25,8 @@ function AnimeCategorySelector({
   onChange,
 }: AnimeCategorySelector) {
   const dispatch = useDispatch();
+  const { t } = useTranslation("profilePage");
+
   const categoryOptions = [
     { value: "not-watched", text: "not watched" },
     { value: "watched", text: "watched" },
@@ -89,7 +92,7 @@ function AnimeCategorySelector({
       >
         <LoginForm redirectTo={"/anime"} state={{ id: animeId }} />
       </ModalWindow>
-      <h4>MY ANIME:</h4>
+      <h4>{t("MY ANIME")}:</h4>
       <div className={cls.selector}>
         <span className={`dot ${selected}`}></span>
         <Select

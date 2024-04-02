@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import ModalWindow from "@/shared/ui/ModalWindow";
 import Button from "@/shared/ui/Button";
@@ -6,6 +7,8 @@ import { LoginForm } from "@/widgets/LoginForm";
 import { RegisterForm } from "@/widgets/RegisterForm";
 
 function AuthorizationLinks() {
+  const { t } = useTranslation("translation");
+
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
@@ -31,8 +34,8 @@ function AuthorizationLinks() {
       >
         <RegisterForm redirectTo={"/"} />
       </ModalWindow>
-      <Button onClick={handleLoginClick}>login</Button>
-      <Button onClick={handleRegisterClick}>register</Button>
+      <Button onClick={handleLoginClick}>{t("Login")}</Button>
+      <Button onClick={handleRegisterClick}>{t("Register")}</Button>
     </>
   );
 }

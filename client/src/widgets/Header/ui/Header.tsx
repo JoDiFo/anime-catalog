@@ -1,20 +1,23 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useDebounce from "@/shared/Hooks/useDebounce";
-
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/redux/store";
+import { useLazyQuery } from "@apollo/client";
 
-import defaultImage from "@/shared/assets/profile-icon.svg";
 import { AnimePopup } from "@/widgets/AnimePopup";
 import { AuthorizationLinks } from "@/widgets/AuthorizationLinks";
 import { HeaderSearchBar } from "@/widgets/HeaderSearchBar";
-import { GET_ALL_ANIME } from "@/app/graphql/anime";
-import { useLazyQuery } from "@apollo/client";
 
+import { RootState } from "@/app/redux/store";
+import useDebounce from "@/shared/Hooks/useDebounce";
+import { GET_ALL_ANIME } from "@/app/graphql/anime";
+
+import defaultImage from "@/shared/assets/profile-icon.svg";
 import "./Header.scss";
 
 function Header() {
+  const { t } = useTranslation("translation");
+
   const { id: userId, imageUrl } = useSelector(
     (state: RootState) => state.userReducer
   );
@@ -55,12 +58,12 @@ function Header() {
         <div className="wrapper">
           <Link to="/">
             <div className="header__title">
-              <h2>Anime Catalog</h2>
+              <h2>{t("Anime Catalog")}</h2>
             </div>
           </Link>
           <Link to="/search">
             <div className="header__link">
-              <h2>Browse All</h2>
+              <h2>{t("Browse All")}</h2>
             </div>
           </Link>
           <div className="left">
@@ -68,7 +71,6 @@ function Header() {
               value={searchString}
               onChange={(value) => setSearchString(value)}
             />
-
             {userId ? (
               <Link to="/profile">
                 <img

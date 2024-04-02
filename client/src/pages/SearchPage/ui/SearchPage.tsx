@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { Loading } from "@/widgets/Loading";
 import { ContentContainer } from "@/widgets/ContentContainer";
@@ -15,6 +16,7 @@ import { notLoad } from "@/app/redux/animeSlice";
 
 function SearchPage() {
   const dispatch = useDispatch();
+  const { t } = useTranslation("searchPage");
 
   const sortOptions = [
     { value: "anime_id", text: "default" },
@@ -89,7 +91,7 @@ function SearchPage() {
       <div className="container">
         <div className="wrapper">
           <div className="page__sorting">
-            <h3>BROWSE THROUGH ANIME CATALOG</h3>
+            <h3>{t("BROWSE THROUGH ANIME CATALOG")}</h3>
             <TagsBlock />
             <SearchBar handleChange={(value) => setSearchString(value)} />
             <SortBlock

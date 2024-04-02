@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Button from "@/shared/ui/Button";
 
@@ -15,6 +16,7 @@ interface SelectedTagsProps {
 
 function SelectedTags({ toggleVisible }: SelectedTagsProps) {
   const dispatch = useDispatch();
+  const { t } = useTranslation("searchPage");
 
   const selectedTags = useSelector(
     (state: RootState) => state.tags.selected,
@@ -23,7 +25,7 @@ function SelectedTags({ toggleVisible }: SelectedTagsProps) {
 
   return (
     <div className={cls.SelectedTags}>
-      <h4 className={cls.title}>Selected tags:</h4>
+      <h4 className={cls.title}>{t("Selected tags")}:</h4>
       {selectedTags
         ? selectedTags.map((item) => (
             <div key={item.id} className={cls.tag}>
@@ -38,7 +40,9 @@ function SelectedTags({ toggleVisible }: SelectedTagsProps) {
         alt="plus button"
         onClick={() => toggleVisible(true)}
       />
-      <Button onClick={() => dispatch(clearSelected())}>Clear all tags</Button>
+      <Button onClick={() => dispatch(clearSelected())}>
+        {t("Clear all tags")}
+      </Button>
     </div>
   );
 }

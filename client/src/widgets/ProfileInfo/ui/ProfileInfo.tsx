@@ -3,13 +3,13 @@ import defaultImage from "@/shared/assets/profile-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 import { setProfileImage } from "@/app/redux/userSlice";
+import { useTranslation } from "react-i18next";
 
 import { storage } from "@/shared/config/firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { useMutation } from "@apollo/client";
 import { UPLOAD_IMAGE } from "@/app/graphql/user";
-import { useTranslation } from "react-i18next";
 
 import cls from "./ProfileInfo.module.scss";
 
@@ -83,7 +83,9 @@ function ProfileInfo({ username, registerDate }: IProps) {
       </div>
       <div>
         <h3>{username}</h3>
-        <p>Part of community since: {registerDate}</p>
+        <p>
+          {t("Part of community since")}: {registerDate}
+        </p>
       </div>
     </div>
   );

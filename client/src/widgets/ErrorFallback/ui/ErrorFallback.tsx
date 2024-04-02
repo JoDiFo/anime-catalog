@@ -1,5 +1,8 @@
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+
 import Button from "@/shared/ui/Button";
+
 import cls from "./ErrorFallback.module.scss";
 
 interface ErrorFallbackProps {
@@ -7,14 +10,16 @@ interface ErrorFallbackProps {
 }
 
 export const ErrorFallback = ({ className }: ErrorFallbackProps) => {
+  const { t } = useTranslation("translation");
+
   const onClick = () => {
     location.reload();
   };
 
   return (
     <div className={classNames(cls.ErrorFallback, className)}>
-      <h2>Oops... Something went wrong</h2>
-      <Button onClick={onClick}>Reload</Button>
+      <h2>{t("Oops... Something went wrong")}</h2>
+      <Button onClick={onClick}>{t("Reload")}</Button>
     </div>
   );
 };

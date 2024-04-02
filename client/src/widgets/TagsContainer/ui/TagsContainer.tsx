@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import cls from "./TagsContainer.module.scss";
 
 function TagsContainer({
@@ -7,10 +8,12 @@ function TagsContainer({
   tags: ETag[];
   handleClick: (index: ETag) => void;
 }) {
+  const {t} = useTranslation("searchPage");
+  
   if (!tags.length) {
     return (
       <div className={cls.selected}>
-        <div>No selected tags</div>
+        <div>{t("No selected tags")}</div>
       </div>
     );
   }

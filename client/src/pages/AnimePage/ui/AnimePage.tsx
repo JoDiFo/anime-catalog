@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { GET_ONE_ANIME } from "@/app/graphql/anime";
-import { AnimeCategorySelector } from "@/widgets/AnimeCategorySelector";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/redux/store";
+import { useQuery } from "@apollo/client";
+import { useTranslation } from "react-i18next";
+
 import { Loading } from "@/widgets/Loading";
+import { AnimeCategorySelector } from "@/widgets/AnimeCategorySelector";
+
+import { GET_ONE_ANIME } from "@/app/graphql/anime";
+import { RootState } from "@/app/redux/store";
+
 import "./AnimePage.scss";
 
 function AnimePage() {
   const location = useLocation();
+  const { t } = useTranslation("translation");
   const { id } = location.state;
   const userId = useSelector((state: RootState) => state.userReducer.id);
 
@@ -54,13 +59,9 @@ function AnimePage() {
             alt={anime.title}
           />
           <div className="anime-page__data">
-            <p className="anime-page__synopsis">
-              This is just some dummy text to fill this text box so don’t mind
-              it. Just assume that here should be a synopsis of this anime. Yah
-              I know I still need to add more text to fill this stupid text box.
-            </p>
+            <p className="anime-page__synopsis">{t("dummy text")}</p>
             <div className="anime-page__tags">
-              <h4 className="anime-page__tag-title">Tags:</h4>
+              <h4 className="anime-page__tag-title">{t("Tags")}:</h4>
               {anime.tags.map((item) => (
                 <div key={item} className="tag">
                   {item}

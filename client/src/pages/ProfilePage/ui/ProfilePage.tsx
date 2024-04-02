@@ -1,17 +1,19 @@
-import { useLazyQuery } from "@apollo/client";
-import { GET_ANIME_COUNT } from "@/app/graphql/user";
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLazyQuery } from "@apollo/client";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/app/redux/store";
 
-import thumbnailImage from "@/shared/assets/thumbnail-image.png";
 import { ProfileInfo } from "@/widgets/ProfileInfo";
 import { AnimeList } from "@/widgets/AnimeList";
 import Button from "@/shared/ui/Button";
 import { logout } from "@/app/redux/userSlice";
 import { LanguageSelector } from "@/widgets/LanguageSelector";
+
+import { GET_ANIME_COUNT } from "@/app/graphql/user";
+import { RootState } from "@/app/redux/store";
+
+import thumbnailImage from "@/shared/assets/thumbnail-image.png";
 
 function ProfilePage() {
   const [list, setList] = useState<EAnimeCount>({
@@ -37,12 +39,13 @@ function ProfilePage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation("profilePage");
 
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
     document.cookie = "refreshToken=";
-    localStorage.removeItem("accessToken")
+    localStorage.removeItem("accessToken");
   };
 
   useEffect(() => {
@@ -75,13 +78,13 @@ function ProfilePage() {
             dropped={list.dropped}
           />
           <div className="page__section">
-            <h3>YOU MIGHT ALSO LIKE</h3>
+            <h3>{t("YOU MIGHT ALSO LIKE")}</h3>
             <div className="card-container">
               {/*reserved for card container*/}
-              <p>Nothing here yet</p>
+              <p>{t("Nothing here yet")}</p>
             </div>
           </div>
-          <Button onClick={handleLogout}>Logout</Button>
+          <Button onClick={handleLogout}>{t("Logout")}</Button>
           <LanguageSelector />
         </div>
       </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
+import { useTranslation } from "react-i18next";
 
 import Form from "@/shared/ui/Form";
 import Button from "@/shared/ui/Button";
@@ -20,6 +21,7 @@ interface RegisterFormProps {
 export function RegisterForm({ redirectTo }: RegisterFormProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation("translation");
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -95,9 +97,9 @@ export function RegisterForm({ redirectTo }: RegisterFormProps) {
 
   return (
     <Form action="submit">
-      <h3>Register</h3>
+      <h3>{t("Register")}</h3>
       <div>
-        <label htmlFor="username">Please enter your username</label>
+        <label htmlFor="username">{t("Please enter your username")}</label>
         <Input
           value={username}
           onChange={handleUsernameChange}
@@ -109,7 +111,7 @@ export function RegisterForm({ redirectTo }: RegisterFormProps) {
         <span>{isIncorrect ? "Incorrect username" : ""}</span>
       </div>
       <div>
-        <label htmlFor="email">Please enter your email</label>
+        <label htmlFor="email">{t("Please enter your email")}</label>
         <Input
           value={email}
           onChange={handleEmailChange}
@@ -121,7 +123,7 @@ export function RegisterForm({ redirectTo }: RegisterFormProps) {
         <span>{isIncorrect ? "Incorrect email" : ""}</span>
       </div>
       <div>
-        <label htmlFor="password">Please enter your password</label>
+        <label htmlFor="password">{t("Please enter your password")}</label>
         <Input
           value={password}
           onChange={handlePasswordChange}
@@ -132,7 +134,7 @@ export function RegisterForm({ redirectTo }: RegisterFormProps) {
         />
         <span>{isIncorrect ? "Incorrect password" : ""}</span>
       </div>
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button onClick={handleSubmit}>{t("Submit")}</Button>
     </Form>
   );
 }

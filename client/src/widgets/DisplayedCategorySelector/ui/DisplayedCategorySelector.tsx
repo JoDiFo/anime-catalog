@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import cls from "./DisplayedCategorySelector.module.scss";
 
 interface DisplayedCategorySelector {
@@ -12,9 +13,11 @@ function DisplayedCategorySelector({
   selected,
   onClick,
 }: DisplayedCategorySelector) {
+  const { t } = useTranslation("profilePage");
+
   return (
     <div className={cls.DisplayedCategorySelector}>
-      <h3>MY ANIME</h3>
+      <h3>{t("MY ANIME")}</h3>
       <div className={cls.lists}>
         {options.map((item) => (
           <div

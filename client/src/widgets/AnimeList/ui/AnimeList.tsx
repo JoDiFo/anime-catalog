@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import cls from "./AnimeList.module.scss";
 
 function AnimeList({
@@ -8,27 +9,34 @@ function AnimeList({
   stalled,
   dropped,
 }: EAnimeCount) {
+  const { t } = useTranslation("profilePage");
+
   return (
     <div className={cls.AnimeList}>
       <Link to="/profile/anime">
-        <h3>Anime list</h3>
+        <h3>{t("Anime list")}</h3>
       </Link>
       <hr />
       <div>
         <p>
-          <span className="dot watched"></span>watched: {watched}
+          <span className="dot watched"></span>
+          {t("watched")}: {watched}
         </p>
         <p>
-          <span className="dot watching"></span>watching: {watching}
+          <span className="dot watching"></span>
+          {t("watching")}: {watching}
         </p>
         <p>
-          <span className="dot planned"></span>plan to watch: {planned}
+          <span className="dot planned"></span>
+          {t("planned")}: {planned}
         </p>
         <p>
-          <span className="dot stalled"></span>stalled: {stalled}
+          <span className="dot stalled"></span>
+          {t("stalled")}: {stalled}
         </p>
         <p>
-          <span className="dot dropped"></span>dropped: {dropped}
+          <span className="dot dropped"></span>
+          {t("dropped")}: {dropped}
         </p>
       </div>
     </div>

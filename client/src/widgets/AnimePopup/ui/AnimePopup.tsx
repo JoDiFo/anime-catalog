@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import cls from "./AnimePopup.module.scss";
+import { useTranslation } from "react-i18next";
 import { AnimePopupItem } from "@/widgets/AnimePopupItem";
+import cls from "./AnimePopup.module.scss";
 
 interface AnimePopupProps {
   animeItems: EAnime[];
@@ -8,6 +9,8 @@ interface AnimePopupProps {
 }
 
 function AnimePopup({ animeItems, searchString }: AnimePopupProps) {
+  const { t } = useTranslation("translation");
+
   const [showPopup, setShowPopup] = useState(true);
 
   const handleClick = () => {
@@ -33,7 +36,7 @@ function AnimePopup({ animeItems, searchString }: AnimePopupProps) {
   if (animeItems.length <= 0) {
     return (
       <div className={[cls.AnimePopup, cls.notFound].join(" ")}>
-        No anime found
+        {t("No anime found")}
       </div>
     );
   }
