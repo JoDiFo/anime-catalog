@@ -7,6 +7,7 @@ import { useLazyQuery } from "@apollo/client";
 import { AnimePopup } from "@/widgets/AnimePopup";
 import { AuthorizationLinks } from "@/widgets/AuthorizationLinks";
 import { HeaderSearchBar } from "@/widgets/HeaderSearchBar";
+import { LanguageSelector } from "@/widgets/LanguageSelector";
 
 import { RootState } from "@/app/redux/store";
 import useDebounce from "@/shared/Hooks/useDebounce";
@@ -86,6 +87,7 @@ function Header() {
         </div>
         <AnimePopup animeItems={anime} searchString={debouncedValue} />
       </div>
+      <LanguageSelector />
     </header>
   );
 }

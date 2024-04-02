@@ -1,1 +1,1 @@
-export { LanguageSelector } from "./ui/LanguageSelector";
+export { LanguageSelectorMemo as LanguageSelector } from "./ui/LanguageSelector";

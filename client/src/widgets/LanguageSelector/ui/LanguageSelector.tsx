@@ -1,13 +1,17 @@
+import { memo } from "react";
 import classNames from "classnames";
-import cls from "./LanguageSelector.module.scss";
-import Select from "@/shared/ui/Select";
 import { changeLanguage } from "i18next";
+
+import Select from "@/shared/ui/Select";
+import { SelectStyles } from "@/shared/ui/Select/Select";
+
+import cls from "./LanguageSelector.module.scss";
 
 interface LanguageSelectorProps {
   className?: string;
 }
 
-export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
+const LanguageSelector = ({ className }: LanguageSelectorProps) => {
   const languageOptions = [
     { value: "en", text: "en" },
     { value: "de", text: "de" },
@@ -20,6 +24,7 @@ export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
   return (
     <Select
       className={classNames(cls.LanguageSelector, className)}
+      theme={SelectStyles.CLEAR}
       onChange={handleChange}
     >
       {languageOptions.map((item) => (
@@ -30,3 +35,5 @@ export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
     </Select>
   );
 };
+
+export const LanguageSelectorMemo = memo(LanguageSelector);

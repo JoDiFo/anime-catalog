@@ -8,7 +8,6 @@ import { ProfileInfo } from "@/widgets/ProfileInfo";
 import { AnimeList } from "@/widgets/AnimeList";
 import Button from "@/shared/ui/Button";
 import { logout } from "@/app/redux/userSlice";
-import { LanguageSelector } from "@/widgets/LanguageSelector";
 
 import { GET_ANIME_COUNT } from "@/app/graphql/user";
 import { RootState } from "@/app/redux/store";
@@ -85,7 +84,6 @@ function ProfilePage() {
             </div>
           </div>
           <Button onClick={handleLogout}>{t("Logout")}</Button>
-          <LanguageSelector />
         </div>
       </div>
     </main>
