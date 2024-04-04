@@ -41,7 +41,7 @@
   margin: 3px 0;
 }
 
-@media (max-width: 800px) {
+@media (width <= 800px) {
   .AnimeCard {
     font-size: calc(var(--small-text) * 0.8);
 

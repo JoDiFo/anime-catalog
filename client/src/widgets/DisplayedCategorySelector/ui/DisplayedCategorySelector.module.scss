@@ -31,7 +31,7 @@
   background-color: var(--black);
 }
 
-@media (max-width: 1500px) {
+@media (width <= 1500px) {
   //variable
   .list-selector {
     font-size: var(--small-text);

@@ -5,13 +5,13 @@
   row-gap: 80px;
 }
 
-@media (max-width: 1300px) {
+@media (width <= 1300px) {
   .CardContainer {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
-@media (max-width: 800px) {
+@media (width <= 800px) {
   .CardContainer {
     row-gap: 70px;
   }

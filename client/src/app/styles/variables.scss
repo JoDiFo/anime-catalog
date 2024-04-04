@@ -5,14 +5,12 @@
   --dark-gray: #323232;
   --white: #d5d5d5;
   --black: #121212;
-
   --not-watched: #8f8f8f;
   --watched: #67d1ff;
   --watching: #6aff67;
   --planned: #fcff67;
   --stalled: #ffa767;
   --dropped: #ff6767;
-
   --big-header: 3rem;
   --header-1: 2rem;
   --header-2: 1.8rem;
@@ -20,10 +18,7 @@
   --small-text: 1rem;
 }
 
-$layout-breakpoint-medium: 1300px;
-$layout-breakpoint-small: 800px;
-
-@media screen and (max-width: $layout-breakpoint-small) {
+@media screen and (width <= 800px) {
   :root {
     --big-header: 2rem;
     --header-1: 1.5rem;

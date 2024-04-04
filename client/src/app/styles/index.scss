@@ -1,6 +1,6 @@
-@import "./variables";
-@import "./page";
-@import "./normalize";
+@import url("./normalize.scss");
+@import url("./page.scss");
+@import url("./variables.scss");
 
 ::-webkit-scrollbar {
   width: 7px;
@@ -58,7 +58,7 @@
   margin: auto;
 }
 
-@media screen and (max-width: $layout-breakpoint-small) {
+@media screen and (width <= 800px) {
   .container {
     width: 100%;
   }
