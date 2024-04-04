@@ -26,7 +26,7 @@ function AuthorizationLinks() {
         visible={showLogin}
         setVisible={(flag) => setShowLogin(flag)}
       >
-        <LoginForm redirectTo={"/"} state={{}} />
+        <LoginForm redirectTo={"/"} />
       </ModalWindow>
       <ModalWindow
         visible={showRegister}

@@ -14,7 +14,7 @@ import createExpireTime from "@/shared/lib/createExpireTime";
 
 interface LoginFormProps {
   redirectTo: string;
-  state: any;
+  state?: { id: string };
 }
 
 export function LoginForm({ redirectTo, state }: LoginFormProps) {
@@ -37,7 +37,7 @@ export function LoginForm({ redirectTo, state }: LoginFormProps) {
             username: data.loginUser.username,
             registerDate: data.loginUser.registerDate,
             imageUrl: data.loginUser.imageUrl,
-          })
+          }),
         );
 
         document.cookie = `refreshToken=${

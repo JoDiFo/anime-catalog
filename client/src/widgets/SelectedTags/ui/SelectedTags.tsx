@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import Button from "@/shared/ui/Button";
+import { Button } from "@/shared/ui/Button";
 
 import { RootState } from "@/app/redux/store";
 import { clearSelected } from "@/app/redux/tagsSlice";
@@ -20,7 +20,7 @@ function SelectedTags({ toggleVisible }: SelectedTagsProps) {
 
   const selectedTags = useSelector(
     (state: RootState) => state.tags.selected,
-    shallowEqual
+    shallowEqual,
   );
 
   return (

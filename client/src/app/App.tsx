@@ -42,6 +42,7 @@ function App() {
 
   useEffect(() => {
     if (!isValidationLoading && called) {
+      // TODO wtf is this!?
       console.log(validationData);
     }
   }, [isValidationLoading, called]);

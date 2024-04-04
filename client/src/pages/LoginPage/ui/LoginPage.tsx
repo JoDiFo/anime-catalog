@@ -5,7 +5,7 @@ function LoginPage() {
   return (
     <div className={cls.LoginPage}>
       <div className={cls.form}>
-        <LoginForm redirectTo="/" state={{}} />
+        <LoginForm redirectTo="/" />
       </div>
     </div>
   );
